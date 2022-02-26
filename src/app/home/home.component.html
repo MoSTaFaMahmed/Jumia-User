@@ -1,0 +1,38 @@
+<section class="container p-3">
+  <div class="row">
+    <div class="col-lg-2 col-md-4 col-sm-4 bg-white">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-lg-8 col-md-8 col-sm-8">
+      <app-slider></app-slider>
+    </div>
+    <div class="col-lg-2 col-md-12" style="text-align: center">
+      <app-sidadversing></app-sidadversing>
+    </div>
+  </div>
+  <app-staticcomponent></app-staticcomponent>
+  <!-- Product -->
+  <app-product></app-product>
+  <app-image-adversting></app-image-adversting>
+  <app-home-office-products></app-home-office-products>
+  
+</section>
+<!--
+<div class="container">
+  <div class="row">
+    <div *ngFor="let prd of products" class="col-4">
+      <p>{{ prd.Name }}</p>
+      <img [src]="prd.Image" style="width: 300px" />
+      <p>
+        <a
+          name=""
+          id=""
+          class="btn btn-primary mb-1"
+          [routerLink]="['/Products', prd.id]"
+          role="button"
+          >Details</a
+        >
+      </p>
+    </div>
+  </div>
+</div> -->

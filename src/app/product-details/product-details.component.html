@@ -1,0 +1,333 @@
+<div class="container-sm container-md container-lg">
+  <div class="row" style="margin-top: 6rem;">
+    <!--start fisrt col-->
+          <section class="col-lg-9  col-sm-12">
+              <div  class="row bg-body">
+                 <!--start fisrt col i first col-->
+                  <div class="col-lg-4 col-sm-12">
+                      <div><img id="itemimg" [src]='product?.Image' width="100%" alt=""></div>
+
+                  </div>
+                   <!--start second col in first col-->
+                  <div class="col-lg-8 col-sm-12">
+                      <div class="d-flex justify-content-between text-start mt-3">
+                          <div class="px-3">
+                               <h2 id="itemtitle">{{product?.Description}}</h2></div>
+                          <div> <a href="#"><i class="far fa-heart fs-2 text-warning"></i></a></div>
+                      </div>
+                      <div style="text-align:left;" class="px-3 text-dark">
+
+                          <div class="py-1">
+                                  <div class="stars">
+                                       <div class="in"></div>
+                                  </div>
+                          </div>
+                          <div class=" py-1 my-2 headline" style="position: relative;">
+                               <h2 class="">{{product?.Price}}LE</h2>
+
+                          </div>
+                      </div>
+                      <!--button-->
+                      <div class="px-2 ">
+                          <div class="py-3 ">
+                        <button type="button"
+                                     (click)="addToCart(product)" style="width: 100%;background-color:#f68b1e; padding: 4px;" class="shoppingbtn ms-0 shadow-lg rounded " >
+                            <i class="fas fa-shopping-cart px-3"></i>
+                            <span class="px-3">Add to card</span>
+                        </button>
+                    </div>
+                      </div>
+                      <!--promotion-->
+                      <section style="position: relative;" class="mt-3">
+                        <h2 class="title-h headline pt-4">PROMOTIONS</h2>
+                        <div class="py-3">
+                      <a class="d-flex text-decoration-none text-dark py-1  ">
+                          <i class="fas fa-crown fs-3 text-warning me-3 align-self-baseline"></i>
+                          Get Free Delivery on your next order with Jumia Prime  </a>
+                        <a class="d-flex text-decoration-none text-dark py-1">
+                            <i class="fas fa-shield-alt fs-3 text-warning me-3 align-self-baseline"></i>
+                            Enjoy 50% cashback on bills payment - Code: WELCOME50 - for new customers only</a>
+                    </div>
+                      </section>
+                  </div>
+                   <!--start third col i first col-->
+
+              </div>
+          </section>
+
+
+          <div class="col-lg-3 col-sm-12">
+
+
+            <!--start return and delivery section -->
+         <section class="bg-body  p-2 card mt-lg-0 mt-sm-3" >
+           <h2 class="title-h py-2">Delivery & Returns</h2>
+           <div style="position: relative;" class="headline">
+                <!--choose your location article-->
+                 <article>
+                   <h2 class="title-h p-2">Choose your location</h2>
+              <div>
+                   <button style="width:100%" class="btn btn-light btn-lg dropdown-toggle my-2 border border-warning" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Cairo
+                   </button>
+                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                         <li><a class="dropdown-item" href="#">Alex</a></li>
+                         <li><a class="dropdown-item" href="#">Giza</a></li>
+                         <li><a class="dropdown-item" href="#">6 Octobar</a></li>
+                       </ul>
+                   <button style="width:100%" class="btn btn-light btn-lg dropdown-toggle my-2 border border-warning" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                           Masr-Elgdida
+                   </button>
+                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                           <li><a class="dropdown-item" href="#">Alex</a></li>
+                            <li><a class="dropdown-item" href="#">Giza</a></li>
+                            <li><a class="dropdown-item" href="#">6 Octobar</a></li>
+                       </ul>
+               </div>
+                <section class="d-flex p-2 ">
+
+                           <div>
+                               <h2 class="title-h"><a href="" class="text-decoration-none text-dark ">Door Delivery</a> </h2>
+                               <p>
+                                   Shipping EGP 68.40
+                                   Ready for delivery between 09 January & 11 January when you order within next 21hrs 50mins
+                               </p>
+                           </div>
+
+                      </section>
+                   </article>
+                      <hr>
+                      <article class="d-flex p-2 ">
+
+                         <div>
+                             <h2 class="title-h"><a href="" class="text-decoration-none text-dark ">Return Policy</a></h2>
+                             <p>
+                               14 days free return (except for underwear and personal items) up to 30 days for defective products with necessity for requesting a return within 24 hours from the delivery date.
+                             </p>
+                         </div>
+
+                    </article>
+
+                  <!--return policy article-->
+                 <article>
+
+                 </article>
+           </div>
+         </section>
+          <!--start seller information div -->
+         <div class="mt-3  card p-2" >
+             <section>
+                 <a class="d-flex align-items-center p-2 text-decoration-none text-dark my-2">
+                     <h2 class="title-h m-0">SELLER INFORMATION</h2>
+
+                 </a>
+                 <div class="p-2 headline" style="position: relative;">
+                      <p class="fs-5" style="font-weight: 500;">Flash Teck</p>
+                      <div class="d-flex justify-content-between" style="font-size: 0.7rem;">
+                         <div class="d-flex justify-contet-between flex-column pe-2 fs-6">
+                             <span >74% Seller Score</span>
+                             <span>292 Followers</span>
+                         </div>
+                         <button type="button" class="btn shadow fw-bold" style="align-self:end-flex; background-color: #f68b1e; color:white;">
+                               follow
+                         </button>
+                      </div>
+                 </div>
+                 <div  class="p-2 headline" style="position: relative;">
+                   <h2 class="title-h">Seller Performance</h2>
+                   <div>
+                       <i class="fas fa-star text-primary"></i>
+                       <span>Order Fulfillment Rate:</span><span class="fw-bold">Good</span>
+                   </div>
+                   <div>
+                       <i class="far fa-check-circle text-success"></i>
+                       <span>Quality Score:</span><span class="fw-bold">Average</span>
+                   </div>
+                   <div>
+                       <i class="fas fa-star text-primary"></i>
+                       <span>Quality Score:</span><span class="fw-bold">Good</span>
+                   </div>
+
+                 </div>
+             </section>
+         </div>
+
+     </div>
+  </div>
+
+  <div class="row">
+    <!--start fisrt col-->
+  <div class="col-lg-9 col-sm-14" >
+     <!--start product details-->
+    <div class="card shadow">
+      <header class="d-block py-2 m-3" ><h2 class="title-lg">Product details</h2> </header>
+      <div class="mx-3 py-4 headline fs-5" style="position: relative;overflow-x: auto;">
+         <span class="d-block">{{product?.Category}}</span>
+         <span class="fw-bold">Material : </span><span>Leather</span>
+         <span class="d-block">{{product?.Description}}</span>
+      </div>
+    </div>
+    <!--start Specifications-->
+    <section class="card mt-3 shadow">
+      <header class="d-block py-2"><h2 class="title-lg">Specifications</h2></header>
+      <div class="headline" style="position: relative;"></div>
+      <div class="row p-2">
+        <article class="col-6 py-2" >
+          <div class="rounded border" style="height: 100%;">
+            <h2 class="title-h p-3">key features</h2>
+            <div class="p-3 fs-5 headline" style="position: relative;">
+              <ul>
+                <li>Labtops</li>
+                <li> Electrotics</li>
+                <li>Lenovo</li>
+                <li>High quality</li>
+              </ul>
+            </div>
+
+          </div>
+        </article>
+        <article class="col-6 py-2">
+          <div class="rounded border" style="height: 100%;">
+            <h2 class="title-h p-3">SPECIFICATIONS</h2>
+            <div class="p-3 fs-5 headline" style="position: relative;">
+              <span class="d-block fw-bold">SDK :<span>Leather</span></span>
+              <span class=" d-block fw-bold">Production country: <span>Egypt</span></span>
+              <span class="d-block fw-bold">Color : <span>Silver</span></span>
+              <span class="d-block fw-bold">Main material : <span>Leather</span></span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!--Customer feadback-->
+    <section class="card mt-3 shadow">
+      <header class="d-block py-2"><h2 class="title-lg">Verified Customer Feedback</h2></header>
+      <div class="d-flex flex-column px-3 headline" style="position:relative;">
+        <h2 class="title-h pt-4">PRODUCT REVIEWS</h2>
+        <hr>
+        <article class="py-2 px-4" style="position: relative;">
+          <div class="py-1">
+            <div class="stars">
+                 <div class="in"></div>
+            </div>
+          </div>
+              <h2 class="title-h py-2">beautiful</h2>
+              <p class="fs-5">good product</p>
+              <div class="d-flex justify-content-between align-items-center fs-5"
+               style="color: gray;">
+                <div>
+                  <span class="pe-2">29-12-2021</span>
+                  <span>by Shrouk</span>
+                </div>
+                <div class="d-flex align-items-center" style="color: #6dbd28;">
+                  <i class="far fa-check-circle"></i>
+                  <span>Verified Purchase</span>
+                </div>
+              </div>
+        </article>
+        <hr>
+        <article class="py-2 px-4" style="position: relative;">
+          <div class="py-1">
+            <div class="stars">
+                 <div class="in"></div>
+            </div>
+          </div>
+              <h2 class="title-h py-2">beautiful</h2>
+              <p class="fs-5">good product</p>
+              <div class="d-flex justify-content-between align-items-center fs-5"
+               style="color: gray;">
+                <div>
+                  <span class="pe-2">29-12-2021</span>
+                  <span>by Shrouk</span>
+                </div>
+                <div class="d-flex align-items-center" style="color: #6dbd28;">
+                  <i class="far fa-check-circle"></i>
+                  <span>Verified Purchase</span>
+                </div>
+              </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+   <!--start second col-->
+   <div id="lastview" class="col-3">
+    <div class="pt-3" style="position: sticky;top: 72px;">
+     <article class="card p-3 mt-3 rounded-4">
+       <div class="d-flex">
+         <img class="rounded" style="width:100px; height: 100px;" [src]='product?.Image' alt="">
+         <div  style="overflow: hidden;">
+           <h3 class="cut-title">{{product?.Name}}</h3>
+              <div class="py-2">
+                <span class="title-h">{{product?.Price}}LE</span>
+
+              </div>
+         </div>
+       </div>
+       <div class="d-flex justify-content-between align-items-center">
+         <button type="button" (click)="addToCart(product)" style="background-color:#f68b1e ; width: 100%; color: white;"
+          class=" btn mt-2 py-2 shadow fs-5">
+           <i class="fas fa-shopping-cart px-3"></i>
+           <span style= >Add to cart</span>
+         </button>
+
+       </div>
+     </article>
+   </div>
+  </div>
+
+
+   <app-home-office-products></app-home-office-products>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+<div class="card mb-3" style="max-width:300px;">
+  <div class="row g-0">
+
+      <img [src]='product?.Image' class="card-img-top"  style="width: 18rem;">
+
+
+      <div class="card-body">
+        <p class="card-title"><b>Names:</b>{{product?.Name}}</p>
+        <p class="card-text"><b>Price:</b>{{product?.Price}}</p>
+        <p class="card-text"><b>Quantity:</b>{{product?.Quantity}}</p>
+        <p class="card-text"><b>Description:</b>{{product?.Description}}</p>
+
+        <button
+        type="button"
+        class="btn btn-dark bg-dark"
+         (click)="addToCart(product)"
+      >
+        Add TO Card
+      </button>
+
+      <div *ngIf="flag">
+        <input type="number" class="form-control" placeholder="Quantity" #quntity/>
+        <button (click)="buy(quntity.value)" class="btn btn-primary">Buy</button>
+      </div>
+        <button type="button" class="btn btn-primary"  (click)="backToProd()">Back</button>
+
+    </div>
+  </div>
+</div> -->

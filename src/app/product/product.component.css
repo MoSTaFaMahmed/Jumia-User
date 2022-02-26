@@ -1,0 +1,26 @@
+
+/**/
+
+.product:hover{
+  transform: scale(1.02,1.05);
+}
+.Amzing-Img:hover{
+  transform: scale(1.02,1.05);
+cursor: pointer;
+}
+.bg-red{
+  background-color: #E61601;
+}
+.bg-gray{
+  background-color: #C7C7CD;
+}
+.text-gray{
+color: #555555;
+}
+.bg-orange{
+ background-color: #FE940C;
+ color: #fff;
+}
+.text-orange{
+ color:#FE940C ;
+}

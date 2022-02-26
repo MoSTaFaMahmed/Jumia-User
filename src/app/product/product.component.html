@@ -1,0 +1,24 @@
+  <!-- productList -->
+
+  <div class="row bg-white">
+    <h3 class="row">Top selling items</h3>
+    <div *ngFor="let prd of products" class="card col-lg-2 col-md-4 col-sm-6 mx-auto product">
+      <a name=""
+      id=""
+      class="btn btn-primary mb-1"
+      [routerLink]="['/Products', prd.id]"
+      role="button" class="text-decoration-none text-dark">
+        <img
+          class="card-img-top"
+         [src]="prd.Image"
+          alt="Card image"
+          style="width: 100%"
+        />
+        <div class="card-body">
+          <small>{{prd.Name}}</small>
+          <h6 class="card-title">{{prd.Price}}</h6>
+        </div>
+      </a>
+    </div>
+
+  </div>

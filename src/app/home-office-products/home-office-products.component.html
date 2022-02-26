@@ -1,0 +1,30 @@
+<div class="row bg-white">
+  <div class="d-flex bg-red">
+    <h3 class="col-6">
+      <i class="bi bi-tag text-danger h4"></i> Flash Sales
+    </h3>
+    <h5 class="col-3">Time Left</h5>
+    <p class="align-self-end ms-auto">See All</p>
+  </div>
+
+  <div *ngFor="let prd of products" class="card col-lg-2 col-md-4 col-sm-6 mx-auto product">
+    <a href="#" [routerLink]="['/Products', prd.id]" class="text-decoration-none text-dark">
+      <img
+        class="card-img-top"
+        [src]="prd.Image"
+        alt="Card image"
+        style="width: 100%"
+      />
+      <div class="card-body">
+        <small>{{prd.Name}}</small>
+        <h6 class="card-title">{{prd.Price}}</h6>
+               <div class="progress" style="height: 7px">
+          <div class="progress-bar bg-orange" style="width: 40%"></div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+
+
+    </div>

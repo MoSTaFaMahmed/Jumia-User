@@ -1,0 +1,64 @@
+
+footer>#fot1
+{   padding-top: 25px;
+    padding-bottom: 25px;
+    color: white;
+    background-color: rgb(40, 40, 40);
+    font-size: 12px;
+
+}
+#newsletter1
+{
+    height: 10%;
+}
+footer>#fot2
+{   padding-top: 25px;
+    padding-bottom: 25px;
+    color: white;
+    background-color: rgb(50, 50, 50);
+    font-size: 12px;
+    font-family: 'Rubik', sans-serif;
+}
+#fot2>li
+{
+    color: white;
+}
+
+
+/**********Healp Page***********/
+.search{
+    position: relative;
+}
+
+.bi-search {
+    position: absolute;
+
+  top: 20px;
+  padding:0 10px 0 5px;
+
+}
+.ab-how-does-block-middle {
+    border: 2px solid #fe9b02;
+    height: 0px;
+    overflow: visible;
+    width: 100%;
+    position: relative;
+}
+#ab-circle1 {
+    left: 10.66%;
+}
+#ab-circle2 {
+    left: 34.12%;
+}
+#ab-circle3 {
+    left: 60%;
+}
+.ab-circle {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: -15px;
+}
+#ab-circle4 {
+    left: 84.66%;
+}

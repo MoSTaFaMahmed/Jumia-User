@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor="let prd of products" class="col-3">
+      <a
+        name=""
+        id=""
+        class="text-decoration-none text-dark"
+        [routerLink]="['/Products', prd.id]"
+        role="button"
+      >
+
+        <img [src]="prd.Image" style="width: 300px" />
+      </a>
+    </div>
+  </div>
+</div>

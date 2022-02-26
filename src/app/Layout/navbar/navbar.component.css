@@ -1,0 +1,32 @@
+/*NAV*/
+nav{
+  padding:30px;
+
+}
+.log{
+ width: 138px;
+ height:auto;
+ top: 0;
+ margin-bottom:20px;
+}
+.searchbut
+{
+ margin-left: 20px;
+ width: 100px;
+ height: 45px;
+ text-align: center;
+ background-color: rgb(246, 139, 30);
+ border: none;
+ border-radius: 5px;
+ -webkit-border-radius: 5px;
+ -moz-border-radius: 5px;
+ -ms-border-radius: 5px;
+ -o-border-radius: 5px;
+ color: white;
+ font-family: 'Lato', sans-serif;
+ font-size: 18px;
+}
+.searchbut:hover
+{
+ background-color: rgb(228, 129, 28);
+}
