@@ -5,6 +5,6 @@ export default interface IUser{
     password?:string,
     Phone?:string,
     IsSeller?:boolean,
-    SellerStatus:String
+    SellerStatus?:String
 
 }

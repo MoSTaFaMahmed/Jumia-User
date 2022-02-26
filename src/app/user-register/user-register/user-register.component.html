@@ -1,9 +1,9 @@
-<div class="container">
-  <div class="row regivmail">
+<div class="container position-relative">
+  <div class="row regivmail position-absolute ">
     <div class="col-lg-12 col-sm-12 col-md-12">
-      <div id="alert" role="alert"></div>
+      <div id="alert" role="alert" class="alert alert-danger" [hidden]="!errorMessage"> {{errorMessage}}</div>
       <h5 class="fw-bold">Create Account</h5>
-      <form class="form needs-validation row g-3" (ngSubmit)="Signup(form)" #form="ngForm">
+      <form class="form needs-validation row g-3"  #form="ngForm">
         <div class="col-md-12 col-lg-6 col-sm-12">
           <input
             #fname="ngModel"
@@ -36,6 +36,7 @@
         </div>
         <div class="col-md-12 col-lg-6 col-sm-12">
           <input
+          [hidden]="IsLoggedByFacebook"
             ngModel
             #email="ngModel"
             name="email"
@@ -56,6 +57,7 @@
         <div class="col-md-12 col-lg-6 col-sm-12">
           <input
             ngModel
+            [hidden]="IsLoggedByFacebook"
             #password="ngModel"
             name="password"
             type="password"
@@ -75,6 +77,7 @@
         <div class="col-md-12 col-lg-6 col-sm-12 input-group mb-6">
           <span class="input-group-text" id="basic-addon1">+20</span>
           <input
+              
             ngModel
             name="phone"
             id="phone"
@@ -101,14 +104,15 @@
         </div>
 
         <button
-          [disabled]="form.invalid"
+          [disabled]="form.errors"
           class="col-12 btlogin text-white"
           type="submit"
+          (click)="Signup(form.value)"
         >
           Create Account
         </button>
 
-        <button class="col-12 btlogfb" type="submit">
+        <button class="col-12 btlogfb" type="submit" (click)="SignupFacebook()">
           <i class="fab fa-facebook-square"></i> REGISTER WITH FACEBOOK
         </button>
       </form>
