@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-
+import { UserLoginComponent } from './user-login/user-login.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { UserRegisterComponent } from './user-register/user-register/user-register.component';
@@ -21,6 +21,7 @@ import { StaticcomponentComponent } from './staticcomponent/staticcomponent.comp
 import { ImageAdverstingComponent } from './image-adversting/image-adversting.component';
 import { HomeOfficeProductsComponent } from './home-office-products/home-office-products.component';
 import { CateqoryComponent } from './cateqory/cateqory.component';
+import { SearchResultComponent } from './Search-Result/search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,8 @@ import { CateqoryComponent } from './cateqory/cateqory.component';
     ImageAdverstingComponent,
     HomeOfficeProductsComponent,
     CateqoryComponent,
+    SearchResultComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,

@@ -21,7 +21,6 @@ export class UserRegisterComponent implements OnInit {
   ngOnInit(): void {}
   Signup(form: any) {
     console.log(form);
-
     let data: IUser = {
       Firstname: form.firstname,
       Lastname: form.lastname,
@@ -29,21 +28,25 @@ export class UserRegisterComponent implements OnInit {
       IsSeller: false,
     };
     this.AuthService.Signup(form.email, form.password).subscribe(() => {
-      if (this.AuthService.IsLogged) {
+      if (this.AuthService.isUser) {
         this.errorMessage = '';
         this.userService.AddUser(this.AuthService.userID, data).then(() => {
           this.router.navigate(['/Products']);
         });
       } else {
         this.errorMessage = this.AuthService.errorMsg;
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 1500);
       }
     });
   }
   SignupFacebook() {
     this.AuthService.LoginFacebook().subscribe(() => {
-      if (this.AuthService.IsLoggedByFacebook) {
+      if (this.AuthService.user) {
         this.errorMessage = '';
-        this.IsLoggedByFacebook = this.AuthService.IsLoggedByFacebook;
+      } else {
+        this.errorMessage = this.AuthService.errorMsg;
       }
     });
   }

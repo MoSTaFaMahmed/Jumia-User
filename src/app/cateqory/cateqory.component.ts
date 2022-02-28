@@ -1,12 +1,12 @@
 import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProductsService } from '../Services/products.service';
+import { ProductsService } from '../Services/Products/products.service';
 import IProduct from '../ViewModels/Iproduct';
 
 @Component({
   selector: 'app-cateqory',
   templateUrl: './cateqory.component.html',
-  styleUrls: ['./cateqory.component.css']
+  styleUrls: ['./cateqory.component.css'],
 })
 export class CateqoryComponent implements OnInit, OnDestroy {
   products: IProduct[] = [];
@@ -22,7 +22,6 @@ export class CateqoryComponent implements OnInit, OnDestroy {
           return {
             id: elemnt.payload.doc.id,
             ...(elemnt.payload.doc.data() as IProduct),
-            // name:elemnt.payload.doc.data['name']
           };
 
           //

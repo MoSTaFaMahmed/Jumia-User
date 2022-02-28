@@ -1,25 +1,32 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { from } from 'rxjs';
+import {  from, Observable } from 'rxjs';
 import auth2 from 'firebase/compat/app';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  IsLogged: boolean = false;
   userID!: string;
+  userEmail!: string | null;
   errorMsg: string = '';
-   IsLoggedByFacebook:boolean=false;
-  constructor(private auth: AngularFireAuth) {}
+  isUser: boolean = false;
+  user!: Observable<firebase.default.User | null>;
+  constructor(private auth: AngularFireAuth) {
+    this.user = auth.user;
+  }
+
   Signup(email: string, password: string) {
     return from(
       this.auth
         .createUserWithEmailAndPassword(email, password)
         .then((e) => {
+          this.user.subscribe(() => (this.isUser = true));
           this.userID = e.user!.uid;
-          this.IsLogged = true;
         })
-        .catch((error) => (this.errorMsg = error.message))
+        .catch(() => {
+          this.user.subscribe(() => (this.isUser = false));
+          this.errorMsg = 'Email Already Exist';
+        })
     );
   }
   LoginFacebook() {
@@ -28,14 +35,28 @@ export class AuthService {
         .signInWithPopup(new auth2.auth.FacebookAuthProvider())
         .then((e) => {
           console.log(e);
-          
+
           this.userID = e.user!.uid;
-          this.IsLogged = true;
-          this.IsLoggedByFacebook=true;
-        }) .catch((error) => (this.errorMsg = error.message))
+        })
+        .catch(() => (this.errorMsg = 'Email Already Exist'))
     );
   }
-  Logout() {
-    this.auth.signOut().then(() => (this.IsLogged = false));
+
+  login(email: string, password: string) {
+    return from(
+      this.auth
+        .signInWithEmailAndPassword(email, password)
+        .then((e) => {
+          console.log(this.user);
+
+          this.userID = e.user!.uid;
+          this.userEmail = e.user!.email;
+        })
+        .catch((error) => (this.errorMsg = error.message))
+    );
+  }
+  async Logout() {
+    await this.auth.signOut();
+    console.log(this.user);
   }
 }

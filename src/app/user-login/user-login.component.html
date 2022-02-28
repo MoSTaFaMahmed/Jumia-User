@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="row g-0">
+    <aside class="col-lg-5 col-sm-5 col-md-5 mb-3 mt-3">
+      <h5 class="fw-bold text-center pb-3 pt-3 text-warning">Sign in</h5>
+      <form
+        class="form needs-validation row g-3"
+        (ngSubmit)="login(form)"
+        #form="ngForm"
+      >
+        <div class="col-md-12 col-lg-6 col-sm-12">
+          <input
+            ngModel
+            #email="ngModel"
+            name="email"
+            type="email"
+            class="form-control border-3"
+            id="inputEmail4"
+            placeholder="E-mail"
+            required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          />
+          <div [hidden]="email.untouched" class="text-danger">
+            <span [hidden]="!email.errors?.['required']"
+              >email is required.</span
+            >
+            <span [hidden]="!email.errors?.['pattern']">Not valid</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6 col-sm-12">
+          <input
+            ngModel
+            #password="ngModel"
+            name="password"
+            type="password"
+            class="form-control border-3"
+            id="inputPassword4"
+            placeholder="Password"
+            required
+            minlength="8"
+          />
+          <div [hidden]="password.untouched" class="text-danger">
+            <span [hidden]="!password.errors?.['required']">
+              you must enter Password</span
+            >
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="gridCheck"
+              [checked]="remember()"
+              #check
+            />
+            <label class="form-check-label" for="gridCheck">
+              Remember me
+            </label>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-warning text-white" type="submit">
+          Login
+        </button>
+
+        <button type="button" class="btn btn-primary text-white" type="submit">
+          Login with Facebook
+        </button>
+
+        <div class="alert alert-danger" *ngIf="errorMes">
+          {{ errorMes }}
+        </div>
+      </form>
+    </aside>
+
+    <div class="vr" style="height: auto; margin: 30px"></div>
+    <!-- start create account -->
+    <aside class="col-lg-5 col-sm-5 col-md-5 mt-3 mb-3">
+      <h5 class="fw-bold text-center pb-3 pt-3 text-warning">
+        Create your Jumia account
+      </h5>
+      <form action="registeruser.html">
+        <div class="mb-3 mt-4">
+          <p class="">
+            Create your Jumia customer account in just a few clicks! You can
+            register either using your e-mail address or through your Facebook
+            account.
+          </p>
+        </div>
+        <button
+          type="button"
+          class="btn btn-warning text-white col-12 mb-3 mt-4"
+          type="submit"
+          (click)="gotoReg()"
+        >
+          CREATE ACCOUNT VIA E-MAIL
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary text-white col-12"
+          type="submit"
+        >
+          REGISTER WITH FACEBOOK
+        </button>
+      </form>
+    </aside>
+    <!-- end create account -->
+  </div>
+</div>

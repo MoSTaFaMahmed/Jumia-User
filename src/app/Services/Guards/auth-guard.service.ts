@@ -10,13 +10,12 @@ export class AuthGuardService implements CanActivate {
 
   constructor(private auth:AuthService,private router:Router ) { }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-   if(this.auth.IsLogged){
-     return true;
-   }
-   else{
-    this.router.navigate(['/Register']);
-     return false;
-   }
+  return new Promise(resolve=>{
+    this.auth.user.subscribe(user=>{
+      if(user)resolve(true)
+      else this.router.navigate(['/login']);
+    })
+  })
  
 }
 }

@@ -3,14 +3,13 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireAction } from '@angular/fire/compat/database';
 
-import IProduct from '../ViewModels/Iproduct';
+import IProduct from '../../ViewModels/Iproduct';
+import IUser from '../../ViewModels/IUser';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  items!: Observable<
-    AngularFireAction<firebase.default.database.DataSnapshot>[]
-  >;
+ 
   constructor(private db: AngularFirestore) {}
   getAllData() {
     return this.db.collection('Products').snapshotChanges();
@@ -24,6 +23,10 @@ export class ProductsService {
   }
   getProductById(productId: number) {
     return this.db.collection('Products').doc(`${productId}`).valueChanges(); //snapshotChanges();
+  }
+  getsellerById(productId: string) {
+    return this.db.collection<IUser>('users')
+    .doc(`${productId}`).valueChanges() ; //snapshotChanges();
   }
   SearchQuery(start: string, end: string) {
     return this.db

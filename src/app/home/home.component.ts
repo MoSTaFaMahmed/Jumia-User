@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { doc } from 'firebase/firestore';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProductsService } from '../Services/products.service';
+import { ProductsService } from '../Services/Products/products.service';
 import IProduct from '../ViewModels/Iproduct';
 import { docData } from 'rxfire/firestore';
 @Component({
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
    this.productObservable= this.prdService.getAllData().subscribe(data => {
       this.products = data.map((elemnt) => {
-        console.log(elemnt);
+       // console.log(elemnt);
         return {
           id: elemnt.payload.doc.id,
           ...elemnt.payload.doc.data()as IProduct
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         //
       })
 
-      console.log(this.products);
+      //console.log(this.products);
     })
   }
 ngOnDestroy() {

@@ -1,7 +1,7 @@
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ICart } from './../ViewModels/icart';
+import { ICart } from './../../ViewModels/icart';
 import { Injectable } from '@angular/core';
-import IProduct from '../ViewModels/Iproduct';
+import IProduct from '../../ViewModels/Iproduct';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({

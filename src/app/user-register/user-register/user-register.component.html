@@ -104,7 +104,7 @@
         </div>
 
         <button
-          [disabled]="form.errors"
+          [disabled]="form.invalid"
           class="col-12 btlogin text-white"
           type="submit"
           (click)="Signup(form.value)"
@@ -112,7 +112,7 @@
           Create Account
         </button>
 
-        <button class="col-12 btlogfb" type="submit" (click)="SignupFacebook()">
+        <button class="col-12 btlogfb" type="submit">
           <i class="fab fa-facebook-square"></i> REGISTER WITH FACEBOOK
         </button>
       </form>

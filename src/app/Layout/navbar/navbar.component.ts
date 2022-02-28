@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Subject, combineLatest } from 'rxjs';
-import { CartServiceService } from './../../Services/cart-service.service';
-import { ProductsService } from 'src/app/Services/products.service';
+import { CartServiceService } from './../../Services/Cart/cart-service.service';
+import { ProductsService } from 'src/app/Services/Products/products.service';
 import IProduct from 'src/app/ViewModels/Iproduct';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/Services/Authontication/auth.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -13,20 +17,28 @@ import IProduct from 'src/app/ViewModels/Iproduct';
 export class NavbarComponent implements OnInit {
   sideBarOpen: boolean = false;
   searchitem: string = '';
+  islogged: boolean = false;
+  isUser: boolean = false;
   private startat = new Subject<string>();
   private endat = new Subject<string>();
   private startobservable = this.startat.asObservable();
   private endobservable = this.endat.asObservable();
   filtteredProducts: IProduct[] = [];
-  private lastKeyPress: number = 0;
   itemIncart!: number;
   constructor(
     private ProductsService: ProductsService,
-    private db: AngularFirestore,
-    private cartServc: CartServiceService
+    private cartServc: CartServiceService,
+    private router: Router,
+    private auth: AuthService
   ) {}
+ 
 
   ngOnInit(): void {
+    this.auth.user.subscribe((user) => {
+      console.log(user);
+      
+      user ? (this.isUser = true) : (this.isUser = false);
+    });
     this.cartServc.cartItems.subscribe((el) => {
       this.itemIncart = el.length;
     });
@@ -48,5 +60,11 @@ export class NavbarComponent implements OnInit {
   search() {
     this.startat.next(this.searchitem);
     this.endat.next(this.searchitem + '\uf8ff');
+  }
+  route(dd: any) {
+    this.router.navigate(['/search'], { queryParams: { word: dd } });
+  }
+  Logout(){
+    this.auth.Logout();
   }
 }

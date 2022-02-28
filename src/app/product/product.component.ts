@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProductsService } from '../Services/products.service';
+import { ProductsService } from '../Services/Products/products.service';
 import IProduct from '../ViewModels/Iproduct';
 
 @Component({
@@ -18,7 +18,7 @@ export class ProductComponent implements OnInit, OnDestroy {
       .getAllDataByCat('Fashion')
       .subscribe((data) => {
         this.products = data.map((elemnt) => {
-          console.log(elemnt);
+        //  console.log(elemnt);
           return {
             id: elemnt.payload.doc.id,
             ...(elemnt.payload.doc.data() as IProduct),
@@ -28,7 +28,7 @@ export class ProductComponent implements OnInit, OnDestroy {
           //
         });
 
-        console.log(this.products);
+       // console.log(this.products);
       });
   }
   ngOnDestroy() {

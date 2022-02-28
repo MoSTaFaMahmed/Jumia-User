@@ -6,5 +6,6 @@ export default interface IUser{
     Phone?:string,
     IsSeller?:boolean,
     SellerStatus?:String
+    Product?:[]
 
 }

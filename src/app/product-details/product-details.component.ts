@@ -1,8 +1,8 @@
-import { CartServiceService } from './../Services/cart-service.service';
+import { CartServiceService } from './../Services/Cart/cart-service.service';
 import { Observable, Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductsService } from '../Services/products.service';
+import { ProductsService } from '../Services/Products/products.service';
 import IProduct from '../ViewModels/Iproduct';
 
 @Component({
