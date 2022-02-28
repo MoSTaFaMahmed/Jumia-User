@@ -22,6 +22,8 @@ import { ImageAdverstingComponent } from './image-adversting/image-adversting.co
 import { HomeOfficeProductsComponent } from './home-office-products/home-office-products.component';
 import { CateqoryComponent } from './cateqory/cateqory.component';
 import { SearchResultComponent } from './Search-Result/search-result/search-result.component';
+import { CommonModule } from '@angular/common';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -40,9 +42,11 @@ import { SearchResultComponent } from './Search-Result/search-result/search-resu
     HomeOfficeProductsComponent,
     CateqoryComponent,
     SearchResultComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    CartComponent
   ],
   imports: [
+    CommonModule ,
     BrowserModule,
     AppRoutingModule,
     NgbModule,

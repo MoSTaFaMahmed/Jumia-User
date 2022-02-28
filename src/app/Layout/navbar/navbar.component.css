@@ -30,3 +30,8 @@ nav{
 {
  background-color: rgb(228, 129, 28);
 }
+.cartitem{
+  position: absolute;
+  top:35%;
+  color: rgb(228, 129, 28) ;
+}

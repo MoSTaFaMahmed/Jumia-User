@@ -15,6 +15,7 @@ import { AuthService } from 'src/app/Services/Authontication/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+
   sideBarOpen: boolean = false;
   searchitem: string = '';
   islogged: boolean = false;
@@ -31,17 +32,18 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private auth: AuthService
   ) {}
- 
+
 
   ngOnInit(): void {
-    this.auth.user.subscribe((user) => {
-      console.log(user);
-      
-      user ? (this.isUser = true) : (this.isUser = false);
-    });
     this.cartServc.cartItems.subscribe((el) => {
       this.itemIncart = el.length;
     });
+    this.auth.user.subscribe((user) => {
+      console.log(user);
+
+      user ? (this.isUser = true) : (this.isUser = false);
+    });
+
     combineLatest([this.startobservable, this.endobservable]).subscribe(
       (value) => {
         this.ProductsService.SearchQuery(value[0], value[1]).subscribe(

@@ -1,3 +1,4 @@
+import { CartComponent } from './cart/cart.component';
 import { CateqoryComponent } from './cateqory/cateqory.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { HomeComponent } from './home/home.component';
@@ -6,7 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SearchResultComponent } from './Search-Result/search-result/search-result.component';
 import { UserRegisterComponent } from './user-register/user-register/user-register.component';
 import { UserLoginComponent } from './user-login/user-login.component';
-import { CartComponent } from './cart/cart/cart.component';
+
 import { AuthGuardService } from './Services/Guards/auth-guard.service';
 const routes: Routes = [
   { path: '', redirectTo: '/Products', pathMatch: 'full' },
@@ -16,10 +17,11 @@ const routes: Routes = [
   { path: 'search', component: SearchResultComponent },
   { path: 'Register', component: UserRegisterComponent },
   { path: 'login', component: UserLoginComponent },
-  { path: 'cart', component:CartComponent,canActivate:[AuthGuardService] },
+  { path: 'cart', component: CartComponent },
+
+  {path:"**",component:ProductDetailsComponent}
 
 
-  
 ];
 
 @NgModule({
