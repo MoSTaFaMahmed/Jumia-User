@@ -9,7 +9,7 @@
 
                   </div>
                    <!--start second col in first col-->
-                  <div class="col-lg-8 col-sm-12">
+                  <div class="col-lg-12 col-sm-12">
                       <div class="d-flex justify-content-between text-start mt-3">
                           <div class="px-3">
                                <h2 id="itemtitle">{{product?.Description}}</h2></div>
@@ -30,11 +30,16 @@
                       <!--button-->
                       <div class="px-2 ">
                           <div class="py-3 ">
-                        <button type="button"
+                        <button type="button" *ngIf="flag"
                                      (click)="addToCart(product)" style="width: 100%;background-color:#f68b1e; padding: 4px;" class="shoppingbtn ms-0 shadow-lg rounded " >
                             <i class="fas fa-shopping-cart px-3"></i>
                             <span class="px-3">Add to card</span>
                         </button>
+                        <button type="button" *ngIf="!flag"
+                         style="width: 100%;background-color:#f68b1e; padding: 4px;" class="shoppingbtn ms-0 shadow-lg rounded " >
+               <i class="fas fa-shopping-cart px-3"></i>
+               <span class="px-3"> Added Succecfuly </span>
+           </button>
                     </div>
                       </div>
                       <!--promotion-->
@@ -48,6 +53,31 @@
                             <i class="fas fa-shield-alt fs-3 text-warning me-3 align-self-baseline"></i>
                             Enjoy 50% cashback on bills payment - Code: WELCOME50 - for new customers only</a>
                     </div>
+                    <!-- RelatedProducts -->
+                    <div class="empty" *ngIf="products.length < 1">
+                      <div class="info">
+                        <h4>No Related Products </h4>
+                        <a routerLink="" class="btn btn-success">Start Shoping </a>
+                      </div>
+                      </div>
+                    <div class="row bg-white mt-5" *ngIf="products.length > 1">
+                      <h3 class="row">Related items</h3>
+                      <div *ngFor="let item of products" class="card col-lg-2 my-3 me-1 col-md-4 col-sm-6 mx-auto product">
+                        <a [routerLink]="['/Products', item.id]" [queryParams]="{ query: item.Category}" class="text-decoration-none text-dark">
+                          <img
+                            class="card-img-top"
+                            [src]='item.Image'
+                            alt="Card image"
+                            style="width: 100%"
+                          />
+                          <div class="card-body">
+                            <!-- <small>{{item.Name}}</small> -->
+                            <small>{{item.Category}}</small>
+                            <h6 class="card-title">EGP {{item.Price}}</h6>
+                               </div>
+                        </a>
+                      </div>
+                      </div>
                       </section>
                   </div>
                    <!--start third col i first col-->
@@ -266,11 +296,16 @@
          </div>
        </div>
        <div class="d-flex justify-content-between align-items-center">
-         <button type="button" (click)="addToCart(product)" style="background-color:#f68b1e ; width: 100%; color: white;"
+         <button type="button" *ngIf="flag" (click)="addToCart(product)" style="background-color:#f68b1e ; width: 100%; color: white;"
           class=" btn mt-2 py-2 shadow fs-5">
            <i class="fas fa-shopping-cart px-3"></i>
            <span style= >Add to cart</span>
          </button>
+         <button type="button" *ngIf="!flag"  style="background-color:#f68b1e ; width: 100%; color: white;"
+         class=" btn mt-2 py-2 shadow fs-5">
+          <i class="fas fa-shopping-cart px-3"></i>
+          <span style= >Added Succefully</span>
+        </button>
 
        </div>
      </article>
@@ -278,7 +313,7 @@
   </div>
 
 
-   <app-home-office-products></app-home-office-products>
+
 </div>
 </div>
 

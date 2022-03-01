@@ -13,10 +13,14 @@ import IProduct from '../ViewModels/Iproduct';
 export class ProductDetailsComponent implements OnInit {
   productId:any;
   product: any;
+  products:IProduct[]=[]
+  categoryName:any;
+  productCatObservable?:Subscription;
   productObservable!:Subscription;
     add:number=-1;
-    flag:boolean=false;
+    flag:boolean=true;
     num!:number;
+
   constructor(
     private activateRouteServicse: ActivatedRoute,
     private productServc: ProductsService,
@@ -27,7 +31,29 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+//******** */Get category of selected product***********//
+    this.activateRouteServicse.queryParamMap.subscribe((param)=>{
+      this.categoryName=param.get('query')
+  console.log(this.categoryName);
+   })
 
+   this.productCatObservable = this.productServc
+   .getDataByCategoryName(this.categoryName)
+   .subscribe((data) => {
+     this.products = data.map((elemnt) => {
+       console.log(elemnt);
+       return {
+         id: elemnt.payload.doc.id,
+         ...(elemnt.payload.doc.data() as IProduct),
+       };
+
+       //
+     });
+
+     console.log(this.products);
+   });
+
+//*****Get Selected product******//
     this.activateRouteServicse.paramMap.subscribe((paramMap) => {
       this.productId=paramMap.get('id');
       console.log(this.productId);
@@ -51,7 +77,7 @@ export class ProductDetailsComponent implements OnInit {
 
   addToCart(product:IProduct){
     this.cartServc.addItem(product)
-    this.flag=true;
+    this.flag=false;
       }
   // addToCart(product:IProduct){
   //   let prodArr = JSON.parse(localStorage.getItem("products") || "[]");

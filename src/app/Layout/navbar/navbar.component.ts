@@ -13,6 +13,7 @@ import ITest from 'src/app/ViewModels/test';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+
   sideBarOpen: boolean = false;
   searchitem: string = '';
   islogged: boolean = false;
@@ -33,6 +34,7 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private auth: AuthService
   ) {}
+<<<<<<< HEAD
 
   ngOnInit(): void {
     /*   |||| reference  ||||  
@@ -51,6 +53,25 @@ export class NavbarComponent implements OnInit {
       this.ProductsService.SearchQuery(value).subscribe(
         (items) => {
           console.log(items);
+=======
+
+
+  ngOnInit(): void {
+    this.cartServc.cartItems.subscribe((el) => {
+      this.itemIncart = el.length;
+    });
+    this.auth.user.subscribe((user) => {
+      console.log(user);
+
+      user ? (this.isUser = true) : (this.isUser = false);
+    });
+
+    combineLatest([this.startobservable, this.endobservable]).subscribe(
+      (value) => {
+        this.ProductsService.SearchQuery(value[0], value[1]).subscribe(
+          (items) => {
+            console.log(items);
+>>>>>>> 7f8ffd1d897ec033a102348b656f2b8db7a97710
 
           this.filtteredProducts = items;
         }

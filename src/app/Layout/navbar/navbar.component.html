@@ -120,22 +120,22 @@
         >
         <ul class="dropdown-menu">
           <li style="text-align: left">
-            <a class="dropdown-item text-dark" href="helpcenter.html"
+            <a class="dropdown-item text-dark" href="#"
               >Help Center</a
             >
           </li>
           <li>
-            <a class="dropdown-item text-dark" href="helpPlace.html"
+            <a class="dropdown-item text-dark" href="#"
               >Place & track order</a
             >
           </li>
           <li>
-            <a class="dropdown-item text-dark" href="ordercancelation.html"
+            <a class="dropdown-item text-dark" href="#"
               >order Cancel</a
             >
           </li>
           <li>
-            <a class="dropdown-item text-dark" href="refundes.html"
+            <a class="dropdown-item text-dark" href="#"
               >Returns & Refunds</a
             >
           </li>
@@ -152,13 +152,10 @@
           </li>
         </ul>
       </li>
+      <!-- <p>taqwa</p> -->
+
       <li class="nav-item">
-        <a routerLink="/cart" class="nav-link text-dark" href="#"
-          ><i class="far fa-shopping-cart"></i
-        ></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-dark" href="#">{{ itemIncart }}</a>
+        <a class="nav-link text-dark " routerLink="/cart"><i class="far fa-shopping-cart "></i><span class="cartitem">{{itemIncart}}</span></a>
       </li>
     </ul>
   </div>

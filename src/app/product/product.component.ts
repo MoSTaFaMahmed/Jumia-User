@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ProductsService } from '../Services/Products/products.service';
 import IProduct from '../ViewModels/Iproduct';
 
@@ -10,28 +10,29 @@ import IProduct from '../ViewModels/Iproduct';
 })
 export class ProductComponent implements OnInit, OnDestroy {
   products: IProduct[] = [];
+  @Input() sendProduct:any;
   productObservable?: Subscription;
   constructor(private prdService: ProductsService) {}
 
   ngOnInit() {
-    this.productObservable = this.prdService
-      .getAllDataByCat('Fashion')
-      .subscribe((data) => {
-        this.products = data.map((elemnt) => {
-        //  console.log(elemnt);
-          return {
-            id: elemnt.payload.doc.id,
-            ...(elemnt.payload.doc.data() as IProduct),
-            // name:elemnt.payload.doc.data['name']
-          };
+    // this.productObservable = this.prdService
+    //   .getAllData()
+    //   .subscribe((data) => {
+    //     this.products = data.map((elemnt) => {
+    //     //  console.log(elemnt);
+    //       return {
+    //         id: elemnt.payload.doc.id,
+    //         ...(elemnt.payload.doc.data() as IProduct),
+    //         // name:elemnt.payload.doc.data['name']
+    //       };
 
-          //
-        });
+    //       //
+    //     });
 
-       // console.log(this.products);
-      });
+    //    // console.log(this.products);
+    //   });
   }
   ngOnDestroy() {
-    this.productObservable!.unsubscribe();
+   // this.productObservable!.unsubscribe();
   }
 }

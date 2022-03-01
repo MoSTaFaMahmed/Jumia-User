@@ -2,23 +2,34 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import IProduct from '../../ViewModels/Iproduct';
 import IUser from '../../ViewModels/IUser';
-import ITest from 'src/app/ViewModels/test';
-import { BehaviorSubject, Subject } from 'rxjs';
-
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
+<<<<<<< HEAD
   products = new BehaviorSubject<IProduct>({});
 
   constructor(private db: AngularFirestore) {}
+=======
+
+  constructor(private db: AngularFirestore,private router:Router) {}
+>>>>>>> 7f8ffd1d897ec033a102348b656f2b8db7a97710
   getAllData() {
     return this.db.collection('Products').snapshotChanges();
   }
+  getAllCategorys() {
+    return this.db.collection('Category').snapshotChanges();
+  }
   getAllDataByCat(cat: string) {
-    return this.db
+
+    this.router.navigate(['./category'],{queryParams:{query:cat}})
+
+  }
+  getDataByCategoryName(cat: string){
+      return this.db
       .collection('Products', (ref) =>
-        ref.where('Category', '==', cat).limit(6)
+        ref.where('Category', '==', cat)
       )
       .snapshotChanges();
   }
