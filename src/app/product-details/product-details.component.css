@@ -1,0 +1,7 @@
+.product:hover{
+  transform: scale(1.02,1.05);
+}
+.Amzing-Img:hover{
+  transform: scale(1.02,1.05);
+cursor: pointer;
+}

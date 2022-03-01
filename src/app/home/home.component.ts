@@ -11,6 +11,10 @@ import { docData } from 'rxfire/firestore';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   products: IProduct[]=[];
+  firstSecproduct: IProduct[]=[];
+  secondSecproduct: IProduct[]=[];
+  thirdSecproduct: IProduct[]=[];
+
   productObservable?:Subscription
   constructor(private prdService: ProductsService) {}
 
@@ -27,9 +31,14 @@ export class HomeComponent implements OnInit, OnDestroy {
         //
       })
 
-      //console.log(this.products);
+      this.firstSecproduct=this.products.slice(0,6);
+      this.secondSecproduct=this.products.slice(6,12);
+      this.thirdSecproduct=this.products.slice(12,18);
     })
+
+
   }
+
 ngOnDestroy() {
 this.productObservable!.unsubscribe()
 }

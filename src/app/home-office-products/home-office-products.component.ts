@@ -13,22 +13,22 @@ export class HomeOfficeProductsComponent implements OnInit, OnDestroy {
   constructor(private prdService: ProductsService) {}
 
   ngOnInit() {
-    this.productObservable = this.prdService
-      .getAllDataByCat('Home&Office')
-      .subscribe((data) => {
-        this.products = data.map((elemnt) => {
-        //  console.log(elemnt);
-          return {
-            id: elemnt.payload.doc.id,
-            ...(elemnt.payload.doc.data() as IProduct),
-            // name:elemnt.payload.doc.data['name']
-          };
+    // this.productObservable = this.prdService
+    //   .getAllDataByCat('Home&Office')
+    //   .subscribe((data) => {
+    //     this.products = data.map((elemnt) => {
+    //     //  console.log(elemnt);
+    //       return {
+    //         id: elemnt.payload.doc.id,
+    //         ...(elemnt.payload.doc.data() as IProduct),
+    //         // name:elemnt.payload.doc.data['name']
+    //       };
 
-          //
-        });
+    //       //
+    //     });
 
-       // console.log(this.products);
-      });
+    //    // console.log(this.products);
+    //   });
   }
   ngOnDestroy() {
     this.productObservable!.unsubscribe();

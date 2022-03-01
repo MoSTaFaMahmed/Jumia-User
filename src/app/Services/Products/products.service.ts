@@ -5,19 +5,28 @@ import { AngularFireAction } from '@angular/fire/compat/database';
 
 import IProduct from '../../ViewModels/Iproduct';
 import IUser from '../../ViewModels/IUser';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
- 
-  constructor(private db: AngularFirestore) {}
+
+  constructor(private db: AngularFirestore,private router:Router) {}
   getAllData() {
     return this.db.collection('Products').snapshotChanges();
   }
+  getAllCategorys() {
+    return this.db.collection('Category').snapshotChanges();
+  }
   getAllDataByCat(cat: string) {
-    return this.db
+
+    this.router.navigate(['./category'],{queryParams:{query:cat}})
+
+  }
+  getDataByCategoryName(cat: string){
+      return this.db
       .collection('Products', (ref) =>
-        ref.where('Category', '==', cat).limit(6)
+        ref.where('Category', '==', cat)
       )
       .snapshotChanges();
   }

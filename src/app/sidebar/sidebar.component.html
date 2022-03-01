@@ -1,9 +1,15 @@
 
   <ul
     class="nav nav-pills flex-column mb-auto"
-
+*ngFor="let item of categorys"
   >
-    <li>
+  <li>
+    <a [routerLink]="['/category']" [queryParams]="{ query: item.name}" class="nav-link link-dark">
+       {{item.name}}
+    </a>
+  </li>
+
+    <!-- <li>
       <a routerLink="/category" class="nav-link link-dark">
         <i class="fas fa-hat-winter"></i> Fashon
       </a>
@@ -37,6 +43,6 @@
       <a href="#" class="nav-link link-dark">
         <i class="bi bi-tv-fill"></i> Electronics
       </a>
-    </li>
+    </li> -->
   </ul>
 

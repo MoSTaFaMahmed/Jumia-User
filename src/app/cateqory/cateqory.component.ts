@@ -2,6 +2,7 @@ import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductsService } from '../Services/Products/products.service';
 import IProduct from '../ViewModels/Iproduct';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cateqory',
@@ -10,27 +11,33 @@ import IProduct from '../ViewModels/Iproduct';
 })
 export class CateqoryComponent implements OnInit, OnDestroy {
   products: IProduct[] = [];
-  productObservable?: Subscription;
-  constructor(private prdService: ProductsService) {}
+  productCatObservable?: Subscription;
+  categoryName:any;
+  constructor(private prdService: ProductsService,private router:ActivatedRoute) {}
 
   ngOnInit() {
-    this.productObservable = this.prdService
-      .getAllDataByCat('Fashion')
-      .subscribe((data) => {
-        this.products = data.map((elemnt) => {
-          console.log(elemnt);
-          return {
-            id: elemnt.payload.doc.id,
-            ...(elemnt.payload.doc.data() as IProduct),
-          };
+    //Get Product By Category//
+  this.router.queryParamMap.subscribe((param)=>{
+    this.categoryName=param.get('query')
+     console.log(this.categoryName);
+    })
+     this.productCatObservable = this.prdService
+       .getDataByCategoryName(this.categoryName)
+       .subscribe((data) => {
+         this.products = data.map((elemnt) => {
+           console.log(elemnt);
+           return {
+             id: elemnt.payload.doc.id,
+             ...(elemnt.payload.doc.data() as IProduct),
+           };
 
-          //
-        });
+           //
+         });
 
-        console.log(this.products);
-      });
+         console.log(this.products);
+       });
   }
   ngOnDestroy() {
-    this.productObservable!.unsubscribe();
+    this.productCatObservable!.unsubscribe();
   }
 }

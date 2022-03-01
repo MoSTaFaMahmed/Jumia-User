@@ -11,11 +11,28 @@
     </div>
   </div>
   <app-staticcomponent></app-staticcomponent>
-  <!-- Product -->
-  <app-product></app-product>
-  <app-image-adversting></app-image-adversting>
-  <app-home-office-products></app-home-office-products>
-  
+  <!-- Product  -->
+ <!-- <div class="row">
+  <ng-container  *ngFor="let item of products ; let i = index" >
+
+    <app-product class="card col-lg-2 col-md-4 col-sm-6  mx-auto product" *ngIf="i<6" [sendProduct]='item'></app-product>
+  </ng-container>
+ </div> -->
+
+  <div class="row">
+    <ng-container  *ngFor="let item of firstSecproduct ;" >
+
+      <app-product class="card col-lg-2 col-md-4 col-sm-6  mx-auto product"  [sendProduct]='item'></app-product>
+    </ng-container>
+   </div>
+
+<app-image-adversting></app-image-adversting>
+<div class="row">
+  <ng-container  *ngFor="let item of secondSecproduct ;" >
+
+    <app-product class="card col-lg-2 col-md-4 col-sm-6  mx-auto product"  [sendProduct]='item'></app-product>
+  </ng-container>
+ </div>
 </section>
 <!--
 <div class="container">
