@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SearchResultComponent } from './Search-Result/search-result/search-result.component';
 import { UserRegisterComponent } from './user-register/user-register/user-register.component';
 import { UserLoginComponent } from './user-login/user-login.component';
-import { CartComponent } from './cart/cart/cart.component';
+import { CartComponent } from './cart/cart.component';
 import { AuthGuardService } from './Services/Guards/auth-guard.service';
 const routes: Routes = [
   { path: '', redirectTo: '/Products', pathMatch: 'full' },

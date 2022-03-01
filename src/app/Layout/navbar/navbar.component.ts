@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Subject, combineLatest } from 'rxjs';
 import { CartServiceService } from './../../Services/Cart/cart-service.service';
@@ -9,6 +6,7 @@ import { ProductsService } from 'src/app/Services/Products/products.service';
 import IProduct from 'src/app/ViewModels/Iproduct';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/Authontication/auth.service';
+import ITest from 'src/app/ViewModels/test';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -25,46 +23,52 @@ export class NavbarComponent implements OnInit {
   private endobservable = this.endat.asObservable();
   filtteredProducts: IProduct[] = [];
   itemIncart!: number;
+  words: ITest = {
+    wrods: [],
+  };
+  prd!: IProduct;
   constructor(
     private ProductsService: ProductsService,
     private cartServc: CartServiceService,
     private router: Router,
     private auth: AuthService
   ) {}
- 
 
   ngOnInit(): void {
+    /*   |||| reference  ||||  
+    this.ProductsService.hhhh();
+    this.ProductsService.products.subscribe((e) => (this.prd = e));
+         |||| reference  |||| */
     this.auth.user.subscribe((user) => {
       console.log(user);
-      
+
       user ? (this.isUser = true) : (this.isUser = false);
     });
     this.cartServc.cartItems.subscribe((el) => {
       this.itemIncart = el.length;
     });
-    combineLatest([this.startobservable, this.endobservable]).subscribe(
-      (value) => {
-        this.ProductsService.SearchQuery(value[0], value[1]).subscribe(
-          (items) => {
-            console.log(items);
+    this.startobservable.subscribe((value) => {
+      this.ProductsService.SearchQuery(value).subscribe(
+        (items) => {
+          console.log(items);
 
-            this.filtteredProducts = items;
-          }
-        );
-      }
-    );
+          this.filtteredProducts = items;
+        }
+      );
+    });
   }
   toggleSideBar() {
     this.sideBarOpen = !this.sideBarOpen;
   }
   search() {
-    this.startat.next(this.searchitem);
-    this.endat.next(this.searchitem + '\uf8ff');
+    setTimeout(() => {
+      this.startat.next(this.searchitem);
+    }, 900);
   }
   route(dd: any) {
     this.router.navigate(['/search'], { queryParams: { word: dd } });
   }
-  Logout(){
+  Logout() {
     this.auth.Logout();
   }
 }

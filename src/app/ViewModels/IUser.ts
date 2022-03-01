@@ -1,3 +1,5 @@
+import { DocumentReference } from "@angular/fire/compat/firestore";
+
 export default interface IUser{
     Firstname?:string,
     Lastname?:string,
@@ -6,6 +8,6 @@ export default interface IUser{
     Phone?:string,
     IsSeller?:boolean,
     SellerStatus?:String
-    Product?:[]
+    Product?:[{Product_Id:DocumentReference}]
 
 }

@@ -17,7 +17,6 @@ export class HomeOfficeProductsComponent implements OnInit, OnDestroy {
       .getAllDataByCat('Home&Office')
       .subscribe((data) => {
         this.products = data.map((elemnt) => {
-        //  console.log(elemnt);
           return {
             id: elemnt.payload.doc.id,
             ...(elemnt.payload.doc.data() as IProduct),
@@ -27,7 +26,6 @@ export class HomeOfficeProductsComponent implements OnInit, OnDestroy {
           //
         });
 
-       // console.log(this.products);
       });
   }
   ngOnDestroy() {

@@ -20,7 +20,6 @@ export class UserRegisterComponent implements OnInit {
 
   ngOnInit(): void {}
   Signup(form: any) {
-    console.log(form);
     let data: IUser = {
       Firstname: form.firstname,
       Lastname: form.lastname,

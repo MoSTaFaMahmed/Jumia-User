@@ -12,7 +12,6 @@ export class CateqoryComponent implements OnInit, OnDestroy {
   products: IProduct[] = [];
   productObservable?: Subscription;
   constructor(private prdService: ProductsService) {}
-
   ngOnInit() {
     this.productObservable = this.prdService
       .getAllDataByCat('Fashion')
@@ -23,11 +22,7 @@ export class CateqoryComponent implements OnInit, OnDestroy {
             id: elemnt.payload.doc.id,
             ...(elemnt.payload.doc.data() as IProduct),
           };
-
-          //
         });
-
-        console.log(this.products);
       });
   }
   ngOnDestroy() {

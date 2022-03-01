@@ -34,6 +34,7 @@
           placeholder="Search products, brands and categories"
           aria-label="default input example"
         />
+        <input class="form-control"  #word type="text" placeholder="add">
         <div class="searchOptions" *ngIf="searchitem.length > 0">
           <div
             class="list-group"
@@ -51,7 +52,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <button class="searchbut">SEARCH</button>
+        
       </li>
       <li id="navitem1" class="nav-item dropdown">
         <!--we will change account in "Hi,username"-->

@@ -10,30 +10,26 @@ import { docData } from 'rxfire/firestore';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  products: IProduct[]=[];
-  productObservable?:Subscription
+  products: IProduct[] = [];
+  productObservable?: Subscription;
   constructor(private prdService: ProductsService) {}
 
   ngOnInit() {
-   this.productObservable= this.prdService.getAllData().subscribe(data => {
+    this.productObservable = this.prdService.getAllData().subscribe((data) => {
       this.products = data.map((elemnt) => {
-       // console.log(elemnt);
         return {
           id: elemnt.payload.doc.id,
-          ...elemnt.payload.doc.data()as IProduct
-          // name:elemnt.payload.doc.data['name']
-        }
-
-        //
-      })
+          ...(elemnt.payload.doc.data() as IProduct),
+        };
+      });
 
       //console.log(this.products);
-    })
+    });
   }
-ngOnDestroy() {
-this.productObservable!.unsubscribe()
-}
-// addToCart(id?:string){
-//   console.log(id);
-// }
+  ngOnDestroy() {
+    this.productObservable!.unsubscribe();
+  }
+  // addToCart(id?:string){
+  //   console.log(id);
+  // }
 }
