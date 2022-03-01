@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Subject, combineLatest } from 'rxjs';
+import { Subject, combineLatest, retry } from 'rxjs';
 import { CartServiceService } from './../../Services/Cart/cart-service.service';
 import { ProductsService } from 'src/app/Services/Products/products.service';
 import IProduct from 'src/app/ViewModels/Iproduct';
@@ -13,15 +13,12 @@ import ITest from 'src/app/ViewModels/test';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-
   sideBarOpen: boolean = false;
   searchitem: string = '';
   islogged: boolean = false;
   isUser: boolean = false;
   private startat = new Subject<string>();
-  private endat = new Subject<string>();
   private startobservable = this.startat.asObservable();
-  private endobservable = this.endat.asObservable();
   filtteredProducts: IProduct[] = [];
   itemIncart!: number;
   words: ITest = {
@@ -34,7 +31,6 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private auth: AuthService
   ) {}
-<<<<<<< HEAD
 
   ngOnInit(): void {
     /*   |||| reference  ||||  
@@ -50,32 +46,13 @@ export class NavbarComponent implements OnInit {
       this.itemIncart = el.length;
     });
     this.startobservable.subscribe((value) => {
-      this.ProductsService.SearchQuery(value).subscribe(
-        (items) => {
-          console.log(items);
-=======
-
-
-  ngOnInit(): void {
-    this.cartServc.cartItems.subscribe((el) => {
-      this.itemIncart = el.length;
-    });
-    this.auth.user.subscribe((user) => {
-      console.log(user);
-
-      user ? (this.isUser = true) : (this.isUser = false);
-    });
-
-    combineLatest([this.startobservable, this.endobservable]).subscribe(
-      (value) => {
-        this.ProductsService.SearchQuery(value[0], value[1]).subscribe(
-          (items) => {
-            console.log(items);
->>>>>>> 7f8ffd1d897ec033a102348b656f2b8db7a97710
-
-          this.filtteredProducts = items;
-        }
-      );
+      this.ProductsService.SearchQuery(value).subscribe((items) => {
+        this.filtteredProducts = items.map((item) => {
+          return item.payload.doc.data();
+        });
+        console.log(this.filtteredProducts);
+        
+      });
     });
   }
   toggleSideBar() {
@@ -86,8 +63,10 @@ export class NavbarComponent implements OnInit {
       this.startat.next(this.searchitem);
     }, 900);
   }
-  route(dd: any) {
-    this.router.navigate(['/search'], { queryParams: { word: dd } });
+  route(id:string) {
+    this.filtteredProducts=[];
+    this.searchitem=""
+  this.router.navigate(['/Products',id]);
   }
   Logout() {
     this.auth.Logout();

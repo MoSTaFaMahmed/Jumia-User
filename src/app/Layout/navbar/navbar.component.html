@@ -34,26 +34,24 @@
           placeholder="Search products, brands and categories"
           aria-label="default input example"
         />
-        <input class="form-control"  #word type="text" placeholder="add">
         <div class="searchOptions" *ngIf="searchitem.length > 0">
           <div
             class="list-group"
             style="position: absolute; width: 100%; z-index: 1"
           >
             <button
-              (click)="route(item.Name)"
+           (click)="route(item.id!)"
               type="button"
               class="list-group-item list-group-item-action"
               *ngFor="let item of filtteredProducts"
+              
             >
               {{ item.Name }}
             </button>
           </div>
         </div>
       </li>
-      <li class="nav-item">
-        
-      </li>
+      <li class="nav-item"></li>
       <li id="navitem1" class="nav-item dropdown">
         <!--we will change account in "Hi,username"-->
         <a
@@ -120,24 +118,16 @@
         >
         <ul class="dropdown-menu">
           <li style="text-align: left">
-            <a class="dropdown-item text-dark" href="#"
-              >Help Center</a
-            >
+            <a class="dropdown-item text-dark" href="#">Help Center</a>
           </li>
           <li>
-            <a class="dropdown-item text-dark" href="#"
-              >Place & track order</a
-            >
+            <a class="dropdown-item text-dark" href="#">Place & track order</a>
           </li>
           <li>
-            <a class="dropdown-item text-dark" href="#"
-              >order Cancel</a
-            >
+            <a class="dropdown-item text-dark" href="#">order Cancel</a>
           </li>
           <li>
-            <a class="dropdown-item text-dark" href="#"
-              >Returns & Refunds</a
-            >
+            <a class="dropdown-item text-dark" href="#">Returns & Refunds</a>
           </li>
           <li>
             <a class="dropdown-item text-dark" href="#"
@@ -155,7 +145,10 @@
       <!-- <p>taqwa</p> -->
 
       <li class="nav-item">
-        <a class="nav-link text-dark " routerLink="/cart"><i class="far fa-shopping-cart "></i><span class="cartitem">{{itemIncart}}</span></a>
+        <a class="nav-link text-dark" routerLink="/cart"
+          ><i class="far fa-shopping-cart"></i
+          ><span class="cartitem">{{ itemIncart }}</span></a
+        >
       </li>
     </ul>
   </div>

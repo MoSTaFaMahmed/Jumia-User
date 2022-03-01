@@ -3,23 +3,19 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import IProduct from '../../ViewModels/Iproduct';
 import IUser from '../../ViewModels/IUser';
 import { Router } from '@angular/router';
+import { ICart } from 'src/app/ViewModels/icart';
+import { Category } from 'src/app/ViewModels/category';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-<<<<<<< HEAD
-  products = new BehaviorSubject<IProduct>({});
-
-  constructor(private db: AngularFirestore) {}
-=======
 
   constructor(private db: AngularFirestore,private router:Router) {}
->>>>>>> 7f8ffd1d897ec033a102348b656f2b8db7a97710
   getAllData() {
     return this.db.collection('Products').snapshotChanges();
   }
   getAllCategorys() {
-    return this.db.collection('Category').snapshotChanges();
+    return this.db.collection<Category>('Category').snapshotChanges();
   }
   getAllDataByCat(cat: string) {
 
@@ -45,26 +41,23 @@ export class ProductsService {
 
           .limit(10)
       )
-      .valueChanges();
+      .snapshotChanges();
   }
 
-  addproduct(word: ITest) {
-    this.db.collection<ITest>('test').add({ ...word });
-    console.log(word);
-  }
-  hhhh() {
-    return this.db
-      .collection<IUser>('users')
-      .doc('GJdYZoixIgn7krJLNZWV')
-      .get()
-      .subscribe((res) => {
-        var res2 = res.data();
-        res2?.Product?.map((el) => {
-          el.Product_Id.get().then((rr) => {
-            // this.tt=  rr.data() as IProduct
-            this.products.next(rr.data() as IProduct);
-          });
-        });
-      });
-  }
+ 
+  // hhhh() {
+  //   return this.db
+  //     .collection<IUser>('users')
+  //     .doc('GJdYZoixIgn7krJLNZWV')
+  //     .get()
+  //     .subscribe((res) => {
+  //       var res2 = res.data();
+  //       res2?.Product?.map((el) => {
+  //         el.Product_Id.get().then((rr) => {
+  //           // this.tt=  rr.data() as IProduct
+  //           this.products.next(rr.data() as IProduct);
+  //         });
+  //       });
+  //     });
+  // }
 }

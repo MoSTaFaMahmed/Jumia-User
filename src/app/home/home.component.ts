@@ -10,17 +10,13 @@ import { docData } from 'rxfire/firestore';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-<<<<<<< HEAD
-  products: IProduct[] = [];
-  productObservable?: Subscription;
-=======
+
   products: IProduct[]=[];
   firstSecproduct: IProduct[]=[];
   secondSecproduct: IProduct[]=[];
   thirdSecproduct: IProduct[]=[];
 
   productObservable?:Subscription
->>>>>>> 7f8ffd1d897ec033a102348b656f2b8db7a97710
   constructor(private prdService: ProductsService) {}
 
   ngOnInit() {
@@ -32,17 +28,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         };
       });
 
-<<<<<<< HEAD
-      //console.log(this.products);
-    });
-  }
-  ngOnDestroy() {
-    this.productObservable!.unsubscribe();
-  }
-  // addToCart(id?:string){
-  //   console.log(id);
-  // }
-=======
       this.firstSecproduct=this.products.slice(0,6);
       this.secondSecproduct=this.products.slice(6,12);
       this.thirdSecproduct=this.products.slice(12,18);
@@ -57,5 +42,4 @@ this.productObservable!.unsubscribe()
 // addToCart(id?:string){
 //   console.log(id);
 // }
->>>>>>> 7f8ffd1d897ec033a102348b656f2b8db7a97710
 }
