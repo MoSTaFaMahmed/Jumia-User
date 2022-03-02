@@ -20,7 +20,7 @@ lang = new BehaviorSubject("");
   
   setLanguage(data: string) {
     localStorage.setItem('lang', JSON.stringify(data));
-    this.lang.next(data);
+    this.lang.next(this.getLanguage());
   }
   getLanguage() {
     return JSON.parse(localStorage.getItem('lang') || '');

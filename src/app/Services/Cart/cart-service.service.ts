@@ -16,8 +16,10 @@ export class CartServiceService {
  cartItems=new BehaviorSubject([])
   constructor(private db: AngularFirestore) {
   // const ls=JSON.parse(localStorage.getItem("cart")||'[]' );
-  const ls=this.getCartData()
-  if(ls) this.cartItems.next(ls)
+  const ls=this.getCartData();
+  console.log(ls);
+  
+  if(ls) this.cartItems.next(ls);
 
    }
 
@@ -25,13 +27,17 @@ export class CartServiceService {
 
   addItem(product: IProduct) {
    //const ls=JSON.parse(localStorage.getItem("cart")||'[]' );
+   console.log(product);
+   
    const ls=this.getCartData()
- var exist:any;
+   console.log(ls);
+   
+    var exist:any;
    if(ls)
    exist=ls.find((item:IProduct)=>{
       return item.Name==product.Name;
     });
-    console.log(exist);
+    
 
     if (exist){
        exist.Quantity+1

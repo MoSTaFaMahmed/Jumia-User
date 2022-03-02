@@ -13,10 +13,10 @@
         <div class="col-lg-12 col-sm-12">
           <div class="d-flex justify-content-between text-start mt-3">
             <div class="px-3">
-              <h2 [hidden]="flaglang == 'rtl'" id="itemtitle">
+              <h2 *ngIf="flaglang=='ltr'" id="itemtitle">
                 {{ product?.Description }}
               </h2>
-              <h2 [hidden]="flaglang == 'ltr'" id="itemtitle">
+              <h2 *ngIf="flaglang=='rtl'" id="itemtitle">
                 {{ product?.DescriptionAr }}
               </h2>
             </div>
@@ -47,7 +47,8 @@
                 class="shoppingbtn ms-0 shadow-lg rounded"
               >
                 <i class="fas fa-shopping-cart px-3"></i>
-                <span class="px-3">Add to card</span>
+                <span *ngIf="flaglang=='ltr'" class="px-3">Add to card</span>
+                <span *ngIf="flaglang=='rtl'" class="px-3">اضف الى العربة</span>
               </button>
               <button
                 type="button"
@@ -104,12 +105,8 @@
                   />
                   <div class="card-body">
                     <!-- <small>{{item.Name}}</small> -->
-                    <small [hidden]="flaglang == 'ltr'">{{
-                      item.Category
-                    }}</small>
-                    <small [hidden]="flaglang == 'rtl'">{{
-                      item.CategoryAr
-                    }}</small>
+                    <small *ngIf="flaglang=='ltr'">{{ item.Category }}</small>
+                    <small *ngIf="flaglang=='rtl'">{{ item.CategoryAr }}</small>
                     <h6 class="card-title">EGP {{ item.Price }}</h6>
                   </div>
                 </a>
@@ -202,9 +199,9 @@
             <h2 class="title-h m-0">SELLER INFORMATION</h2>
           </a>
           <div class="p-2 headline" style="position: relative">
-            <a class="fs-5" style="cursor: pointer; font-weight: 500"
+            <!-- <a class="fs-5" style="cursor: pointer; font-weight: 500"
               >{{ seller.firstname }} Marketplace</a
-            >
+            > -->
             <div
               class="d-flex justify-content-between"
               style="font-size: 0.7rem"
@@ -259,19 +256,13 @@
           class="mx-3 py-4 headline fs-5"
           style="position: relative; overflow-x: auto"
         >
-          <span [hidden]="flaglang == 'rtl'" class="d-block">{{
-            product?.Category
-          }}</span>
-          <span [hidden]="flaglang == 'rtl'" class="d-block">{{
-            product?.CategoryAr
-          }}</span>
+          <span *ngIf="flaglang=='ltr'" class="d-block">{{ product?.Category }}</span>
+          <span *ngIf="flaglang=='rtl'" class="d-block">{{ product?.CategoryAr }}</span>
+
           <span class="fw-bold">Material : </span><span>Leather</span>
-          <span [hidden]="flaglang == 'rtl'" class="d-block">{{
-            product?.Description
-          }}</span>
-          <span [hidden]="flaglang == 'rtl'" class="d-block">{{
-            product?.DescriptionAr
-          }}</span>
+          <span *ngIf="flaglang=='ltr'" class="d-block">{{ product?.Description }}</span>
+          <span *ngIf="flaglang=='rtl'" class="d-block">{{ product?.DescriptionAr }}</span>
+
         </div>
       </div>
       <!--start Specifications-->
@@ -364,7 +355,7 @@
               </div>
               <div class="d-flex align-items-center" style="color: #6dbd28">
                 <i class="far fa-check-circle"></i>
-                <span>Verified Purchase</span>
+                <span >Verified Purchase</span>
               </div>
             </div>
           </article>
@@ -380,14 +371,14 @@
             <img
               class="rounded"
               style="width: 100px; height: 100px"
-              src={{product?.Image}}
+              [src]="product?.Image"
               alt=""
             />
             <div style="overflow: hidden">
-              <h3 [hidden]="flaglang == 'ltr'" class="cut-title">
+              <h3 *ngIf="flaglang=='ltr'" class="cut-title">
                 {{ product?.Name }}
               </h3>
-              <h3 [hidden]="flaglang == 'rtl'" class="cut-title">
+              <h3 *ngIf="flaglang=='rtl'" class="cut-title">
                 {{ product?.NameAr }}
               </h3>
               <div class="py-2">
