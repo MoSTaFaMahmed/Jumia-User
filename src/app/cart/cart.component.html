@@ -49,9 +49,10 @@
           </div>
           <div class="pe-3 me-5 mt-5 pt-5" style="flex: 5%">
             <input
+             (change)="updatetotal(item)"
               type="number"
               class="qty"
-              [value]="item.Quantity"
+              [(ngModel)]="subtotal"
               (blur)="validateInput($event, i)"
             />
           </div>

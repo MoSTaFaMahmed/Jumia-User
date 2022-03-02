@@ -9,4 +9,5 @@ export interface ICart {
   Rank?: number;
   SellerId?: any;
   Size?: string;
+  subtotal?:number
 }

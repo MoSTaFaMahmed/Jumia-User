@@ -23,7 +23,7 @@ export class ProductDetailsComponent implements OnInit {
   flag: boolean = true;
   num!: number;
   seller!: IUser;
-  flaglang:string='';
+  flaglang: string = '';
   constructor(
     private activateRouteServicse: ActivatedRoute,
     private productServc: ProductsService,
@@ -36,7 +36,6 @@ export class ProductDetailsComponent implements OnInit {
     this.productServc.lang.subscribe((e) => {
       this.flaglang = e;
       console.log(this.flaglang);
-      
     });
     //******** */Get category of selected product***********//
     this.activateRouteServicse.queryParamMap.subscribe((param) => {
@@ -44,7 +43,7 @@ export class ProductDetailsComponent implements OnInit {
       console.log(this.categoryName);
     });
     /////////////////////////
- 
+
     /////////////////////////
     this.productCatObservable = this.productServc
       .getDataByCategoryName(this.categoryName)
@@ -73,8 +72,7 @@ export class ProductDetailsComponent implements OnInit {
           this.sellerServc.seller.subscribe((el) => {
             this.product = prod!;
             this.seller = el;
-          // console.log( this.seller.firstname);
-           
+            // console.log( this.seller.firstname);
           });
         });
       });

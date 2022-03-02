@@ -34,7 +34,6 @@
             (keydown)="search()"
             class="form-control"
             type="search"
-            placeholder="Search products, brands and categories"
             aria-label="default input example"
           />
           <div class="searchOptions" *ngIf="searchitem.length > 0">
@@ -48,15 +47,16 @@
                 class="list-group-item list-group-item-action"
                 *ngFor="let item of filtteredProducts"
               >
-               <span >{{ item.Name }}</span> 
-               
+                <span>{{ item.Name }}</span>
               </button>
-             
             </div>
           </div>
         </li>
         <li>
-          <button class="searchbut">SEARCH</button>
+          <button class="searchbut">
+            <span *ngIf="flag == 'ltr'">Search</span>
+            <span *ngIf="flag == 'rtl'">بحث</span>
+          </button>
         </li>
       </ul>
     </div>
@@ -70,8 +70,11 @@
             href="#"
             role="button"
             aria-expanded="false"
-            ><i class="far fa-user"></i> Account</a
-          >
+            ><i class="far fa-user"></i
+            ><span *ngIf="isUser == true">Account</span>
+            <span *ngIf="isUser == false">Signin</span>
+          </a>
+
           <ul class="dropdown-menu">
             <li>
               <a class="dropdown-item text-dark" href="#"

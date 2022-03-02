@@ -27,6 +27,7 @@ export class NavbarComponent implements OnInit {
   };
   prd!: IProduct;
   flag:string='';
+  
   constructor(
     private ProductsService: ProductsService,
     private cartServc: CartServiceService,

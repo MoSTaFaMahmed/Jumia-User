@@ -13,15 +13,21 @@ import { ProductsService } from '../Services/Products/products.service';
 export class CartComponent implements OnInit {
   items: IProduct[] = [];
   total: number = 0;
-  flag:string='';
-  constructor(private cartservce: CartServiceService, private prdService:ProductsService) {}
+  flag: string = '';
+  subtotal!: number;
+  constructor(
+    private cartservce: CartServiceService,
+    private prdService: ProductsService
+  ) {}
 
   ngOnInit(): void {
+
     this.prdService.lang.subscribe((e) => {
       this.flag = e;
     });
     this.cartservce.cartItems.subscribe((data) => {
       this.items = data;
+      
       if (this.items) this.getTotal(this.items);
     });
   }
@@ -45,7 +51,11 @@ export class CartComponent implements OnInit {
   }
   getTotal(data: any) {
     let subs = 0;
-    for (const item of data) subs += item.Price * item.Quantity;
+    for (const item of data) subs += item.Price * item.subtotal;
     this.total = subs;
+  }
+  updatetotal(p:IProduct){
+this.cartservce.addItem(p);
+
   }
 }
