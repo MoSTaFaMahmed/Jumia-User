@@ -5,12 +5,42 @@ import IUser from '../../ViewModels/IUser';
 import { Router } from '@angular/router';
 import { ICart } from 'src/app/ViewModels/icart';
 import { Category } from 'src/app/ViewModels/category';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
+lang = new BehaviorSubject("");
+  constructor(private db: AngularFirestore,private router:Router) {
+   this.lang.next(this.getLanguage());
 
-  constructor(private db: AngularFirestore,private router:Router) {}
+  }
+
+
+  
+  setLanguage(data: string) {
+    localStorage.setItem('lang', JSON.stringify(data));
+    this.lang.next(data);
+  }
+  getLanguage() {
+    return JSON.parse(localStorage.getItem('lang') || '');
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   getAllData() {
     return this.db.collection('Products').snapshotChanges();
   }
@@ -30,7 +60,7 @@ export class ProductsService {
       .snapshotChanges();
   }
   getProductById(productId: number) {
-    return this.db.collection('Products').doc(`${productId}`).valueChanges(); //snapshotChanges();
+    return this.db.collection<IProduct>('Products').doc(`${productId}`).valueChanges(); //snapshotChanges();
   }
 
   SearchQuery(start: string) {
@@ -45,19 +75,5 @@ export class ProductsService {
   }
 
  
-  // hhhh() {
-  //   return this.db
-  //     .collection<IUser>('users')
-  //     .doc('GJdYZoixIgn7krJLNZWV')
-  //     .get()
-  //     .subscribe((res) => {
-  //       var res2 = res.data();
-  //       res2?.Product?.map((el) => {
-  //         el.Product_Id.get().then((rr) => {
-  //           // this.tt=  rr.data() as IProduct
-  //           this.products.next(rr.data() as IProduct);
-  //         });
-  //       });
-  //     });
-  // }
+  
 }

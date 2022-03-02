@@ -1,61 +1,73 @@
-
-<div class="container-sm container-md container-lg" >
+<div class="container-sm container-md container-lg">
   <div class="empty" *ngIf="items.length < 1">
     <div class="info">
-      <h4>You don't have any item in your cart </h4>
+      <h4>You don't have any item in your cart</h4>
       <a routerLink="" class="btn btn-success">Start Shoping </a>
     </div>
-    </div>
+  </div>
   <div class="bg-body shadow my-3">
-     <div class="row">
-      <ng-container >
-         <div id="" *ngFor="let item of items; let i = index " class="empty"  class="col-lg-12 col-sm-12 "  style="display: flex;">
-           <div style="flex:30%;"> <img class="my-3" style="width: 100%;" [src]="item.Image"  alt="" ></div>
-              <div class="p-3 text-start mt-5" style="flex: 70%;">
-                 <p class="text-secondary">Seller: THE OASIS Store</p>
-                 <a class ="text-decoration-none anchor">{{item.Description}}</a>
-                 <p class="text-secondary ">{{item.Category}}</p>
-                 <p class="text-secondary ">{{item.Price}}LE</p>
-                 <p class="text-secondary ">{{item.Quantity}}</p>
-                 <!-- <p>{{item.Price*item.Quantity}}</p> -->
-                 <div class="itemInfo mt-5 ms-auto" style="display: flex;flex-wrap: wrap; ">
+    <div class="row">
+      <ng-container>
+        <div
+          id=""
+          *ngFor="let item of items; let i = index"
+          class="empty"
+          class="col-lg-12 col-sm-12"
+          style="display: flex"
+        >
+          <div style="flex: 30%">
+            <img class="my-3" style="width: 100%" [src]="item.Image" alt="" />
+          </div>
+          <div class="p-3 text-start mt-5" style="flex: 70%">
+            <p class="text-secondary">Seller: THE OASIS Store</p>
+            <a *ngIf="flag == 'ltr'" class="text-decoration-none anchor">{{
+              item.Description
+            }}</a>
+            <a *ngIf="flag == 'rtl'" class="text-decoration-none anchor">{{
+              item.DescriptionAr
+            }}</a>
+            <p *ngIf="flag == 'ltr'" class="text-secondary">{{ item.Category }}</p>
+            <p *ngIf="flag == 'rtl'" class="text-secondary">{{ item.CategoryAr }}</p>
 
-                     <a class="text-decoration-none mt-5" >
-                      <i class="fas fa-trash" aria-hidden="true" (click)="onDelete(i)"> <span>REMOVE</span></i>
-
-                     </a>
-                 </div>
-              </div>
-              <div class="pe-3 me-5 mt-5 pt-5" style="flex: 5%;">
-                <input type="number" class="qty"  [value]="item.Quantity" (blur)="validateInput($event,i)"/>
-                </div>
-         </div>
-
-         </ng-container>
-         <div class="checkout" *ngIf="items.length >= 1">
-           <div class="subtotal">
-
-             <div>Total</div>
-             <b>{{total}}</b>
-
-              <button class="btn shoppingbtn m-3">checkout</button>
+            <p class="text-secondary">{{ item.Price }}LE</p>
+            <p class="text-secondary">{{ item.Quantity }}</p>
+            <!-- <p>{{item.Price*item.Quantity}}</p> -->
+            <div
+              class="itemInfo mt-5 ms-auto"
+              style="display: flex; flex-wrap: wrap"
+            >
+              <a class="text-decoration-none mt-5">
+                <i
+                  class="fas fa-trash"
+                  aria-hidden="true"
+                  (click)="onDelete(i)"
+                >
+                  <span>REMOVE</span></i
+                >
+              </a>
             </div>
-         </div>
+          </div>
+          <div class="pe-3 me-5 mt-5 pt-5" style="flex: 5%">
+            <input
+              type="number"
+              class="qty"
+              [value]="item.Quantity"
+              (blur)="validateInput($event, i)"
+            />
+          </div>
+        </div>
+      </ng-container>
+      <div class="checkout" *ngIf="items.length >= 1">
+        <div class="subtotal">
+          <div>Total</div>
+          <b>{{ total }}</b>
 
-         </div>
-         </div>
-         </div>
-
-
-
-
-
-
-
-
-
-
-
+          <button class="btn shoppingbtn m-3">checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--
 

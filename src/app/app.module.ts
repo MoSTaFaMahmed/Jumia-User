@@ -24,6 +24,7 @@ import { CateqoryComponent } from './cateqory/cateqory.component';
 import { SearchResultComponent } from './Search-Result/search-result/search-result.component';
 import { CommonModule } from '@angular/common';
 import { CartComponent } from './cart/cart.component';
+import { LanguageServiceMode } from 'typescript';
 
 @NgModule({
   declarations: [

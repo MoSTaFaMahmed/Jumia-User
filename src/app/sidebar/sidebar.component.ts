@@ -11,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarComponent implements OnInit {
  categorys:Category[]=[];
 catObservable?:Subscription;
+flag:string=''
   constructor(private prodServc:ProductsService) { }
 
   ngOnInit(): void {
+    this.prodServc.lang.subscribe((e) => {
+      this.flag = e;
+    });
 this.catObservable=this.prodServc.getAllCategorys().subscribe(data=>{
   this.categorys= data.map((elemnt) => {
     // console.log(elemnt);

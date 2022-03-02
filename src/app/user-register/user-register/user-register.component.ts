@@ -21,8 +21,8 @@ export class UserRegisterComponent implements OnInit {
   ngOnInit(): void {}
   Signup(form: any) {
     let data: IUser = {
-      Firstname: form.firstname,
-      Lastname: form.lastname,
+      firstname: form.firstname,
+      lastname: form.lastname,
       Phone: form.phone,
       IsSeller: false,
     };

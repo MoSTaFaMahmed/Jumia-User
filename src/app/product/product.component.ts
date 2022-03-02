@@ -10,11 +10,15 @@ import IProduct from '../ViewModels/Iproduct';
 })
 export class ProductComponent implements OnInit, OnDestroy {
   products: IProduct[] = [];
-  @Input() sendProduct:any;
+  @Input() sendProduct: any;
+  flag: string = '';
   productObservable?: Subscription;
   constructor(private prdService: ProductsService) {}
 
   ngOnInit() {
+    this.prdService.lang.subscribe((e) => {
+      this.flag = e;
+    });
     // this.productObservable = this.prdService
     //   .getAllData()
     //   .subscribe((data) => {
@@ -25,14 +29,12 @@ export class ProductComponent implements OnInit, OnDestroy {
     //         ...(elemnt.payload.doc.data() as IProduct),
     //         // name:elemnt.payload.doc.data['name']
     //       };
-
     //       //
     //     });
-
     //    // console.log(this.products);
     //   });
   }
   ngOnDestroy() {
-   // this.productObservable!.unsubscribe();
+    // this.productObservable!.unsubscribe();
   }
 }

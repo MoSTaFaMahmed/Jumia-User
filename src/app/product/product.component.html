@@ -1,25 +1,37 @@
-  <!-- productList -->
+<!-- productList -->
 
-  <div >
-
-    <div>
-      <a  name=""
+<div>
+  <div>
+    <a
+      name=""
       id=""
       class="btn btn-primary mb-1"
       [routerLink]="['/Products', sendProduct.id]"
-      [queryParams]="{ query: sendProduct.Category}"
-      role="button" class="text-decoration-none text-dark">
-        <img
-          class="card-img-top"
-         [src]="sendProduct.Image"
-          alt="Card image"
-          style="width: 100%"
-        />
-        <div class="card-body">
-          <small>{{sendProduct.Name}}</small>
-          <h6 class="card-title">{{sendProduct.Price}}</h6>
-        </div>
-      </a>
-    </div>
-
+      [queryParams]="{ query: sendProduct.Category }"
+      role="button"
+      class="text-decoration-none text-dark"
+    >
+      <img
+        class="card-img-top"
+        [src]="sendProduct.Image"
+        alt="Card image"
+        style="width: 100%"
+      />
+      <div class="card-body">
+        <small *ngIf="flag=='ltr'">{{ sendProduct.Name }}</small>
+        <small *ngIf="flag=='rtl'" >{{ sendProduct.NameAr }}</small>
+        <h6 class="card-title">{{ sendProduct.Price | currency: "EGP" }}</h6>
+        <span style="font-size: 0.8rem"
+          >{{ sendProduct.Quantity }} items left</span
+        >
+        <p>
+          <ngb-progressbar
+            type="warning"
+            [value]="sendProduct.Quantity"
+            height="5px"
+          ></ngb-progressbar>
+        </p>
+      </div>
+    </a>
   </div>
+</div>

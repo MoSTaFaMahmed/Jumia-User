@@ -1,36 +1,44 @@
 <div class="container">
   <div class="row mb-2">
-    <div class="col-lg-12 rounded white p-3 Amzing-Img ">
-
-        <img  src="https://eg.jumia.is/cms/categories-20/Phones/Banners/1152x252_px_.jpg" alt="header image"
-            class=" rounded-3  header_img">
-
-
-    </div>
-
-</div>
-<div class="empty" *ngIf="products.length < 1">
-  <div class="info">
-    <h4>No Related Products </h4>
-    <a routerLink="" class="btn btn-success">Start Shoping </a>
-  </div>
-  </div>
-<div class="row bg-white mt-5" *ngIf=" products.length > 0 ">
-  <h3 class="row">{{categoryName}}</h3>
-  <div  *ngFor="let item of products" class="card col-lg-2 my-3 col-md-4 me-1 col-sm-6 mx-auto product">
-    <a [routerLink]="['/Products', item.id]" [queryParams]="{ query: item.Category}" class="text-decoration-none text-dark">
+    <div class="col-lg-12 rounded white p-3 Amzing-Img">
       <img
-        class="card-img-top"
-        [src]='item.Image'
-        alt="Card image"
-        style="width: 100%"
+        src="https://eg.jumia.is/cms/categories-20/Phones/Banners/1152x252_px_.jpg"
+        alt="header image"
+        class="rounded-3 header_img"
       />
-      <div class="card-body">
-        <!-- <small>{{item.Name}}</small> -->
-        <small>{{item.Category}}</small>
-        <h6 class="card-title">EGP {{item.Price}}</h6>
-           </div>
-    </a>
+    </div>
   </div>
+  <div class="empty" *ngIf="products.length < 1">
+    <div class="info">
+      <h4>No Related Products</h4>
+      <a routerLink="" class="btn btn-success">Start Shoping </a>
+    </div>
+  </div>
+  <div class="row bg-white mt-5" *ngIf="products.length > 0">
+    <h3 class="row">{{ categoryName }}</h3>
+
+    <div
+      *ngFor="let item of products"
+      class="card col-lg-2 my-3 col-md-4 me-1 col-sm-6 mx-auto product"
+    >
+      <a
+        [routerLink]="['/Products', item.id]"
+        [queryParams]="{ query: item.Category }"
+        class="text-decoration-none text-dark"
+      >
+        <img
+          class="card-img-top"
+          [src]="item.Image"
+          alt="Card image"
+          style="width: 100%"
+        />
+        <div class="card-body">
+          <!-- <small>{{item.Name}}</small> -->
+          <small *ngIf="flag == 'ltr'">{{ item.Category }}</small>
+          <small *ngIf="flag == 'rtl'">{{ item.CategoryAr }}</small>
+          <h6 class="card-title">EGP {{ item.Price }}</h6>
+        </div>
+      </a>
+    </div>
   </div>
 </div>

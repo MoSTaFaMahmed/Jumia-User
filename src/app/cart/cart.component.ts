@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import IProduct from '../ViewModels/Iproduct';
 
 import { CartServiceService } from '../Services/Cart/cart-service.service';
+import { ProductsService } from '../Services/Products/products.service';
 
 @Component({
   selector: 'app-cart',
@@ -12,9 +13,13 @@ import { CartServiceService } from '../Services/Cart/cart-service.service';
 export class CartComponent implements OnInit {
   items: IProduct[] = [];
   total: number = 0;
-  constructor(private cartservce: CartServiceService) {}
+  flag:string='';
+  constructor(private cartservce: CartServiceService, private prdService:ProductsService) {}
 
   ngOnInit(): void {
+    this.prdService.lang.subscribe((e) => {
+      this.flag = e;
+    });
     this.cartservce.cartItems.subscribe((data) => {
       this.items = data;
       if (this.items) this.getTotal(this.items);

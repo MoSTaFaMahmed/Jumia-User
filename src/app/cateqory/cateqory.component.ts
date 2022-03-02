@@ -13,12 +13,16 @@ export class CateqoryComponent implements OnInit, OnDestroy {
   products: IProduct[] = [];
   productCatObservable?: Subscription;
   categoryName: any;
+  flag:string=''
   constructor(
     private prdService: ProductsService,
     private router: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    this.prdService.lang.subscribe((e) => {
+      this.flag = e;
+    });
     //Get Product By Category//
     this.router.queryParamMap.subscribe((param) => {
       this.categoryName = param.get('query');

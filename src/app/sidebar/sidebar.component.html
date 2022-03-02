@@ -1,15 +1,24 @@
-
-  <ul
-    class="nav nav-pills flex-column mb-auto"
-*ngFor="let item of categorys"
-  >
+<ul class="nav nav-pills flex-column mb-auto" *ngFor="let item of categorys">
   <li>
-    <a [routerLink]="['/category']" [queryParams]="{ query: item.name}" class="nav-link link-dark">
-       {{item.name}}
+    <a
+      *ngIf="flag == 'ltr'"
+      [routerLink]="['/category']"
+      [queryParams]="{ query: item.name }"
+      class="nav-link link-dark"
+    >
+      {{ item.name }}
+    </a>
+    <a
+      *ngIf="flag == 'rtl'"
+      [routerLink]="['/category']"
+      [queryParams]="{ query: item.name }"
+      class="nav-link link-dark"
+    >
+      {{ item.NameAr }}
     </a>
   </li>
 
-    <!-- <li>
+  <!-- <li>
       <a routerLink="/category" class="nav-link link-dark">
         <i class="fas fa-hat-winter"></i> Fashon
       </a>
@@ -44,5 +53,4 @@
         <i class="bi bi-tv-fill"></i> Electronics
       </a>
     </li> -->
-  </ul>
-
+</ul>

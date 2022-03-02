@@ -7,6 +7,7 @@ import IProduct from 'src/app/ViewModels/Iproduct';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/Authontication/auth.service';
 import ITest from 'src/app/ViewModels/test';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -25,6 +26,7 @@ export class NavbarComponent implements OnInit {
     wrods: [],
   };
   prd!: IProduct;
+  flag:string='';
   constructor(
     private ProductsService: ProductsService,
     private cartServc: CartServiceService,
@@ -37,6 +39,9 @@ export class NavbarComponent implements OnInit {
     this.ProductsService.hhhh();
     this.ProductsService.products.subscribe((e) => (this.prd = e));
          |||| reference  |||| */
+         this.ProductsService.lang.subscribe((e) => {
+          this.flag = e;
+        });
     this.auth.user.subscribe((user) => {
       console.log(user);
 
@@ -51,7 +56,6 @@ export class NavbarComponent implements OnInit {
           return item.payload.doc.data();
         });
         console.log(this.filtteredProducts);
-        
       });
     });
   }
@@ -63,10 +67,13 @@ export class NavbarComponent implements OnInit {
       this.startat.next(this.searchitem);
     }, 900);
   }
-  route(id:string) {
-    this.filtteredProducts=[];
-    this.searchitem=""
-  this.router.navigate(['/Products',id]);
+  route(id: string) {
+    this.filtteredProducts = [];
+    this.searchitem = '';
+    this.router.navigate(['/Products', id]);
+  }
+  changeDir(dir: string) {
+    this.ProductsService.setLanguage(dir);
   }
   Logout() {
     this.auth.Logout();
