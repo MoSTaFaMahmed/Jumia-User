@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
-import IProduct from '../ViewModels/Iproduct';
-
+import { doc, Firestore } from '@angular/fire/firestore';
 import { CartServiceService } from '../Services/Cart/cart-service.service';
 import { ProductsService } from '../Services/Products/products.service';
+import { ICart } from '../ViewModels/icart';
+import { IOrder } from '../ViewModels/iorder';
+import { OrdersService } from '../Services/Orders/orders.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import * as firebase from 'firebase/compat';
+import IUser from '../ViewModels/IUser';
+import { AuthService } from '../Services/Authontication/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,23 +16,26 @@ import { ProductsService } from '../Services/Products/products.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  items: IProduct[] = [];
+  items: ICart[] = [];
   total: number = 0;
   flag: string = '';
   subtotal!: number;
+  order!: IOrder;
   constructor(
     private cartservce: CartServiceService,
-    private prdService: ProductsService
+    private prdService: ProductsService,
+    private orderService: OrdersService,
+    private db: Firestore,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
-
     this.prdService.lang.subscribe((e) => {
       this.flag = e;
     });
     this.cartservce.cartItems.subscribe((data) => {
       this.items = data;
-      
+
       if (this.items) this.getTotal(this.items);
     });
   }
@@ -54,8 +62,33 @@ export class CartComponent implements OnInit {
     for (const item of data) subs += item.Price * item.subtotal;
     this.total = subs;
   }
-  updatetotal(p:IProduct){
-this.cartservce.addItem(p);
+  updatetotal(p: ICart) {
+    this.cartservce.addItem(p);
+  }
+  PlaceOrder(items: ICart[]) {
+    console.log(this.auth.userID);
 
+    var today = new Date();
+    this.order = {
+      Total: this.total,
+      buyer: doc(this.db, 'users/' + this.auth.userID),
+      Product: items.map((e) => ({
+        Product_Id: doc(this.db, 'Products/' + e.id),
+        Total_Price: e.subtotal! * e.Price!,
+        Product_Quntity: e.subtotal,
+      })),
+      date:
+        today.getMonth() +
+        1 +
+        '/' +
+        today.getDate() +
+        '/' +
+        today.getFullYear(),
+    };
+    console.log(this.order);
+
+    this.orderService.AddOrder(this.order);
+
+    //this.route.navigate(['/Register']);
   }
 }

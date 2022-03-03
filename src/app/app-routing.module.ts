@@ -9,6 +9,7 @@ import { UserRegisterComponent } from './user-register/user-register/user-regist
 import { UserLoginComponent } from './user-login/user-login.component';
 
 import { AuthGuardService } from './Services/Guards/auth-guard.service';
+import { PaypalComponent } from './paypal/paypal.component';
 const routes: Routes = [
   { path: '', redirectTo: '/Products', pathMatch: 'full' },
   { path: 'Products', component: HomeComponent },
@@ -17,11 +18,9 @@ const routes: Routes = [
   { path: 'search', component: SearchResultComponent },
   { path: 'Register', component: UserRegisterComponent },
   { path: 'login', component: UserLoginComponent },
-  { path: 'cart', component: CartComponent,canActivate:[AuthGuardService] },
-
-  {path:"**",component:ProductDetailsComponent}
-
-
+  { path: 'cart', component: CartComponent },
+  { path: 'paypal', component: PaypalComponent },
+  { path: '**', component: ProductDetailsComponent },
 ];
 
 @NgModule({

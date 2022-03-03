@@ -1,50 +1,45 @@
-
-
-.text-jm{
+.text-jm {
   color: #f68b1e;
 }
-.anchor{
- color: black;
- font-weight: bold;
- font-size:16px;
-margin-bottom: 0.25rem;
+.anchor {
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 0.25rem;
 }
-.anchor:hover{
+.anchor:hover {
   color: #f68b1e;
 }
 @media (max-width: 960px) {
-  *{
-      font-size: .9rem;
+  * {
+    font-size: 0.9rem;
   }
-  #bord{
-      border-bottom: 2px solid lightgray;
+  #bord {
+    border-bottom: 2px solid lightgray;
   }
-  #title{
-      display: none;
+  #title {
+    display: none;
   }
-  #lastview{
-      display: none
+  #lastview {
+    display: none;
   }
-  #itemimg{
-      width:50%;
-      float: right;
+  #itemimg {
+    width: 50%;
+    float: right;
   }
-
 }
 
-@media(max-width:530px){
+@media (max-width: 530px) {
   .shoppingbtn {
-      display: block;
-      text-align: center;
-      margin: 10px;
+    display: block;
+    text-align: center;
+    margin: 10px;
   }
-
-
 }
-.itemInfo a{
-     color: #f68b1e;
+.itemInfo a {
+  color: #f68b1e;
 }
-.itemInfo a:hover{
+.itemInfo a:hover {
   color: black;
   cursor: pointer;
 }
@@ -62,7 +57,7 @@ margin-bottom: 0.25rem;
   padding: 0 20px;
   font-weight: 500;
 }
-.shoppingbtn{
+.shoppingbtn {
   min-width: 240px;
   font-size: 1.34em;
   font-weight: 500;
@@ -74,30 +69,33 @@ margin-bottom: 0.25rem;
   color: #fff;
   grid-column: 1/-1;
 }
-.shoppingbtn:hover{
+.shoppingbtn:hover {
   background-color: #fff;
   border: 1px solid #fff;
   color: #f68b1e;
 }
 
-.empty{
+.empty {
   height: 70vh;
   display: grid;
   justify-content: center;
   align-content: center;
-  text-align:center ;
+  text-align: center;
 }
 
-.checkout
-{
+.checkout {
   flex-basis: 100%;
   display: grid;
-  justify-content:end;
-  grid-template-columns: repeat(2,8rem);
+  justify-content: end;
+  grid-template-columns: repeat(2, 8rem);
   gap: 1rem;
   margin-top: 1rem;
-  padding: .5rem;
+  padding: 0.5rem;
+  flex-basis: 75%;
+  max-width: 75%;
+  min-width: 75%;
+  width: 75%;
 }
-b{
+b {
   justify-self: end;
 }

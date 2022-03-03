@@ -1,11 +1,56 @@
 <div class="container-sm container-md container-lg">
+  <div class="row"></div>
   <div class="empty" *ngIf="items.length < 1">
     <div class="info">
       <h4>You don't have any item in your cart</h4>
       <a routerLink="" class="btn btn-success">Start Shoping </a>
     </div>
   </div>
-  <div class="bg-body shadow my-3">
+  <div class="col-9">
+    <article class="card mt-2">
+      <header class="py-1 px-3">
+        <h2 *ngIf="flag == 'ltr'">shopping cart</h2>
+        <h2 *ngIf="flag == 'rtl'">سلة التسوق</h2>
+      </header>
+      <article
+        class="mx-2 py-2"
+        style="position: relative"
+        *ngFor="let item of items; let i = index"
+      >
+        <a style="text-decoration: none; color: black" class="p-0 d-flex">
+          <div style="width: 72px; align-self: baseline">
+            <img
+              [src]="item.Image"
+              alt=""
+              style="flex-shrink: 0"
+              width="72px"
+              height="72px"
+            />
+          </div>
+          <div style="width: 100%" class="px-2">
+            <h3 style="font-size: 0.875rem" *ngIf="flag == 'ltr'">
+              {{ item.Description }}
+            </h3>
+            <!-- <h3 *ngIf="flag == 'rtl'">{{item.DescriptionAr}}</h3> -->
+          </div>
+          <div style="width: 30%">
+            <div style="font-size: 1.25rem; font-weight: bold">
+              {{ item.Price |currency }}<span class="px-2" *ngIf="flag == 'rtl'">جنية</span
+              ><span class="px-2" *ngIf="flag == 'ltr'">ُEGP</span>
+            </div>
+          </div>
+        </a>
+        <footer  class="d-flex py-2">
+          <button style="color: white; background-color:rgb(246, 139, 30);" class=" btn shadow">
+            <i class="fas fa-trash-alt"></i>
+          <span class="px-2"  *ngIf="flag == 'ltr'">Remove</span>
+          <span class="px-2" *ngIf="flag == 'rtl'">ازالة</span>
+
+          </button>
+          <form></form>
+        </footer>
+      </article>
+    </article>
     <div class="row">
       <ng-container>
         <div
@@ -23,11 +68,13 @@
             <a *ngIf="flag == 'ltr'" class="text-decoration-none anchor">{{
               item.Description
             }}</a>
-            <a *ngIf="flag == 'rtl'" class="text-decoration-none anchor">{{
+            <!-- <a *ngIf="flag == 'rtl'" class="text-decoration-none anchor">{{
               item.DescriptionAr
-            }}</a>
-            <p *ngIf="flag == 'ltr'" class="text-secondary">{{ item.Category }}</p>
-            <p *ngIf="flag == 'rtl'" class="text-secondary">{{ item.CategoryAr }}</p>
+            }}</a> -->
+            <p *ngIf="flag == 'ltr'" class="text-secondary">
+              {{ item.Category }}
+            </p>
+            <!-- <p *ngIf="flag == 'rtl'" class="text-secondary">{{ item.CategoryAr }}</p> -->
 
             <p class="text-secondary">{{ item.Price }}LE</p>
             <p class="text-secondary">{{ item.Quantity }}</p>
@@ -49,10 +96,10 @@
           </div>
           <div class="pe-3 me-5 mt-5 pt-5" style="flex: 5%">
             <input
-             (change)="updatetotal(item)"
+              (change)="updatetotal(item)"
               type="number"
               class="qty"
-              [(ngModel)]="subtotal"
+              [value]="item.subtotal"
               (blur)="validateInput($event, i)"
             />
           </div>
@@ -63,11 +110,15 @@
           <div>Total</div>
           <b>{{ total }}</b>
 
-          <button class="btn shoppingbtn m-3">checkout</button>
+          <button (click)="PlaceOrder(items)" class="btn shoppingbtn m-3">
+            checkout
+          </button>
         </div>
       </div>
     </div>
   </div>
+  <div class="col-3"></div>
+  <div class="col-12"></div>
 </div>
 
 <!--
@@ -102,4 +153,3 @@
    </div>
   </div>
 </ng-container> -->
->>>>>>> 7f8ffd1d897ec033a102348b656f2b8db7a97710

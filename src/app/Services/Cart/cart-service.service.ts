@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
 import IProduct from 'src/app/ViewModels/Iproduct';
 import { BehaviorSubject } from 'rxjs';
+import { ICart } from 'src/app/ViewModels/icart';
 
 @Injectable({
   providedIn: 'root',
@@ -10,48 +11,46 @@ import { BehaviorSubject } from 'rxjs';
 export class CartServiceService {
   // cartItems: IProduct[] = [];
   // cartnum!:number;
-  placeholder: IProduct[] = [];
+  placeholder: ICart[] = [];
   // num:[]=[];
 
   cartItems = new BehaviorSubject([]);
   constructor(private db: AngularFirestore) {
     // const ls=JSON.parse(localStorage.getItem("cart")||'[]' );
     const ls = this.getCartData();
-    console.log(ls);
+    
 
     if (ls) this.cartItems.next(ls);
   }
 
-  addItem(product: IProduct) {
+  addItem(product: ICart) {
     //const ls=JSON.parse(localStorage.getItem("cart")||'[]' );
-    console.log(product);
 
     const ls = this.getCartData();
     console.log(ls);
 
     var exist: any;
     if (ls)
-      exist = ls.find((item: IProduct) => {
-        return item.Name == product.Name;
+      exist = ls.findIndex((item: IProduct) => {
+        return item.id == product.id;
       });
 
-    if (exist) {
-      // exist.Quantity + 1;
-      // alert(exist.Quantity + 1);
-      // // localStorage.setItem('cart',JSON.stringify(ls));
-      var prd = { ...product, subtotal: ++exist.subtotal };
-      const newData = [...ls, prd];
+    console.log(exist);
 
-      this.setCartData(newData);
+    if (exist >= 0) {
+      ls[exist].subtotal = ++ls[exist].subtotal;
+      console.log(ls);
+
+      this.setCartData(ls);
     } else {
       if (ls) {
+        console.log(ls);
+
         var prd = { ...product, subtotal: 1 };
         const newData = [...ls, prd];
         console.log(newData);
 
-        //localStorage.setItem('cart',JSON.stringify(newData));
         this.setCartData(newData);
-        //this.cartItems.next(JSON.parse(localStorage.getItem('cart')||'[]'))
       } else {
         this.placeholder.push(product);
         //localStorage.setItem("cart", JSON.stringify(ls));

@@ -24,8 +24,9 @@ import { CateqoryComponent } from './cateqory/cateqory.component';
 import { SearchResultComponent } from './Search-Result/search-result/search-result.component';
 import { CommonModule } from '@angular/common';
 import { CartComponent } from './cart/cart.component';
-import { LanguageServiceMode } from 'typescript';
-
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { PaypalComponent } from './paypal/paypal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,10 +45,11 @@ import { LanguageServiceMode } from 'typescript';
     CateqoryComponent,
     SearchResultComponent,
     UserLoginComponent,
-    CartComponent
+    CartComponent,
+    PaypalComponent,
   ],
   imports: [
-    CommonModule ,
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,
@@ -64,6 +66,18 @@ import { LanguageServiceMode } from 'typescript';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AppRoutingModule,
+    provideFirebaseApp(() =>
+      initializeApp({
+        apiKey: 'AIzaSyABMSgpsBPB7_X2Yb6MP7BvyJ6Nsx29LCY',
+        authDomain: 'jumia-1ff31.firebaseapp.com',
+        projectId: 'jumia-1ff31',
+        storageBucket: 'jumia-1ff31.appspot.com',
+        messagingSenderId: '339082607573',
+        appId: '1:339082607573:web:817bef3ff2a645c738db5c',
+        measurementId: 'G-812PBEVC9Y',
+      })
+    ),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent],

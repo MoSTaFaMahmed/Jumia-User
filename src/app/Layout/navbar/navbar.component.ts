@@ -7,6 +7,7 @@ import IProduct from 'src/app/ViewModels/Iproduct';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/Authontication/auth.service';
 import ITest from 'src/app/ViewModels/test';
+import { ICart } from 'src/app/ViewModels/icart';
 
 @Component({
   selector: 'app-navbar',
@@ -26,8 +27,8 @@ export class NavbarComponent implements OnInit {
     wrods: [],
   };
   prd!: IProduct;
-  flag:string='';
-  
+  flag: string = '';
+
   constructor(
     private ProductsService: ProductsService,
     private cartServc: CartServiceService,
@@ -40,17 +41,32 @@ export class NavbarComponent implements OnInit {
     this.ProductsService.hhhh();
     this.ProductsService.products.subscribe((e) => (this.prd = e));
          |||| reference  |||| */
-         this.ProductsService.lang.subscribe((e) => {
-          this.flag = e;
-        });
+    this.ProductsService.lang.subscribe((e) => {
+      this.flag = e;
+    });
     this.auth.user.subscribe((user) => {
       console.log(user);
 
       user ? (this.isUser = true) : (this.isUser = false);
     });
-    this.cartServc.cartItems.subscribe((el) => {
-      this.itemIncart = el.length;
+
+
+    
+    this.cartServc.cartItems.subscribe((el: ICart[]) => {
+      var num = 0;
+      el.forEach((e) => (num += e.subtotal!));
+
+      this.itemIncart = num;
     });
+
+
+
+
+
+
+
+
+
     this.startobservable.subscribe((value) => {
       this.ProductsService.SearchQuery(value).subscribe((items) => {
         this.filtteredProducts = items.map((item) => {
