@@ -9,23 +9,16 @@ import { ICart } from 'src/app/ViewModels/icart';
   providedIn: 'root',
 })
 export class CartServiceService {
-  // cartItems: IProduct[] = [];
-  // cartnum!:number;
   placeholder: ICart[] = [];
-  // num:[]=[];
 
   cartItems = new BehaviorSubject([]);
   constructor(private db: AngularFirestore) {
-    // const ls=JSON.parse(localStorage.getItem("cart")||'[]' );
     const ls = this.getCartData();
-    
 
     if (ls) this.cartItems.next(ls);
   }
 
   addItem(product: ICart) {
-    //const ls=JSON.parse(localStorage.getItem("cart")||'[]' );
-
     const ls = this.getCartData();
     console.log(ls);
 
@@ -53,15 +46,10 @@ export class CartServiceService {
         this.setCartData(newData);
       } else {
         this.placeholder.push(product);
-        //localStorage.setItem("cart", JSON.stringify(ls));
         this.setCartData(this.placeholder);
         this.cartItems.next(this.getCartData());
       }
     }
-
-    //  const exist=this.cartItems.find((item)=>{
-    //     return item.id===product.id;
-    //   });
   }
 
   setCartData(data: any) {

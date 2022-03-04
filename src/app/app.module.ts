@@ -27,6 +27,7 @@ import { CartComponent } from './cart/cart.component';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { PaypalComponent } from './paypal/paypal.component';
+import { SellerdataComponent } from './sellerdata/sellerdata.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,7 @@ import { PaypalComponent } from './paypal/paypal.component';
     UserLoginComponent,
     CartComponent,
     PaypalComponent,
+    SellerdataComponent,
   ],
   imports: [
     CommonModule,

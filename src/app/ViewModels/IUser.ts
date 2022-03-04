@@ -1,6 +1,7 @@
 import { DocumentReference } from "@angular/fire/compat/firestore";
 
 export default interface IUser{
+    sellerid?:string,
     firstname?:string,
     lastname?:string,
     Email?:string,

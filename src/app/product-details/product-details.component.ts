@@ -68,11 +68,13 @@ export class ProductDetailsComponent implements OnInit {
       this.productServc.getProductById(this.productId).subscribe((prod) => {
         // this.product =prod.payload.data()
 
-        this.sellerServc.getSeller(prod!.SellerID).subscribe(() => {
+        this.sellerServc.getSeller(prod?.SellerID!).subscribe(() => {
           this.sellerServc.seller.subscribe((el) => {
             this.product = prod!;
             this.seller = el;
-            // console.log( this.seller.firstname);
+           console.log( this.seller );
+           
+            
           });
         });
       });

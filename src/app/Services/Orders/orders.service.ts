@@ -8,11 +8,11 @@ export class OrdersService {
   constructor(private firestore: AngularFirestore) {
     // this.orderRef = firestore.collection(this.dbpath);
   }
-  AddOrder(orderdata: IOrder): any {
+  AddOrder(orderdata: IOrder) {
     return this.firestore.collection('Orders/').add({ ...orderdata });
   }
-  // AddOrder(orderdata: IOrder){
-  //   const ref:any=collection(this.firestore,'Orders');
-  //   return addDoc(ref,orderdata);
-  // }
+  ClearLocalStorage(){
+    localStorage.removeItem('cart');
+
+  }
 }

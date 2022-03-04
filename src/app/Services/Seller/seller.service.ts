@@ -3,14 +3,18 @@ import {
   AngularFirestore,
   DocumentReference,
 } from '@angular/fire/compat/firestore';
+import { async } from '@firebase/util';
 import { BehaviorSubject, from } from 'rxjs';
+import IProduct from 'src/app/ViewModels/Iproduct';
 import IUser from 'src/app/ViewModels/IUser';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SellerService {
+export class SellerService  {
   seller = new BehaviorSubject<IUser>({});
+  //products = new BehaviorSubject<IProduct>();
+  products: IProduct[] = [];
   constructor(private db: AngularFirestore) {}
 
   // hhhh() {
@@ -31,13 +35,22 @@ export class SellerService {
 
   getSeller(sellerRef: DocumentReference) {
     return from(
-
-
       sellerRef.get().then((s) => {
-        this.seller.next(s.data() as IUser);
+        var seller = {
+          sellerid: s.id,
+          ...s.data(),
+        };
+        this.seller.next(seller as IUser);
       })
-
-      
     );
   }
+  getSellerByID(id: string) {
+  return  this.db
+      .collection<IUser>('users')
+      .doc(id).valueChanges()
+      
+
+  }
+  
+  
 }

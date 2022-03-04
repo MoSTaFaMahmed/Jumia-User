@@ -8,10 +8,10 @@ export default interface IProduct {
   DescriptionAr?:string;
   Image?: string;
   Name?: string;
-  NameAr: string;
+  NameAr?: string;
   Price?: number;
   Quantity?: number;
-  Rank: number;
-  SellerID: DocumentReference;
+  Rank?: number;
+  SellerID?: DocumentReference;
   Size?: string;
 }

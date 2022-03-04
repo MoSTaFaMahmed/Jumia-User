@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  DocumentReference,
+} from '@angular/fire/compat/firestore';
 import IProduct from '../../ViewModels/Iproduct';
 import IUser from '../../ViewModels/IUser';
 import { Router } from '@angular/router';
 import { ICart } from 'src/app/ViewModels/icart';
 import { Category } from 'src/app/ViewModels/category';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-lang = new BehaviorSubject("");
-  constructor(private db: AngularFirestore,private router:Router) {
-   this.lang.next(this.getLanguage());
-
+  lang = new BehaviorSubject('');
+  products = new BehaviorSubject<IProduct>({});
+  constructor(private db: AngularFirestore, private router: Router) {
+    this.lang.next(this.getLanguage());
   }
 
-
-  
   setLanguage(data: string) {
     localStorage.setItem('lang', JSON.stringify(data));
     this.lang.next(this.getLanguage());
@@ -26,21 +27,6 @@ lang = new BehaviorSubject("");
     return JSON.parse(localStorage.getItem('lang') || '');
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   getAllData() {
     return this.db.collection('Products').snapshotChanges();
   }
@@ -48,19 +34,18 @@ lang = new BehaviorSubject("");
     return this.db.collection<Category>('Category').snapshotChanges();
   }
   getAllDataByCat(cat: string) {
-
-    this.router.navigate(['./category'],{queryParams:{query:cat}})
-
+    this.router.navigate(['./category'], { queryParams: { query: cat } });
   }
-  getDataByCategoryName(cat: string){
-      return this.db
-      .collection('Products', (ref) =>
-        ref.where('Category', '==', cat)
-      )
+  getDataByCategoryName(cat: string) {
+    return this.db
+      .collection('Products', (ref) => ref.where('Category', '==', cat))
       .snapshotChanges();
   }
   getProductById(productId: number) {
-    return this.db.collection<IProduct>('Products').doc(`${productId}`).valueChanges(); //snapshotChanges();
+    return this.db
+      .collection<IProduct>('Products')
+      .doc(`${productId}`)
+      .valueChanges(); //snapshotChanges();
   }
 
   SearchQuery(start: string) {
@@ -73,7 +58,10 @@ lang = new BehaviorSubject("");
       )
       .snapshotChanges();
   }
-
- 
-  
+  getProductbyRef(productRef: DocumentReference) {
+    return this.db
+      .collection<IProduct>(productRef.parent)
+      .doc(productRef.id)
+      .valueChanges();
+  }
 }

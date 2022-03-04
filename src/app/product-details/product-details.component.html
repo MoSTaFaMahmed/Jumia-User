@@ -28,7 +28,7 @@
             <div style="font-size: x-large; color: #f68b1e">
               <ngb-rating
                 [max]="10"
-                [(rate)]="product!.Rank"
+                [(rate)]="product.Rank!"
                 [readonly]="false"
               ></ngb-rating>
             </div>
@@ -199,9 +199,11 @@
             <h2 class="title-h m-0">SELLER INFORMATION</h2>
           </a>
           <div class="p-2 headline" style="position: relative">
-            <!-- <a class="fs-5" style="cursor: pointer; font-weight: 500"
+            <a 
+            [routerLink]="['/Seller', seller.sellerid]"
+            class="fs-5" style="cursor: pointer; font-weight: 500"
               >{{ seller.firstname }} Marketplace</a
-            > -->
+            >
             <div
               class="d-flex justify-content-between"
               style="font-size: 0.7rem"

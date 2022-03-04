@@ -11,6 +11,8 @@ export class PaypalComponent implements OnInit {
       id: '#payment',
       currency: 'USD',
       onApprove: (details) => {
+        console.log(details);
+
         alert('success');
       },
       value: '100.00',

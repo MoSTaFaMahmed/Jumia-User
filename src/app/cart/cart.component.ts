@@ -5,9 +5,6 @@ import { ProductsService } from '../Services/Products/products.service';
 import { ICart } from '../ViewModels/icart';
 import { IOrder } from '../ViewModels/iorder';
 import { OrdersService } from '../Services/Orders/orders.service';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import * as firebase from 'firebase/compat';
-import IUser from '../ViewModels/IUser';
 import { AuthService } from '../Services/Authontication/auth.service';
 
 @Component({
@@ -66,9 +63,8 @@ export class CartComponent implements OnInit {
     this.cartservce.addItem(p);
   }
   PlaceOrder(items: ICart[]) {
-    console.log(this.auth.userID);
-
     var today = new Date();
+
     this.order = {
       Total: this.total,
       buyer: doc(this.db, 'users/' + this.auth.userID),
@@ -85,10 +81,10 @@ export class CartComponent implements OnInit {
         '/' +
         today.getFullYear(),
     };
-    console.log(this.order);
+////////////navigate to raring ////////////
+    this.orderService.AddOrder(this.order).then(() => {
+      this.orderService.ClearLocalStorage();
 
-    this.orderService.AddOrder(this.order);
-
-    //this.route.navigate(['/Register']);
+    });
   }
 }

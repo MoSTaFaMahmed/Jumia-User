@@ -8,8 +8,8 @@ import { SearchResultComponent } from './Search-Result/search-result/search-resu
 import { UserRegisterComponent } from './user-register/user-register/user-register.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 
-import { AuthGuardService } from './Services/Guards/auth-guard.service';
 import { PaypalComponent } from './paypal/paypal.component';
+import { SellerdataComponent } from './sellerdata/sellerdata.component';
 const routes: Routes = [
   { path: '', redirectTo: '/Products', pathMatch: 'full' },
   { path: 'Products', component: HomeComponent },
@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'login', component: UserLoginComponent },
   { path: 'cart', component: CartComponent },
   { path: 'paypal', component: PaypalComponent },
+  { path: 'Seller/:id', component: SellerdataComponent },
   { path: '**', component: ProductDetailsComponent },
 ];
 
