@@ -11,16 +11,50 @@ import { ICart } from 'src/app/ViewModels/icart';
 export class CartServiceService {
   placeholder: ICart[] = [];
 
-  cartItems = new BehaviorSubject([]);
+  cartItems = new BehaviorSubject<ICart[]>([]);
   constructor(private db: AngularFirestore) {
     const ls = this.getCartData();
 
     if (ls) this.cartItems.next(ls);
   }
 
-  addItem(product: ICart) {
+  addItem(product: IProduct) {
+    console.log(product);
+
     const ls = this.getCartData();
-    console.log(ls);
+
+    var exist: any;
+    if (ls)
+      exist = ls.findIndex((item: IProduct) => {
+        return item.id == product.id;
+      });
+
+    console.log(exist);
+
+    if (exist>=0 ) {
+      ls[exist].subtotal = ++ls[exist].subtotal;
+
+      this.setCartData(ls);
+    } else {
+      if (ls) {
+        console.log(ls);
+
+        var prd = { ...product, SellerID: product.SellerID!.id, subtotal: 1 };
+        console.log(prd);
+
+        const newData = [...ls, prd];
+        console.log(newData);
+
+        this.setCartData(newData);
+      } else {
+        this.placeholder.push({ ...product, SellerID: product.SellerID!.id });
+        this.setCartData(this.placeholder);
+        this.cartItems.next(this.getCartData());
+      }
+    }
+  }
+  suppItem(product: IProduct) {
+    const ls = this.getCartData();
 
     var exist: any;
     if (ls)
@@ -31,8 +65,7 @@ export class CartServiceService {
     console.log(exist);
 
     if (exist >= 0) {
-      ls[exist].subtotal = ++ls[exist].subtotal;
-      console.log(ls);
+      ls[exist].subtotal = --ls[exist].subtotal;
 
       this.setCartData(ls);
     } else {
@@ -51,7 +84,6 @@ export class CartServiceService {
       }
     }
   }
-
   setCartData(data: any) {
     localStorage.setItem('cart', JSON.stringify(data));
     this.cartItems.next(this.getCartData());

@@ -20,7 +20,7 @@ export class ProductDetailsComponent implements OnInit {
   productCatObservable?: Subscription;
   productObservable!: Subscription;
   add: number = -1;
-  flag: boolean = true;
+  flag: boolean = false;
   num!: number;
   seller!: IUser;
   flaglang: string = '';
@@ -72,9 +72,7 @@ export class ProductDetailsComponent implements OnInit {
           this.sellerServc.seller.subscribe((el) => {
             this.product = prod!;
             this.seller = el;
-           console.log( this.seller );
-           
-            
+            console.log(this.seller);
           });
         });
       });
@@ -90,8 +88,14 @@ export class ProductDetailsComponent implements OnInit {
   buy(qtn: any) {}
 
   addToCart(product: IProduct) {
+   
+    console.log(product);
+    
     this.cartServc.addItem(product);
-    this.flag = false;
+    this.flag = true;
+    setTimeout(() => {
+      this.flag=false;
+    }, 1500);
   }
   // addToCart(product:IProduct){
   //   let prodArr = JSON.parse(localStorage.getItem("products") || "[]");

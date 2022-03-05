@@ -12,6 +12,6 @@ export default interface IProduct {
   Price?: number;
   Quantity?: number;
   Rank?: number;
-  SellerID?: DocumentReference;
+  SellerID?:DocumentReference;
   Size?: string;
 }

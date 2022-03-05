@@ -11,8 +11,8 @@ import IProduct from '../ViewModels/Iproduct';
   styleUrls: ['./sellerdata.component.css'],
 })
 export class SellerdataComponent implements OnInit, AfterViewInit, OnDestroy {
-  products=new  BehaviorSubject<IProduct[]>([]);
-  allprds!:IProduct[]
+  products!: IProduct[];
+
   productObservable?: Subscription;
   constructor(
     private activateRouteServicse: ActivatedRoute,
@@ -22,31 +22,27 @@ export class SellerdataComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.productObservable?.unsubscribe();
   }
-  ngAfterViewInit(): void {
-    this.products.subscribe(e=>{
-          this.allprds=e
-    })
-  }
+  ngAfterViewInit(): void {}
 
   ngOnInit(): void {
-    this.productObservable = this.activateRouteServicse.paramMap.subscribe(
+    this.productObservable =
+     this.activateRouteServicse.paramMap.subscribe(
       (paramMap) => {
         var m = paramMap.get('id');
+      
         this.sellerService.getSellerByID(m!).subscribe((e) => {
-          var m: IProduct[] = [];
-          e?.Product?.map((e) => {
-            this.productService
-              .getProductbyRef(e?.Product_Id)
-              .subscribe((el) => {
-                console.log(el);
-                
-                m.push(el as IProduct);
-                this.products.next(m );
-              });
+
+
+          var ids: string[] = [];
+
+          e?.Product?.map((el) => {
+            ids.push(el.Product_Id.id);
           });
           
-          
-          
+          this.productService.getProductbyRef(ids);
+          this.productService.products.subscribe((e) => {
+            this.products = e;
+          });
         });
       }
     );

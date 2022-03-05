@@ -6,6 +6,7 @@ import { ICart } from '../ViewModels/icart';
 import { IOrder } from '../ViewModels/iorder';
 import { OrdersService } from '../Services/Orders/orders.service';
 import { AuthService } from '../Services/Authontication/auth.service';
+import { SellerService } from '../Services/Seller/seller.service';
 
 @Component({
   selector: 'app-cart',
@@ -18,19 +19,26 @@ export class CartComponent implements OnInit {
   flag: string = '';
   subtotal!: number;
   order!: IOrder;
+  ids!: any[];
   constructor(
     private cartservce: CartServiceService,
     private prdService: ProductsService,
     private orderService: OrdersService,
     private db: Firestore,
-    private auth: AuthService
+    private auth: AuthService,
+    private sellerService:SellerService
   ) {}
 
   ngOnInit(): void {
     this.prdService.lang.subscribe((e) => {
       this.flag = e;
     });
+    this.getdata();
+  }
+  getdata() {
     this.cartservce.cartItems.subscribe((data) => {
+      console.log(data);
+      
       this.items = data;
 
       if (this.items) this.getTotal(this.items);
@@ -49,6 +57,7 @@ export class CartComponent implements OnInit {
     }
     this.QtyUpdated(Quantity, index);
   }
+
   private QtyUpdated(Quantity: number, index: number) {
     this.items[index].Quantity = Quantity;
     this.cartservce.setCartData(this.items);
@@ -63,15 +72,28 @@ export class CartComponent implements OnInit {
     this.cartservce.addItem(p);
   }
   PlaceOrder(items: ICart[]) {
-    var today = new Date();
+console.log(items);
 
+   items.map(e=>{
+     console.log(e.SellerID);
+     
+    //  this.sellerService.getSeller(e.SellerID).subscribe(e=>{
+    //    this.sellerService.seller.subscribe(el=>{
+    //      console.log(el);
+         
+    //    })
+    //  })
+     
+   })
+    var today = new Date();
     this.order = {
       Total: this.total,
       buyer: doc(this.db, 'users/' + this.auth.userID),
-      Product: items.map((e) => ({
+      Product: items.map((e, index) => ({
         Product_Id: doc(this.db, 'Products/' + e.id),
         Total_Price: e.subtotal! * e.Price!,
         Product_Quntity: e.subtotal,
+        sellerID:e.SellerID
       })),
       date:
         today.getMonth() +
@@ -81,10 +103,21 @@ export class CartComponent implements OnInit {
         '/' +
         today.getFullYear(),
     };
-////////////navigate to raring ////////////
-    this.orderService.AddOrder(this.order).then(() => {
-      this.orderService.ClearLocalStorage();
+console.log(this.order);
 
-    });
+    ////////////navigate to raring ////////////
+      this.orderService.AddOrder(this.order).then(() => {
+        this.orderService.ClearLocalStorage();
+      });
+     this.getdata();
+  }
+  updateTotal(item: ICart) {
+    if (item.Quantity! > item.subtotal!) this.cartservce.addItem(item);
+  }
+  suppTotal(item: ICart, index: number) {
+    this.cartservce.suppItem(item);
+    if (item.subtotal == 1) {
+      this.onDelete(index);
+    }
   }
 }

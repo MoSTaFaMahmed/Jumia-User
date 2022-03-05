@@ -9,12 +9,13 @@ import { Router } from '@angular/router';
 import { ICart } from 'src/app/ViewModels/icart';
 import { Category } from 'src/app/ViewModels/category';
 import { BehaviorSubject, from } from 'rxjs';
+import * as fir from 'firebase/compat/app';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
   lang = new BehaviorSubject('');
-  products = new BehaviorSubject<IProduct>({});
+  products = new BehaviorSubject<IProduct[]>([]);
   constructor(private db: AngularFirestore, private router: Router) {
     this.lang.next(this.getLanguage());
   }
@@ -58,10 +59,17 @@ export class ProductsService {
       )
       .snapshotChanges();
   }
-  getProductbyRef(productRef: DocumentReference) {
-    return this.db
-      .collection<IProduct>(productRef.parent)
-      .doc(productRef.id)
-      .valueChanges();
+  getProductbyRef(ids: string[]) {
+    
+    return this.db.collection<IProduct>('Products', 
+    (ref) =>
+      ref.where(
+        fir.default.firestore.FieldPath.documentId(),
+        'in',
+        ids
+      )
+    ).valueChanges().subscribe(e=>{
+        this.products.next(e); 
+    })
   }
 }
