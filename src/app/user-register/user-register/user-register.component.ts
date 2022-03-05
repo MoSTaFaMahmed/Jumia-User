@@ -27,8 +27,11 @@ export class UserRegisterComponent implements OnInit {
       IsSeller: false,
     };
     this.AuthService.Signup(form.email, form.password).subscribe(() => {
-      if (this.AuthService.isUser) {
+      //console.log(this.AuthService.userID);})
+      if (this.AuthService.userID) {
         this.errorMessage = '';
+        console.log(this.AuthService.userID);
+        
         this.userService.AddUser(this.AuthService.userID, data).then(() => {
           this.router.navigate(['/Products']);
         });

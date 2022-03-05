@@ -8,6 +8,7 @@ import IUser from 'src/app/ViewModels/IUser';
 export class UsersService {
   constructor(private firestore: AngularFirestore) {}
   AddUser(id: string, userdata: IUser) {
+    
     return this.firestore.doc('users/' + id).set(userdata);
   }
 }
