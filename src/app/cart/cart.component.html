@@ -112,17 +112,20 @@ role="alert">
             <p>{{ total | currency }}</p>
           </div>
           <div class="pt-1" style="border-top: 1px solis #ededed">
+            <!-- (click)="PlaceOrder(items)" -->
             <button
-              (click)="PlaceOrder(items)"
+
+              [routerLink]="['/paypal']"
               class="btn shadow"
               style="
                 background-color: rgb(246, 139, 30);
                 width: 100%;
                 color: #fff;
               "
+
             >
               <span class="px-2" *ngIf="flag == 'ltr'">Check out</span>
-              <span class="px-2" *ngIf="flag == 'rtl'"></span>
+              <span class="px-2" *ngIf="flag == 'rtl'">شراء</span>
             </button>
           </div>
         </article>

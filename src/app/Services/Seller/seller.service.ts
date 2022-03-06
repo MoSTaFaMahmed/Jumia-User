@@ -46,11 +46,11 @@ export class SellerService  {
   }
   getSellerByID(id: string) {
   return  this.db
-      .collection<IUser>('users')
+      .collection<IUser>('Seller')
       .doc(id).valueChanges()
-      
+
 
   }
-  
-  
+
+
 }

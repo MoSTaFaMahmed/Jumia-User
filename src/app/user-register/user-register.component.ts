@@ -20,7 +20,7 @@ export class UserRegisterComponent implements OnInit {
 
   ngOnInit(): void {}
   Signup(form: any) {
-    let data: IUser = {
+    let data: any = {
       firstname: form.firstname,
       lastname: form.lastname,
       Phone: form.phone,
@@ -31,7 +31,7 @@ export class UserRegisterComponent implements OnInit {
       if (this.AuthService.userID) {
         this.errorMessage = '';
         console.log(this.AuthService.userID);
-        
+
         this.userService.AddUser(this.AuthService.userID, data).then(() => {
           this.router.navigate(['/Products']);
         });
