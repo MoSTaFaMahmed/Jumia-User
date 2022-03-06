@@ -8,7 +8,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { UserRegisterComponent } from './user-register/user-register/user-register.component';
+import { UserRegisterComponent } from './user-register/user-register.component';
 import { NavbarComponent } from './Layout/navbar/navbar.component';
 import { FooterComponent } from './Layout/footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';

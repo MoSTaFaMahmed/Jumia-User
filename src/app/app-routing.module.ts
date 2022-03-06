@@ -5,7 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SearchResultComponent } from './Search-Result/search-result/search-result.component';
-import { UserRegisterComponent } from './user-register/user-register/user-register.component';
+import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 
 import { PaypalComponent } from './paypal/paypal.component';
