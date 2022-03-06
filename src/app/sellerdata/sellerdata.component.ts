@@ -29,16 +29,16 @@ export class SellerdataComponent implements OnInit, AfterViewInit, OnDestroy {
      this.activateRouteServicse.paramMap.subscribe(
       (paramMap) => {
         var m = paramMap.get('id');
-      
+
         this.sellerService.getSellerByID(m!).subscribe((e) => {
 
 
           var ids: string[] = [];
 
-          e?.Product?.map((el) => {
+          e?.Products?.map((el) => {
             ids.push(el.Product_Id.id);
           });
-          
+
           this.productService.getProductbyRef(ids);
           this.productService.products.subscribe((e) => {
             this.products = e;

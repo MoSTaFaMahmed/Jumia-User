@@ -15,6 +15,11 @@ export class OrdersService {
   ClearLocalStorage(){
     localStorage.removeItem('cart');
     this.cartservice.cartItems.next([])
-      
+
+  }
+  updatQtn(id:any,qtn:any){
+       this.firestore.collection("Products").doc(id).update({
+        Quantity:qtn
+       })
   }
 }

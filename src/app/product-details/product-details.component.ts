@@ -31,7 +31,7 @@ export class ProductDetailsComponent implements OnInit {
   uid:any
   datainfo:any
   dataprofile={
-    favorite:{},  
+    favorite:{},
   }
   favorite: any
   constructor(
@@ -43,9 +43,9 @@ export class ProductDetailsComponent implements OnInit {
     private auth:AuthService,
     private db:Firestore,
     private fs :AngularFirestore,
- 
-  
-    
+
+
+
   ) {}
 
   ngOnInit(): void {
@@ -104,9 +104,9 @@ export class ProductDetailsComponent implements OnInit {
   buy(qtn: any) {}
 
   addToCart(product: IProduct) {
-   
+
     console.log(product);
-    
+
     this.cartServc.addItem(product);
     this.flag = true;
     setTimeout(() => {
@@ -126,10 +126,10 @@ export class ProductDetailsComponent implements OnInit {
      this.fs.collection('users').doc(userId).update({
               favorite : ([{Product_Id:
               doc(this.db,"Products/"+id)}])
-     }) 
+     })
      console.log("updated")
-   
+
      console.log(this.dataprofile)
-    
+
 }
 }
