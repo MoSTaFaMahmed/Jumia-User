@@ -72,47 +72,6 @@ export class CartComponent implements OnInit {
   updatetotal(p: ICart) {
     this.cartservce.addItem(p);
   }
-<<<<<<< HEAD
-  PlaceOrder(items: ICart[]) {
-    console.log(items);
-
-    items.map((e) => {
-      console.log(e.SellerID);
-
-      //  this.sellerService.getSeller(e.SellerID).subscribe(e=>{
-      //    this.sellerService.seller.subscribe(el=>{
-      //      console.log(el);
-
-      //    })
-      //  })
-    });
-    var today = new Date();
-    this.order = {
-      Total: this.total,
-      buyer: doc(this.db, 'users/' + this.auth.userID),
-      Product: items.map((e, index) => ({
-        Product_Id: doc(this.db, 'Products/' + e.id),
-        Total_Price: e.subtotal! * e.Price!,
-        Product_Quntity: e.subtotal,
-        sellerID: e.SellerID,
-      })),
-      date:
-        today.getMonth() +
-        1 +
-        '/' +
-        today.getDate() +
-        '/' +
-        today.getFullYear(),
-    };
-    console.log(this.order);
-
-    ////////////navigate to raring ////////////
-    this.orderService.AddOrder(this.order).then(() => {
-      this.orderService.ClearLocalStorage();
-    });
-    this.getdata();
-  }
-=======
 //   PlaceOrder(items: ICart[]) {
 // console.log(items);
 
@@ -153,7 +112,6 @@ export class CartComponent implements OnInit {
 //       });
 //      this.getdata();
 //   }
->>>>>>> 3460f746aab4e26594201b3702dce2badc7e4e55
   updateTotal(item: ICart) {
     if (item.Quantity! > item.subtotal!) {
       this.cartservce.addItem(item);
