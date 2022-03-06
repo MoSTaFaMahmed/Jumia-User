@@ -25,8 +25,9 @@ export class ProductsService {
     this.lang.next(this.getLanguage());
   }
   getLanguage() {
-    return JSON.stringify(localStorage.getItem('lang') || '');
+    return JSON.parse(localStorage.getItem('lang') || '');
   }
+  // taqwa
 
   getAllData() {
     return this.db.collection('Products').snapshotChanges();
