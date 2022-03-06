@@ -38,7 +38,7 @@ export class CartComponent implements OnInit {
   getdata() {
     this.cartservce.cartItems.subscribe((data) => {
       console.log(data);
-      
+
       this.items = data;
 
       if (this.items) this.getTotal(this.items);
@@ -71,46 +71,46 @@ export class CartComponent implements OnInit {
   updatetotal(p: ICart) {
     this.cartservce.addItem(p);
   }
-  PlaceOrder(items: ICart[]) {
-console.log(items);
+//   PlaceOrder(items: ICart[]) {
+// console.log(items);
 
-   items.map(e=>{
-     console.log(e.SellerID);
-     
-    //  this.sellerService.getSeller(e.SellerID).subscribe(e=>{
-    //    this.sellerService.seller.subscribe(el=>{
-    //      console.log(el);
-         
-    //    })
-    //  })
-     
-   })
-    var today = new Date();
-    this.order = {
-      Total: this.total,
-      buyer: doc(this.db, 'users/' + this.auth.userID),
-      Product: items.map((e, index) => ({
-        Product_Id: doc(this.db, 'Products/' + e.id),
-        Total_Price: e.subtotal! * e.Price!,
-        Product_Quntity: e.subtotal,
-        sellerID:e.SellerID
-      })),
-      date:
-        today.getMonth() +
-        1 +
-        '/' +
-        today.getDate() +
-        '/' +
-        today.getFullYear(),
-    };
-console.log(this.order);
+//    items.map(e=>{
+//      console.log(e.SellerID);
 
-    ////////////navigate to raring ////////////
-      this.orderService.AddOrder(this.order).then(() => {
-        this.orderService.ClearLocalStorage();
-      });
-     this.getdata();
-  }
+//     //  this.sellerService.getSeller(e.SellerID).subscribe(e=>{
+//     //    this.sellerService.seller.subscribe(el=>{
+//     //      console.log(el);
+
+//     //    })
+//     //  })
+
+//    })
+//     var today = new Date();
+//     this.order = {
+//       Total: this.total,
+//       buyer: doc(this.db, 'users/' + this.auth.userID),
+//       Product: items.map((e, index) => ({
+//         Product_Id: doc(this.db, 'Products/' + e.id),
+//         Total_Price: e.subtotal! * e.Price!,
+//         Product_Quntity: e.subtotal,
+//         sellerID:e.SellerID
+//       })),
+//       date:
+//         today.getMonth() +
+//         1 +
+//         '/' +
+//         today.getDate() +
+//         '/' +
+//         today.getFullYear(),
+//     };
+// console.log(this.order);
+
+//     ////////////navigate to raring ////////////
+//       this.orderService.AddOrder(this.order).then(() => {
+//         this.orderService.ClearLocalStorage();
+//       });
+//      this.getdata();
+//   }
   updateTotal(item: ICart) {
     if (item.Quantity! > item.subtotal!) this.cartservce.addItem(item);
   }
