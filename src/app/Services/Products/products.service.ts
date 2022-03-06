@@ -25,7 +25,7 @@ export class ProductsService {
     this.lang.next(this.getLanguage());
   }
   getLanguage() {
-    return JSON.parse(localStorage.getItem('lang') || '');
+    return JSON.stringify(localStorage.getItem('lang') || '');
   }
 
   getAllData() {

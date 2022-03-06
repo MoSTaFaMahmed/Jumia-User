@@ -6,6 +6,9 @@ import { ProductsService } from '../Services/Products/products.service';
 import IProduct from '../ViewModels/Iproduct';
 import { SellerService } from '../Services/Seller/seller.service';
 import IUser from '../ViewModels/IUser';
+import { AuthService } from '../Services/Authontication/auth.service';
+import { doc, Firestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-product-details',
@@ -24,12 +27,25 @@ export class ProductDetailsComponent implements OnInit {
   num!: number;
   seller!: IUser;
   flaglang: string = '';
+  favList:[]=[];
+  uid:any
+  datainfo:any
+  dataprofile={
+    favorite:{},  
+  }
+  favorite: any
   constructor(
     private activateRouteServicse: ActivatedRoute,
     private productServc: ProductsService,
     private cartServc: CartServiceService,
     private router: Router,
-    private sellerServc: SellerService
+    private sellerServc: SellerService,
+    private auth:AuthService,
+    private db:Firestore,
+    private fs :AngularFirestore,
+ 
+  
+    
   ) {}
 
   ngOnInit(): void {
@@ -103,4 +119,17 @@ export class ProductDetailsComponent implements OnInit {
   //   localStorage.setItem("products", JSON.stringify(prodArr));
   //   console.log(this.cartServc.num.length);
   // }
+
+  // ==================addtofavLise"taqwa"========================
+  save(id:string){
+    let userId=this.auth.userID
+     this.fs.collection('users').doc(userId).update({
+              favorite : ([{Product_Id:
+              doc(this.db,"Products/"+id)}])
+     }) 
+     console.log("updated")
+   
+     console.log(this.dataprofile)
+    
+}
 }

@@ -28,6 +28,8 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { PaypalComponent } from './paypal/paypal.component';
 import { SellerdataComponent } from './sellerdata/sellerdata.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { FavouriteListComponent } from './favourite-list/favourite-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +51,8 @@ import { SellerdataComponent } from './sellerdata/sellerdata.component';
     CartComponent,
     PaypalComponent,
     SellerdataComponent,
+    UserProfileComponent,
+    FavouriteListComponent,
   ],
   imports: [
     CommonModule,
