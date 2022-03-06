@@ -27,6 +27,7 @@ export class ProductsService {
   getLanguage() {
     return JSON.parse(localStorage.getItem('lang') || '');
   }
+  // taqwa
 
   getAllData() {
     return this.db.collection('Products').snapshotChanges();
