@@ -1,0 +1,262 @@
+<p>user-profile works!</p>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <title>jumia</title>
+
+</head>
+
+ 
+
+<body>
+    <div class="row">
+        <!-- aside -->
+        <div class="sidebar collapse col-lg-2 d-lg-block d-md-none bg-secondary display-flex justify-content-stretch  ">
+            <div class="container-fluid pt-3" id="mainnav">
+                <a class="navbar-brand text-light h2" href="#">jumia market</a>
+            </div>
+            <ul class="nav flex-lg-column my-6" id="sidebar">
+                <li class="nav-item mt-3">
+                    <a class="nav-link text-light " aria-current="page" href="adminpanel.html"><i
+                            class="bi bi-house-door-fill h4 mx-3"></i>my
+                        maket</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light " aria-current="page" href="#"><i
+                            class="bi bi-question h4 mx-3"></i>community
+                    </a>
+                </li>
+                <hr class="divider">
+                <li class="nav-item">
+                    <a class="nav-link text-light " aria-current="page" href="#"><i class="bi bi-star-fill"></i>
+                        My ratings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light " aria-current="page" href="mypurchases.html"><i
+                            class="bi bi-bag-check-fill"></i>
+                        My purchases</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light " aria-current="page" href="#"><i class="bi bi-heart-fill"></i>
+                        Whishlist</a>
+                </li>
+                <hr class="divider">
+                <li class="nav-item">
+                    <a class="nav-link text-light " aria-current="page" href="mysales.html"><i class="bi bi-tag"></i>
+                        My sales</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light " aria-current="page" href="products.html"><i class="bi bi-box"></i>
+                        My Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light " aria-current="page" href="#"><i class="bi bi-shop"></i>
+                        Promote My shop</a>
+                </li>
+                <hr class="divider">
+                <li class="nav-item">
+                    <a class="nav-link text-light " aria-current="page" href="#"><i class="bi bi-gear-fill"></i>
+                        Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light " aria-current="page"  
+                    *ngIf="isUser"
+                    (click)="Logout()"><i class="bi bi-power"></i>
+                        logout</a>
+                </li>
+                <li class="nav-item" [routerLink]="['/sellerReg']">
+                    <a class="nav-link text-light " aria-current="page" 
+                     
+                     ><i class="bi bi-power"></i>
+                        As Seller </a>
+                </li>
+            </ul>
+        </div>
+        <!-- end aside -->
+        <!-- start body edit -->
+        <div class="col-lg-9 mt-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+
+                        <div class="card-body">
+    
+                            <h5 class="fw-bold float-start">ACCOUNT DETAILS</h5>
+                            <button type="button" class="btn btn-light" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                <i class="fas fa-pen float-end"></i>
+                            </button>
+    
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <p>firstname :{{dataprofile.firstname}}</p>
+                                <p>lastname:{{ dataprofile.lastname}}</p>
+                                <p>Email : {{dataprofile.email}}</p>
+    
+                                <p>Phone : {{ dataprofile.phone}}</p>
+                            </li>
+    
+                        </ul>
+    
+                    </div>
+
+                </div>
+                <!-- start search part -->
+                <div class="col-lg-6 mb-0">
+                    <div class="card ">
+                        <!-- edit modal name -->
+                        <div class="card-body">
+    
+                            <h5 class="fw-bold float-start">CHANGE PASSWORD</h5>
+                            <button type="button" class="btn btn-light" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal2">
+                                <i class="fas fa-pen float-end"></i>
+                            </button>
+    
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <p>password :{{dataprofile.password}}</p>
+                               
+                            </li>
+    
+                        </ul>
+    
+                    </div>
+                </div>
+                <!-- end search part -->
+                <!-- start jumia prime -->
+                <div class="col-lg-6 mt-5">
+                    <div class="card ">
+                        <!-- edit modal name -->
+                        <div class="card-body">
+    
+                            <h5 class="fw-bold float-start">JUMIA PRIME</h5>
+                            
+    
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <h6>Jumia Prime</h6>
+                                <p class="text-muted"> jumia Primo and Jumia Primo Plus are loyalty programs that allow its members to benefit from free delivery of Jumia Express and Jumia Food orders and exclusive access to </p>
+                               
+                            </li>
+    
+                        </ul>
+    
+                    </div>
+                </div>
+                <!-- end jumia prime -->
+                <!-- JUMIA ACCOUNT BALANCE -->
+                <div class="col-lg-6 ">
+                    <div class="card mt-5">
+                        <!-- edit modal name -->
+                        <div class="card-body">
+    
+                            <h5 class="fw-bold float-start">JUMIA ACCOUNT BALANCE</h5>
+                            
+    
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <h1 class="text-primary">0.00 EGP</h1>
+                                
+                               
+                            </li>
+    
+                        </ul>
+    
+                    </div>
+                </div>
+
+                <!-- end JUMIA ACCOUNT BALANCE -->
+            </div>
+
+        </div>
+        <!-- end body edit -->
+    </div>
+    <!-- ========================================= -->
+     <!-- Modal -->
+     <div class="modal fade" id="exampleModal" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Update Profile</h5>
+                 <button type="button" class="btn-close " data-bs-dismiss="modal"
+                     aria-label="Close"></button>
+             </div>
+             <div class="modal-body">
+                 <form class="form needs-validation row g-3" #form="ngForm">
+                     <div class="col-md-12 col-lg-6 col-sm-12">
+                         <input #fname="ngModel" ngModel name="firstname" type="text"
+                             class="form-control border-3" id="inputFname"
+                             placeholder="First Name"
+                             [(ngModel)]="dataprofile.firstname" />
+                         <div [hidden]="fname.valid || fname.untouched"
+                             class="text-danger">
+                             you must enter First Name
+                         </div>
+                     </div>
+                     <div class="col-md-12 col-lg-6 col-sm-12">
+                         <input ngModel name="lastname" #lname="ngModel" type="text"
+                             class="form-control border-3" id="inputLname"
+                             placeholder="Last Name"
+                             [(ngModel)]="dataprofile.lastname" />
+                         <div [hidden]="lname.valid || lname.untouched"
+                             class="text-danger">
+                             you must enter Last Name
+                         </div>
+                     </div>
+
+                     <div class="col-md-12 col-lg-6 col-sm-12">
+                         <input ngModel #password="ngModel" name="password"
+                             type="password" class="form-control border-3"
+                             id="inputPassword4" placeholder="Password" minlength="8" />
+                         <div [hidden]="password.untouched" class="text-danger">
+
+                             <span [hidden]="!password.errors?.['minlength']">Not
+                                 Valid</span>
+                         </div>
+                     </div>
+                     <div class="col-md-12 col-lg-6 col-sm-12 input-group mb-6">
+                         <span class="input-group-text" id="basic-addon1">+20</span>
+                         <input ngModel name="phone" id="phone" type="tel"
+                             [(ngModel)]="dataprofile.phone"
+                             class="form-control border-3" placeholder="Phone Number" />
+                     </div>
+
+
+                 </form>
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal"
+                     (click)="updateUserProfile()">Update</button>
+                 <!-- <button type="button" class="btn btn-primary"
+                 (click)="updateUserProfile()"> Update</button> -->
+             </div>
+         </div>
+     </div>
+ </div>
+ <!-- <button type="button" class="btn btn-light">  </button> -->
+
+ 
+<!-- end modal -->
+</body>
+
+</html>

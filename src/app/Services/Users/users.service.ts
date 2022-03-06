@@ -6,9 +6,13 @@ import IUser from 'src/app/ViewModels/IUser';
   providedIn: 'root',
 })
 export class UsersService {
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore,
+    ) {}
   AddUser(id: string, userdata: IUser) {
     
     return this.firestore.doc('users/' + id).set(userdata);
   }
+  getUserByID(id: string) {
+    return  this.firestore.collection('users') .doc(id).valueChanges()
+    }
 }

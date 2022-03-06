@@ -21,9 +21,25 @@
                 {{ product?.DescriptionAr }}
               </h2>
             </div>
-            <div>
-              <a href="#"><i class="far fa-heart fs-2 text-warning"></i></a>
+           
+             
+            
+            <!-- start saveItem -->
+            <div class="px-2">
+              <div class="py-3">
+                <button
+                  type="button"
+                  (click)="save(product.id!)"
+                  style="width: 100%; background-color: #f68b1e; padding: 4px"
+                  class="shoppingbtn ms-0 shadow-lg rounded"
+                >
+                  
+                 <i class="far fa-heart fs-2 text-warning"></i> 
+                 
+                </button>
+              </div>
             </div>
+            <!-- end saveitem -->
           </div>
           <div style="text-align: left" class="px-3 text-dark">
             <div style="font-size: x-large; color: #f68b1e">
