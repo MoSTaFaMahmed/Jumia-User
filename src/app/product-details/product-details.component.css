@@ -5,3 +5,12 @@
   transform: scale(1.02,1.05);
 cursor: pointer;
 }
+.alertApp{
+  color: #fff;
+  background-color: #6dbd28;
+  border-bottom: 1px solid #b5de93;
+  position: fixed;
+  top: 0rem;
+  width: 100%;
+  z-index: 100;
+}

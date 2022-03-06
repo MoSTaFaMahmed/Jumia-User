@@ -1,17 +1,37 @@
-<div *ngIf="flag" class="alert alert-success" role="alert">item added</div>
+<div *ngIf="flag"
+class="alert text-center  p-1 fs-5 alertApp"
+role="alert"
+>
+<i class="fas fa-check-circle px-3"></i>
+Product  added  successfully
+</div>
 <div class="container-sm container-md container-lg">
-  <div class="row" style="margin-top: 6rem">
+ 
+
+  <div class="row pt-1" style="display: flex; flex-wrap: wrap">
     <!--start fisrt col-->
-    <section class="col-lg-9 col-sm-12">
-      <div class="row bg-body">
+    <section
+      style="display: flex; flex-direction: column"
+      class="col-lg-9 col-sm-12 px-2"
+    >
+      <div
+        style="display: flex; flex-direction: row"
+        class="row card bg-body p-1"
+      >
         <!--start fisrt col i first col-->
         <div class="col-lg-4 col-sm-12">
           <div>
-            <img id="itemimg" [src]="product?.Image" width="100%" alt="" />
+            <img
+              style="cursor: zoom-in"
+              id="itemimg"
+              [src]="product?.Image"
+              width="100%"
+              alt=""
+            />
           </div>
         </div>
         <!--start second col in first col-->
-        <div class="col-lg-12 col-sm-12">
+        <div class="col-lg-8 col-sm-12">
           <div class="d-flex justify-content-between text-start mt-3">
             <div class="px-3">
               <h2 *ngIf="flaglang == 'ltr'" id="itemtitle">
@@ -21,9 +41,7 @@
                 {{ product?.DescriptionAr }}
               </h2>
             </div>
-           
-             
-            
+
             <!-- start saveItem -->
             <div class="px-2">
               <div class="py-3">
@@ -33,9 +51,7 @@
                   style="width: 100%; background-color: #f68b1e; padding: 4px"
                   class="shoppingbtn ms-0 shadow-lg rounded"
                 >
-                  
-                 <i class="far fa-heart fs-2 text-warning"></i> 
-                 
+                  <i class="far fa-heart fs-2 text-warning"></i>
                 </button>
               </div>
             </div>
@@ -55,12 +71,16 @@
           </div>
           <!--button-->
           <div class="px-2">
-            <div class="py-3">
+            <div class="pt-1" style="border-bottom: 1px solis #ededed">
               <button
                 type="button"
                 (click)="addToCart(product)"
-                style="width: 100%; background-color: #f68b1e; padding: 4px"
-                class="shoppingbtn ms-0 shadow-lg rounded"
+                style="
+                  background-color: rgb(246, 139, 30);
+                  width: 100%;
+                  color: #fff;
+                "
+                class="btn shadow rounded"
               >
                 <i class="fas fa-shopping-cart px-3"></i>
                 <span *ngIf="flaglang == 'ltr'" class="px-3">Add to card</span>
@@ -129,7 +149,7 @@
       </div>
     </section>
 
-    <div class="col-lg-3 col-sm-12">
+    <div class="col-lg-3 col-sm-12 ps-2">
       <!--start return and delivery section -->
       <section class="bg-body p-2 card mt-lg-0 mt-sm-3">
         <h2 class="title-h py-2">Delivery & Returns</h2>
@@ -422,36 +442,3 @@
     </div>
   </div>
 </div>
-
-<!--
-
-
-<div class="card mb-3" style="max-width:300px;">
-  <div class="row g-0">
-
-      <img [src]='product?.Image' class="card-img-top"  style="width: 18rem;">
-
-
-      <div class="card-body">
-        <p class="card-title"><b>Names:</b>{{product?.Name}}</p>
-        <p class="card-text"><b>Price:</b>{{product?.Price}}</p>
-        <p class="card-text"><b>Quantity:</b>{{product?.Quantity}}</p>
-        <p class="card-text"><b>Description:</b>{{product?.Description}}</p>
-
-        <button
-        type="button"
-        class="btn btn-dark bg-dark"
-         (click)="addToCart(product)"
-      >
-        Add TO Card
-      </button>
-
-      <div *ngIf="flag">
-        <input type="number" class="form-control" placeholder="Quantity" #quntity/>
-        <button (click)="buy(quntity.value)" class="btn btn-primary">Buy</button>
-      </div>
-        <button type="button" class="btn btn-primary"  (click)="backToProd()">Back</button>
-
-    </div>
-  </div>
-</div> -->

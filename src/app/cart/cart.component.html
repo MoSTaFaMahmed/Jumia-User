@@ -1,4 +1,12 @@
+<div 
+class="alert text-center  p-1 fs-5 alertApp"
+role="alert">
+<i class="fas fa-check-circle px-3"></i>
+ <span *ngIf="alert=='updated'">Product quantity has been updated</span>
+ <span *ngIf="alert=='removed'">Product  removed  successfully</span> 
+</div>
 <div class="container-sm container-md container-lg">
+  
   <div class="row">
     <div class="empty" *ngIf="items.length < 1">
       <div class="info">

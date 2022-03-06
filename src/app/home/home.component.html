@@ -18,7 +18,15 @@
     <app-product class="card col-lg-2 col-md-4 col-sm-6  mx-auto product" *ngIf="i<6" [sendProduct]='item'></app-product>
   </ng-container>
  </div> -->
-
+ <div class="row">
+  <ng-container *ngFor="let item of LowQntproducts">
+    <app-product
+      class="card col-lg-2 col-md-4 col-sm-6 mx-auto product p-0"
+      [sendProduct]="item"
+    ></app-product>
+  </ng-container>
+</div>
+ <app-image-adversting></app-image-adversting>
   <div class="row">
     <ng-container *ngFor="let item of firstSecproduct">
       <app-product

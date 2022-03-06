@@ -18,6 +18,9 @@ export class ProductsService {
   products = new BehaviorSubject<IProduct[]>([]);
   constructor(private db: AngularFirestore, private router: Router) {
     this.lang.next(this.getLanguage());
+    this.lang.subscribe((e) => {
+      console.log(e);
+    });
   }
 
   setLanguage(data: string) {
@@ -30,7 +33,26 @@ export class ProductsService {
   // taqwa
 
   getAllData() {
-    return this.db.collection('Products').snapshotChanges();
+    return this.db
+      .collection('Products', (ref) =>
+        ref
+
+          .where('isAccepted', '==', true)
+          .where('Quantity', '>=', 20)
+          .orderBy('Quantity')
+      )
+      .snapshotChanges();
+  }
+  getLowQntData() {
+    return this.db
+      .collection('Products', (ref) =>
+        ref
+          .where('Quantity', '<', 20)
+          .orderBy('Quantity')
+          .where('isAccepted', '==', true)
+          .limit(6)
+      )
+      .snapshotChanges();
   }
   getAllCategorys() {
     return this.db.collection<Category>('Category').snapshotChanges();
@@ -40,7 +62,26 @@ export class ProductsService {
   }
   getDataByCategoryName(cat: string) {
     return this.db
-      .collection('Products', (ref) => ref.where('Category', '==', cat))
+      .collection('Products', (ref) =>
+        ref
+          .where('Category', '==', cat)
+          .where('Quantity', '>=', 20)
+          .orderBy('Quantity')
+          .where('isAccepted', '==', true)
+          .limit(6)
+      )
+      .snapshotChanges();
+  }
+  getLowQntDataByCategoryName(cat: string) {
+    return this.db
+      .collection('Products', (ref) =>
+        ref
+          .where('Category', '==', cat)
+          .where('Quantity', '<', 20)
+          .orderBy('Quantity')
+          .where('isAccepted', '==', true)
+          .limit(6)
+      )
       .snapshotChanges();
   }
   getProductById(productId: number) {
@@ -61,16 +102,13 @@ export class ProductsService {
       .snapshotChanges();
   }
   getProductbyRef(ids: string[]) {
-    
-    return this.db.collection<IProduct>('Products', 
-    (ref) =>
-      ref.where(
-        fir.default.firestore.FieldPath.documentId(),
-        'in',
-        ids
+    return this.db
+      .collection<IProduct>('Products', (ref) =>
+        ref.where(fir.default.firestore.FieldPath.documentId(), 'in', ids)
       )
-    ).valueChanges().subscribe(e=>{
-        this.products.next(e); 
-    })
+      .valueChanges()
+      .subscribe((e) => {
+        this.products.next(e);
+      });
   }
 }

@@ -15,12 +15,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   firstSecproduct: IProduct[]=[];
   secondSecproduct: IProduct[]=[];
   thirdSecproduct: IProduct[]=[];
-
+  LowQntproducts:IProduct[]=[];
   productObservable?:Subscription
   constructor(private prdService: ProductsService) {}
 
   ngOnInit() {
     this.productObservable = this.prdService.getAllData().subscribe((data) => {
+      console.log(data);
+      
       this.products = data.map((elemnt) => {
         return {
           id: elemnt.payload.doc.id,
@@ -32,7 +34,19 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.secondSecproduct=this.products.slice(6,12);
       this.thirdSecproduct=this.products.slice(12,18);
     })
+    this.productObservable =
+     this.prdService.getLowQntData().subscribe((data) => {
+      
+      
+      this.products = data.map((elemnt) => {
+        return {
+          id: elemnt.payload.doc.id,
+          ...(elemnt.payload.doc.data() as IProduct),
+        };
+      });
+      this.LowQntproducts=this.products;
 
+    })
 
   }
 

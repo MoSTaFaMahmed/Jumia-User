@@ -85,6 +85,8 @@ export class NavbarComponent implements OnInit {
     }, 900);
   }
   route(id: string) {
+    console.log(id);
+    
     this.filtteredProducts = [];
     this.searchitem = '';
     this.router.navigate(['/Products', id]);

@@ -105,14 +105,15 @@
 
         <button
           [disabled]="form.invalid"
-          class="col-12 btlogin text-white"
+          class="col-12 btn text-white"
           type="submit"
+          style="background-color: rgb(246, 139, 30);"
           (click)="Signup(form.value)"
         >
           Create Account
         </button>
 
-        <button class="col-12 btlogfb" type="submit">
+        <button class="col-12 btn" type="submit">
           <i class="fab fa-facebook-square"></i> REGISTER WITH FACEBOOK
         </button>
       </form>

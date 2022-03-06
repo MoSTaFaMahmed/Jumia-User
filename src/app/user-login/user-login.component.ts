@@ -19,6 +19,7 @@ export class UserLoginComponent implements OnInit {
 
      this.as.login(data.email, data.password).subscribe(() => {
       
+       console.log(this.as.userID);
        
       if (this.as.userID) {
         let id = this.as.userID;

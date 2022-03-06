@@ -14,6 +14,7 @@ import { SellerService } from '../Services/Seller/seller.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+  alert: string = '';
   items: ICart[] = [];
   total: number = 0;
   flag: string = '';
@@ -26,7 +27,7 @@ export class CartComponent implements OnInit {
     private orderService: OrdersService,
     private db: Firestore,
     private auth: AuthService,
-    private sellerService:SellerService
+    private sellerService: SellerService
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +39,7 @@ export class CartComponent implements OnInit {
   getdata() {
     this.cartservce.cartItems.subscribe((data) => {
       console.log(data);
-      
+
       this.items = data;
 
       if (this.items) this.getTotal(this.items);
@@ -72,19 +73,18 @@ export class CartComponent implements OnInit {
     this.cartservce.addItem(p);
   }
   PlaceOrder(items: ICart[]) {
-console.log(items);
+    console.log(items);
 
-   items.map(e=>{
-     console.log(e.SellerID);
-     
-    //  this.sellerService.getSeller(e.SellerID).subscribe(e=>{
-    //    this.sellerService.seller.subscribe(el=>{
-    //      console.log(el);
-         
-    //    })
-    //  })
-     
-   })
+    items.map((e) => {
+      console.log(e.SellerID);
+
+      //  this.sellerService.getSeller(e.SellerID).subscribe(e=>{
+      //    this.sellerService.seller.subscribe(el=>{
+      //      console.log(el);
+
+      //    })
+      //  })
+    });
     var today = new Date();
     this.order = {
       Total: this.total,
@@ -93,7 +93,7 @@ console.log(items);
         Product_Id: doc(this.db, 'Products/' + e.id),
         Total_Price: e.subtotal! * e.Price!,
         Product_Quntity: e.subtotal,
-        sellerID:e.SellerID
+        sellerID: e.SellerID,
       })),
       date:
         today.getMonth() +
@@ -103,21 +103,36 @@ console.log(items);
         '/' +
         today.getFullYear(),
     };
-console.log(this.order);
+    console.log(this.order);
 
     ////////////navigate to raring ////////////
-      this.orderService.AddOrder(this.order).then(() => {
-        this.orderService.ClearLocalStorage();
-      });
-     this.getdata();
+    this.orderService.AddOrder(this.order).then(() => {
+      this.orderService.ClearLocalStorage();
+    });
+    this.getdata();
   }
   updateTotal(item: ICart) {
-    if (item.Quantity! > item.subtotal!) this.cartservce.addItem(item);
+    if (item.Quantity! > item.subtotal!) {
+      this.cartservce.addItem(item);
+      this.alert = '';
+      setTimeout(() => {
+        this.alert = 'updated';
+      }, 100);
+      
+    }
   }
   suppTotal(item: ICart, index: number) {
+    setTimeout(() => {
+      this.alert = 'updated';
+    }, 500);
     this.cartservce.suppItem(item);
     if (item.subtotal == 1) {
       this.onDelete(index);
+      this.alert = '';
+      setTimeout(() => {
+        this.alert = 'removed';
+      }, 500);
     }
+   
   }
 }

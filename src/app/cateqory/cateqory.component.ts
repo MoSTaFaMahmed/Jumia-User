@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CateqoryComponent implements OnInit, OnDestroy {
   products: IProduct[] = [];
+  LowQntproducts: IProduct[] = [];
   productCatObservable?: Subscription;
   categoryName: any;
   flag:string=''
@@ -39,8 +40,15 @@ export class CateqoryComponent implements OnInit, OnDestroy {
           };
         });
 
-        console.log(this.products);
       });
+      this.prdService.getLowQntDataByCategoryName(this.categoryName).subscribe((data)=>{
+        this.LowQntproducts=data.map((element)=>{
+          return{
+            id:element.payload.doc.id,
+            ...(element.payload.doc.data()as IProduct)
+          }
+        })
+      })
   }
   ngOnDestroy() {
     this.productCatObservable!.unsubscribe();

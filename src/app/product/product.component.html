@@ -25,11 +25,12 @@
           >{{ sendProduct.Quantity }} items left</span
         >
         <p>
-          <ngb-progressbar
-            type="warning"
+          <ngb-progressbar *ngIf="sendProduct.Quantity<19"
+            type="danger"
             [value]="sendProduct.Quantity"
             height="5px"
           ></ngb-progressbar>
+       
         </p>
       </div>
     </a>
