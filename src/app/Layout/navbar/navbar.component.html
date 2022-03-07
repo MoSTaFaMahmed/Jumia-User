@@ -52,7 +52,7 @@
           </div>
         </li>
         <li>
-          <button class="searchbut">
+          <button (click)="searchBtn()" class="searchbut">
             <span *ngIf="flag == 'ltr'">Search</span>
             <span *ngIf="flag == 'rtl'">بحث</span>
           </button>

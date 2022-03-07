@@ -30,8 +30,9 @@ import { PaypalComponent } from './paypal/paypal.component';
 import { SellerdataComponent } from './sellerdata/sellerdata.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FavouriteListComponent } from './favourite-list/favourite-list.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     HomeComponent,
     UserRegisterComponent,
@@ -53,7 +54,8 @@ import { FavouriteListComponent } from './favourite-list/favourite-list.componen
     SellerdataComponent,
     UserProfileComponent,
     FavouriteListComponent,
-  ],
+      NotfoundComponent
+   ],
   imports: [
     CommonModule,
     BrowserModule,

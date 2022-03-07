@@ -13,6 +13,7 @@ import { SellerdataComponent } from './sellerdata/sellerdata.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AuthGuardService } from './Services/Guards/auth-guard.service';
 import { FavouriteListComponent } from './favourite-list/favourite-list.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 const routes: Routes = [
   { path: '', redirectTo: '/Products', pathMatch: 'full' },
   { path: 'Products', component: HomeComponent },
@@ -22,10 +23,11 @@ const routes: Routes = [
   { path: 'Register', component: UserRegisterComponent },
   { path: 'login', component: UserLoginComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'paypal', component: PaypalComponent },
+  { path: 'paypal', component: PaypalComponent ,canActivate:[AuthGuardService]},
   { path: 'Seller/:id', component: SellerdataComponent },
   {path:"userProfile" , component:UserProfileComponent,canActivate:[AuthGuardService]},
-  {path:'favList' , component:FavouriteListComponent},
+  {path:'favList' , component:FavouriteListComponent,canActivate:[AuthGuardService]},
+  {path:'NotFound' , component:NotfoundComponent},
   { path: '**', component: ProductDetailsComponent },
 ];
 
