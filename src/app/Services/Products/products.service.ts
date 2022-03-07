@@ -102,16 +102,6 @@ export class ProductsService {
       .snapshotChanges();
   }
   getProductbyRef(ids: string[]) {
-<<<<<<< HEAD
-    return this.db
-      .collection<IProduct>('Products', (ref) =>
-        ref.where(fir.default.firestore.FieldPath.documentId(), 'in', ids)
-      )
-      .valueChanges()
-      .subscribe((e) => {
-        this.products.next(e);
-      });
-=======
 
     return this.db.collection<IProduct>('Products',
     (ref) =>
@@ -123,6 +113,5 @@ export class ProductsService {
     ).valueChanges().subscribe(e=>{
         this.products.next(e);
     })
->>>>>>> 3460f746aab4e26594201b3702dce2badc7e4e55
   }
 }

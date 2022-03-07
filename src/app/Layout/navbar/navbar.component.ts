@@ -50,22 +50,12 @@ export class NavbarComponent implements OnInit {
       user ? (this.isUser = true) : (this.isUser = false);
     });
 
-
-    
     this.cartServc.cartItems.subscribe((el: ICart[]) => {
       var num = 0;
       el.forEach((e) => (num += e.subtotal!));
 
       this.itemIncart = num;
     });
-
-
-
-
-
-
-
-
 
     this.startobservable.subscribe((value) => {
       this.ProductsService.SearchQuery(value).subscribe((items) => {
@@ -80,13 +70,22 @@ export class NavbarComponent implements OnInit {
     this.sideBarOpen = !this.sideBarOpen;
   }
   search() {
+    console.log(this.searchitem);
+   
     setTimeout(() => {
       this.startat.next(this.searchitem);
+      
     }, 900);
+    
+  }
+  searchBtn(){
+    if (this.filtteredProducts.length==0) {
+      this.router.navigate(['/NotFound']);
+    }
   }
   route(id: string) {
     console.log(id);
-    
+
     this.filtteredProducts = [];
     this.searchitem = '';
     this.router.navigate(['/Products', id]);

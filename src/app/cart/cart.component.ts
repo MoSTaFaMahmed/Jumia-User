@@ -46,6 +46,10 @@ export class CartComponent implements OnInit {
     });
   }
   onDelete(index: number) {
+    this.alert='removed';
+    setTimeout(() => {
+      this.alert='';
+    }, 800);
     this.items.splice(index, 1);
     this.cartservce.setCartData(this.items);
     this.getTotal(this.items);
@@ -72,68 +76,68 @@ export class CartComponent implements OnInit {
   updatetotal(p: ICart) {
     this.cartservce.addItem(p);
   }
-//   PlaceOrder(items: ICart[]) {
-// console.log(items);
+  //   PlaceOrder(items: ICart[]) {
+  // console.log(items);
 
-//    items.map(e=>{
-//      console.log(e.SellerID);
+  //    items.map(e=>{
+  //      console.log(e.SellerID);
 
-//     //  this.sellerService.getSeller(e.SellerID).subscribe(e=>{
-//     //    this.sellerService.seller.subscribe(el=>{
-//     //      console.log(el);
+  //     //  this.sellerService.getSeller(e.SellerID).subscribe(e=>{
+  //     //    this.sellerService.seller.subscribe(el=>{
+  //     //      console.log(el);
 
-//     //    })
-//     //  })
+  //     //    })
+  //     //  })
 
-//    })
-//     var today = new Date();
-//     this.order = {
-//       Total: this.total,
-//       buyer: doc(this.db, 'users/' + this.auth.userID),
-//       Product: items.map((e, index) => ({
-//         Product_Id: doc(this.db, 'Products/' + e.id),
-//         Total_Price: e.subtotal! * e.Price!,
-//         Product_Quntity: e.subtotal,
-//         sellerID:e.SellerID
-//       })),
-//       date:
-//         today.getMonth() +
-//         1 +
-//         '/' +
-//         today.getDate() +
-//         '/' +
-//         today.getFullYear(),
-//     };
-// console.log(this.order);
+  //    })
+  //     var today = new Date();
+  //     this.order = {
+  //       Total: this.total,
+  //       buyer: doc(this.db, 'users/' + this.auth.userID),
+  //       Product: items.map((e, index) => ({
+  //         Product_Id: doc(this.db, 'Products/' + e.id),
+  //         Total_Price: e.subtotal! * e.Price!,
+  //         Product_Quntity: e.subtotal,
+  //         sellerID:e.SellerID
+  //       })),
+  //       date:
+  //         today.getMonth() +
+  //         1 +
+  //         '/' +
+  //         today.getDate() +
+  //         '/' +
+  //         today.getFullYear(),
+  //     };
+  // console.log(this.order);
 
-//     ////////////navigate to raring ////////////
-//       this.orderService.AddOrder(this.order).then(() => {
-//         this.orderService.ClearLocalStorage();
-//       });
-//      this.getdata();
-//   }
+  //     ////////////navigate to raring ////////////
+  //       this.orderService.AddOrder(this.order).then(() => {
+  //         this.orderService.ClearLocalStorage();
+  //       });
+  //      this.getdata();
+  //   }
   updateTotal(item: ICart) {
     if (item.Quantity! > item.subtotal!) {
       this.cartservce.addItem(item);
-      this.alert = '';
+      this.alert = 'updated';
       setTimeout(() => {
-        this.alert = 'updated';
-      }, 100);
-      
+        this.alert = '';
+      }, 800);
     }
   }
   suppTotal(item: ICart, index: number) {
+    this.alert = 'updated';
     setTimeout(() => {
-      this.alert = 'updated';
-    }, 500);
+      this.alert = '';
+    }, 800);
     this.cartservce.suppItem(item);
     if (item.subtotal == 1) {
       this.onDelete(index);
-      this.alert = '';
+      this.alert = 'removed';
+
       setTimeout(() => {
-        this.alert = 'removed';
-      }, 500);
+        this.alert = '';
+      }, 800);
     }
-   
   }
 }
