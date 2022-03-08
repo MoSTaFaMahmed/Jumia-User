@@ -5,8 +5,14 @@
     alt=""
   />
 </nav>
+<li class="nav-item float-start p-2 list-unstyled">
+  <a class="sellOn" [routerLink]="['/SellerRegister']">Sell on Jumia </a>
+</li>
 <div class="mt-3 shadow container">
-  <nav style="align-items: normal;" class="navbar navbar-expand-lg bg-white p-0 row">
+  <nav
+    style="align-items: normal"
+    class="navbar navbar-expand-lg bg-white p-0 row"
+  >
     <div class="nav-item col-2">
       <a class="nav-link active" aria-current="page" href="#"
         ><img class="log" src="assets/img/logo.png"
@@ -28,7 +34,7 @@
         class="navbar-nav me-auto mb-2 mb-lg-0"
         style="width: 100%; justify-content: space-around"
       >
-        <li style="width: 100%;position: relative;">
+        <li style="width: 100%; position: relative">
           <input
             [(ngModel)]="searchitem"
             (keydown)="search()"
@@ -37,16 +43,17 @@
             aria-label="default input example"
           />
           <div class="searchOptions" *ngIf="searchitem.length > 0">
-            <div 
-              class="list-group" style="position: absolute; width: 100%; z-index: 1">
+            <div
+              class="list-group"
+              style="position: absolute; width: 100%; z-index: 1"
+            >
               <button
-              *ngFor="let item of filtteredProducts"
+                *ngFor="let item of filtteredProducts"
                 (click)="route(item.id!)"
                 type="button"
                 class="list-group-item list-group-item-action"
-               
               >
-               {{ item.Name }}
+                {{ item.Name }}
               </button>
             </div>
           </div>
@@ -76,12 +83,12 @@
 
           <ul class="dropdown-menu">
             <li routerLink="/userProfile">
-              <a class="dropdown-item text-dark"  
-                ><i class="far fa-user"   ></i> My Account</a
+              <a class="dropdown-item text-dark"
+                ><i class="far fa-user"></i> My Account</a
               >
             </li>
             <li>
-              <a class="dropdown-item text-dark" href="#"
+              <a [routerLink]="['/Orders',id]" class="dropdown-item text-dark" href="#"
                 ><i class="far fa-box"></i> Orders</a
               >
             </li>
@@ -165,11 +172,10 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" routerLink="/favList"
-            > 
-            <i class="far fa-heart "></i> 
-            <span class="cartitem"> </span></a
-          >
+          <a class="nav-link text-dark" routerLink="/favList">
+            <i class="far fa-heart"></i>
+            <span class="cartitem"> </span
+          ></a>
         </li>
 
         <li (click)="changeDir('ltr')" class="nav-item">

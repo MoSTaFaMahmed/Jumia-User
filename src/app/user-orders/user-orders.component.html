@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="row py-3" style="display: flex">
+    <div class="col-3">
+      <div  style="list-style: none;">
+        <li routerLink="/userProfile">
+          <a class="dropdown-item text-dark"
+            ><i class="far fa-user"></i> My Account</a
+          >
+        </li>
+        <li>
+          <a [routerLink]="['/Orders']" class="dropdown-item text-dark" href="#"
+            ><i class="far fa-box"></i> Orders</a
+          >
+        </li>
+        <li>
+          <a class="dropdown-item text-dark" href="#"
+            ><i class="far fa-envelope"></i> Inbox</a
+          >
+        </li>
+        <li>
+          <a class="dropdown-item text-dark" href="#"
+            ><i class="far fa-heart"></i> Saved Items</a
+          >
+        </li>
+        <li>
+          <a class="dropdown-item text-dark" href="#"
+            ><i class="far fa-ticket"></i> Jumia Credit</a
+          >
+        </li>
+        <li><hr class="dropdown-divider" /></li>
+       
+        
+      </div>
+    </div>
+    <section class="col-9">
+      <div class="card bg-white">
+        <div class="row px-3">
+          <div class="col-12 p-2" style="text-align: center"></div>
+          <div style="border: 1px solid #ededed" class="col-12 p-2">
+            <!-- <p
+              class="col-2 p-3"
+              style="
+                font-weight: 500;
+                color: #f68b1e;
+                border-bottom: 2px solid #f68b1e;
+              "
+            >
+              ({{ orders.length }})Order
+            </p> -->
+          </div>
+          <div>{{orders|json}}</div>
+          <div style="border: 1px solid #ededed" class="col-12 p-2">
+            <article>
+              <div
+                *ngFor="let order of orders"
+                style="display: flex; flex-direction: row;position: relative;"
+              >
+                <div class="p-3" style="border-bottom: 1px solid #ededed">
+                  <h2 style="font-size: 1rem; font-weight: 400; color: #282828">
+                    Total: {{ order!.Total | currency }}
+                  </h2>
+                </div>
+                <div class="p-3" style="border-bottom: 1px solid #ededed">
+                  <h2 style="font-size: 1rem; font-weight: 400; color: #282828">
+                    Date on : {{ order!.date }}
+                  </h2>
+                </div>
+                
+                <div class="p-3" style=" border-bottom: 1px solid #ededed">
+                  <a
+                  [routerLink]="['/OrderDetails', order.id]"
+                    class="m-3"
+                    style="
+                      bottom: 0;
+                      cursor: pointer;
+                      font-weight: 700;
+                      text-decoration: none;
+                      color: orange;
+                      font-size: 1.5rem;
+  
+                      position: absolute;
+                      right: 0px;
+                      bottom: 0px;
+                    "
+                    >See details</a
+                  >
+                </div>
+               
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+

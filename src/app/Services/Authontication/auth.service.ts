@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { from, Observable } from 'rxjs';
 import auth2 from 'firebase/compat/app';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import * as fir from 'firebase/compat/app';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -11,7 +14,7 @@ export class AuthService {
   errorMsg: string = '';
   isUser: boolean = false;
   user!: Observable<firebase.default.User | null>;
-  constructor(private auth: AngularFireAuth) {
+  constructor(private auth: AngularFireAuth, private db: AngularFirestore) {
     this.user = auth.user;
   }
 
@@ -47,8 +50,6 @@ export class AuthService {
       this.auth
         .signInWithEmailAndPassword(email, password)
         .then((e) => {
-          console.log(this.user);
-
           this.userID = e.user!.uid;
           this.userEmail = e.user!.email;
         })
@@ -58,5 +59,12 @@ export class AuthService {
   async Logout() {
     await this.auth.signOut();
     console.log(this.user);
+  }
+  checkuser(id: string) {
+    return this.db
+      .collection('users', (ref) =>
+        ref.where(fir.default.firestore.FieldPath.documentId(), '==', id)
+      )
+      .valueChanges();
   }
 }

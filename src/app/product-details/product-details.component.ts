@@ -122,8 +122,13 @@ export class ProductDetailsComponent implements OnInit {
 
   // ==================addtofavLise"taqwa"========================
   save(id:string){
-    let userId=this.auth.userID
-     this.fs.collection('users').doc(userId).update({
+   // let userId=this.auth.userID
+   this.auth.user.subscribe(id=>{
+     this.uid=id?.uid
+   })
+   console.log(this.uid);
+   
+     this.fs.collection('users').doc(this.uid).update({
               favorite : ([{Product_Id:
               doc(this.db,"Products/"+id)}])
      })

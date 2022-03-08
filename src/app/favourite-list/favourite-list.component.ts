@@ -37,6 +37,7 @@ export class FavouriteListComponent implements OnInit {
     //     var m = paramMap.get('id');
     //     console.log(m)
     const userId=this.auth.userID
+    
      
   
       //   this.userService.getUserByID(this.auth.userID!).subscribe((e:any) => {
