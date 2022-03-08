@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.productObservable = this.prdService.getAllData().subscribe((data) => {
       console.log(data);
-      
+
       this.products = data.map((elemnt) => {
         return {
           id: elemnt.payload.doc.id,
@@ -36,15 +36,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
     this.productObservable =
      this.prdService.getLowQntData().subscribe((data) => {
-      
-      
-      this.products = data.map((elemnt) => {
+
+
+      this.LowQntproducts = data.map((elemnt) => {
         return {
           id: elemnt.payload.doc.id,
           ...(elemnt.payload.doc.data() as IProduct),
         };
       });
-      this.LowQntproducts=this.products;
+     
 
     })
 

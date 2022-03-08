@@ -10,13 +10,19 @@ import { ICart } from 'src/app/ViewModels/icart';
 import { Category } from 'src/app/ViewModels/category';
 import { BehaviorSubject, from } from 'rxjs';
 import * as fir from 'firebase/compat/app';
+import { IProductOrder } from 'src/app/ViewModels/IProductOrder';
+import { doc, Firestore } from '@angular/fire/firestore';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
   lang = new BehaviorSubject('');
   products = new BehaviorSubject<IProduct[]>([]);
-  constructor(private db: AngularFirestore, private router: Router) {
+  constructor(
+    private db: AngularFirestore,
+    private router: Router,
+    private firs: Firestore
+  ) {
     this.lang.next(this.getLanguage());
     this.lang.subscribe((e) => {
       console.log(e);
@@ -42,7 +48,7 @@ export class ProductsService {
   getLowQntData() {
     return this.db
       .collection('Products', (ref) =>
-        ref.where('Quantity', '<', 20).orderBy('Quantity').limit(6)
+        ref.where('Quantity', '<', 20).where('Quantity', '>',0).orderBy('Quantity')
       )
       .snapshotChanges();
   }
@@ -99,10 +105,13 @@ export class ProductsService {
       });
   }
   updateRank(id: string) {
-    return this.db
-      .collection<IProduct>('Products')
-      .doc(id)
-      .valueChanges()
-     
+    return this.db.collection<IProduct>('Products').doc(id).valueChanges();
+  }
+
+  /////////******FEEDBACK*****////////
+  getPrroductFeedBack(Prodid:any) {
+    return this.db.collection<IProductOrder>('ProductsFeedback', (ref) =>
+      ref.where('product_id', '==',doc(this.firs,'Products/'+Prodid))
+    ).valueChanges()
   }
 }

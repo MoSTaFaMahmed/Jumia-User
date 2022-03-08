@@ -103,48 +103,16 @@
                 customers only</a
               >
             </div>
-            <!-- RelatedProducts -->
-            <div class="empty" *ngIf="products.length < 1">
-              <div class="info">
-                <h4>No Related Products</h4>
-                <a routerLink="" class="btn btn-success">Start Shoping </a>
-              </div>
-            </div>
-            <div class="row bg-white mt-5" *ngIf="products.length > 1">
-              <h3 class="row">Related items</h3>
-              <div
-                *ngFor="let item of products"
-                class="card col-lg-2 my-3 me-1 col-md-4 col-sm-6 mx-auto product"
-              >
-                <a
-                  [routerLink]="['/Products', item.id]"
-                  [queryParams]="{ query: item.Category }"
-                  class="text-decoration-none text-dark"
-                >
-                  <img
-                    class="card-img-top"
-                    [src]="item.Image"
-                    alt="Card image"
-                    style="width: 100%"
-                  />
-                  <div class="card-body">
-                    <!-- <small>{{item.Name}}</small> -->
-                    <small *ngIf="flaglang == 'ltr'">{{ item.Category }}</small>
-                    <small *ngIf="flaglang == 'rtl'">{{
-                      item.CategoryAr
-                    }}</small>
-                    <h6 class="card-title">EGP {{ item.Price }}</h6>
-                  </div>
-                </a>
-              </div>
-            </div>
+
           </section>
+
         </div>
         <!--start third col i first col-->
       </div>
     </section>
 
     <div class="col-lg-3 col-sm-12 ps-2">
+
       <!--start return and delivery section -->
       <section class="bg-body p-2 card mt-lg-0 mt-sm-3">
         <h2 class="title-h py-2">Delivery & Returns</h2>
@@ -276,6 +244,42 @@
   <div class="row">
     <!--start fisrt col-->
     <div class="col-lg-9 col-sm-14">
+       <!-- RelatedProducts -->
+ <div class="empty" *ngIf="products.length < 1">
+  <div class="info">
+    <h4>No Related Products</h4>
+    <a routerLink="" class="btn btn-success">Start Shoping </a>
+  </div>
+</div>
+<div class="row bg-white mt-5" *ngIf="products.length > 1">
+  <h3 class="row">Related items</h3>
+  <div
+    *ngFor="let item of products"
+    class="card col-lg-2 my-3 me-1 col-md-4 col-sm-6 mx-auto product"
+  >
+    <a
+      [routerLink]="['/Products', item.id]"
+      [queryParams]="{ query: item.Category }"
+      class="text-decoration-none text-dark"
+    >
+      <img
+        class="card-img-top"
+        [src]="item.Image"
+        alt="Card image"
+        style="width: 100%"
+      />
+      <div class="card-body">
+        <!-- <small>{{item.Name}}</small> -->
+        <small *ngIf="flaglang == 'ltr'">{{ item.Category }}</small>
+        <small *ngIf="flaglang == 'rtl'">{{
+          item.CategoryAr
+        }}</small>
+        <h6 class="card-title">EGP {{ item.Price }}</h6>
+      </div>
+    </a>
+  </div>
+
+</div>
       <!--start product details-->
       <div class="card shadow">
         <header class="d-block py-2 m-3">
@@ -349,46 +353,26 @@
           style="position: relative"
         >
           <h2 class="title-h pt-4">PRODUCT REVIEWS</h2>
+
+
           <hr />
-          <article class="py-2 px-4" style="position: relative">
+
+          <article *ngFor="let item of feedBacks" class="py-2 px-4" >
             <div class="py-1">
               <div class="stars">
                 <div class="in"></div>
               </div>
             </div>
-            <h2 class="title-h py-2">beautiful</h2>
-            <p class="fs-5">good product</p>
+            <h2 class="title-h py-2">{{item.feedback}}</h2>
+
+
             <div
               class="d-flex justify-content-between align-items-center fs-5"
               style="color: gray"
             >
               <div>
-                <span class="pe-2">29-12-2021</span>
-                <span>by Shrouk</span>
-              </div>
-              <div class="d-flex align-items-center" style="color: #6dbd28">
-                <i class="far fa-check-circle"></i>
-                <span>Verified Purchase</span>
-              </div>
-            </div>
-          </article>
-          <hr />
-          <article class="py-2 px-4" style="position: relative">
-            <div class="py-1">
-              <div class="stars">
-                <div class="in"></div>
-              </div>
-            </div>
-            <h2 class="title-h py-2">beautiful</h2>
-            <p class="fs-5">good product</p>
-            <div
-              class="d-flex justify-content-between align-items-center fs-5"
-              style="color: gray"
-            >
-              <div>
-                <span class="pe-2">29-12-2021</span>
-                <span>by Shrouk</span>
-              </div>
+                <span class="pe-2">{{item.date}}</span>
+                            </div>
               <div class="d-flex align-items-center" style="color: #6dbd28">
                 <i class="far fa-check-circle"></i>
                 <span>Verified Purchase</span>

@@ -9,6 +9,7 @@ import IUser from '../ViewModels/IUser';
 import { AuthService } from '../Services/Authontication/auth.service';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { IFeedBack } from '../ViewModels/ifeed-back';
 
 @Component({
   selector: 'app-product-details',
@@ -33,7 +34,8 @@ export class ProductDetailsComponent implements OnInit {
   dataprofile={
     favorite:{},
   }
-  favorite: any
+  favorite: any;
+  feedBacks:IFeedBack[]=[];
   constructor(
     private activateRouteServicse: ActivatedRoute,
     private productServc: ProductsService,
@@ -93,6 +95,15 @@ export class ProductDetailsComponent implements OnInit {
         });
       });
     });
+
+
+    /////////////*******GetFeedBack********///////////////
+   this.productServc.getPrroductFeedBack(this.productId).subscribe((feed)=>{
+    this.feedBacks=feed as IFeedBack[];
+    console.log(this.productId);
+    console.log(this.feedBacks);
+    console.log(feed);
+    })
   }
   backToProd() {
     this.router.navigate(['/Products']);
@@ -127,7 +138,7 @@ export class ProductDetailsComponent implements OnInit {
      this.uid=id?.uid
    })
    console.log(this.uid);
-   
+
      this.fs.collection('users').doc(this.uid).update({
               favorite : ([{Product_Id:
               doc(this.db,"Products/"+id)}])
@@ -137,4 +148,5 @@ export class ProductDetailsComponent implements OnInit {
      console.log(this.dataprofile)
 
 }
+
 }
