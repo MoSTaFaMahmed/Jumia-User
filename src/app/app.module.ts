@@ -21,7 +21,7 @@ import { ImageAdverstingComponent } from './image-adversting/image-adversting.co
 import { HomeOfficeProductsComponent } from './home-office-products/home-office-products.component';
 import { CateqoryComponent } from './cateqory/cateqory.component';
 import { SearchResultComponent } from './Search-Result/search-result/search-result.component';
-// import { CommonModule } from '@angular/common';
+//import { CommonModule } from '@angular/common';
 import { CartComponent } from './cart/cart.component';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -33,9 +33,10 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { SellerRegisterComponent } from './seller-register/seller-register.component';
 import { UserRegisterComponent } from './user-register/user-register/user-register.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
-import { OrderDetailsComponent } from './order-details/order-details.component';
+import { OrderdetailsComponent } from './orderdetails/orderdetails.component';
+
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     HomeComponent,
     UserRegisterComponent,
@@ -60,7 +61,8 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     NotfoundComponent,
       SellerRegisterComponent,
       UserOrdersComponent,
-      OrderDetailsComponent
+      OrderdetailsComponent,
+     
    ],
   imports: [
     BrowserModule,

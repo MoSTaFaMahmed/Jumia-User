@@ -1,0 +1,6 @@
+<div *ngFor="let item of produtorderd">
+<p>{{item.Product?.Name}}</p>
+<img [src]="item.Product?.Image" alt="">
+<textarea #feedback name="" id="" cols="30" maxlength="30" rows="10"></textarea>
+<button (click)="submitBack(feedback.value,item.id)">Give FeedBack</button>
+</div>

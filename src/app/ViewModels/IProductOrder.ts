@@ -4,7 +4,6 @@ import IProduct from './Iproduct';
 export interface IProductOrder {
   id?: string;
   Product?: IProduct;
-
   Product_Quntity?: number;
   Total_Price?: number;
   delviredstatus?: string;

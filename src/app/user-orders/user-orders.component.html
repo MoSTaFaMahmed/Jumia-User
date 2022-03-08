@@ -7,11 +7,11 @@
             ><i class="far fa-user"></i> My Account</a
           >
         </li>
-        <li>
+        <!-- <li>
           <a [routerLink]="['/Orders']" class="dropdown-item text-dark" href="#"
             ><i class="far fa-box"></i> Orders</a
           >
-        </li>
+        </li> -->
         <li>
           <a class="dropdown-item text-dark" href="#"
             ><i class="far fa-envelope"></i> Inbox</a
@@ -28,8 +28,8 @@
           >
         </li>
         <li><hr class="dropdown-divider" /></li>
-       
-        
+
+
       </div>
     </div>
     <section class="col-9">
@@ -48,7 +48,7 @@
               ({{ orders.length }})Order
             </p> -->
           </div>
-          <div>{{orders|json}}</div>
+          <!-- <div>{{orders|json}}</div> -->
           <div style="border: 1px solid #ededed" class="col-12 p-2">
             <article>
               <div
@@ -65,10 +65,10 @@
                     Date on : {{ order!.date }}
                   </h2>
                 </div>
-                
+{{order.id}}
                 <div class="p-3" style=" border-bottom: 1px solid #ededed">
                   <a
-                  [routerLink]="['/OrderDetails', order.id]"
+                  [routerLink]="['/OrderDetails',order.id]"
                     class="m-3"
                     style="
                       bottom: 0;
@@ -77,7 +77,7 @@
                       text-decoration: none;
                       color: orange;
                       font-size: 1.5rem;
-  
+
                       position: absolute;
                       right: 0px;
                       bottom: 0px;
@@ -85,7 +85,7 @@
                     >See details</a
                   >
                 </div>
-               
+
               </div>
             </article>
           </div>

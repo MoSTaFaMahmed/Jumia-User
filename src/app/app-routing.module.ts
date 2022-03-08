@@ -16,7 +16,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { SellerRegisterComponent } from './seller-register/seller-register.component';
 import { UserRegisterComponent } from './user-register/user-register/user-register.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
-import { OrderDetailsComponent } from './order-details/order-details.component';
+import { OrderdetailsComponent } from './orderdetails/orderdetails.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/Products', pathMatch: 'full' },
   { path: 'Products', component: HomeComponent },
@@ -28,7 +29,7 @@ const routes: Routes = [
   { path: 'Orders/:id', component: UserOrdersComponent,canActivate: [AuthGuardService] },
   { path: 'SellerRegister', component: SellerRegisterComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'OrderDetails/:id', component: OrderDetailsComponent },
+  { path: 'OrderDetails/:id', component:OrderdetailsComponent },
   {
     path: 'paypal',
     component: PaypalComponent,
