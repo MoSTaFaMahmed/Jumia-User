@@ -35,3 +35,11 @@ nav{
   top:35%;
   color: rgb(228, 129, 28) ;
 }
+.sellOn{
+  color: rgb(246, 139, 30);
+  text-decoration: none;
+}
+.sellOn:hover{
+  color: rgb(228, 129, 28);
+  
+}

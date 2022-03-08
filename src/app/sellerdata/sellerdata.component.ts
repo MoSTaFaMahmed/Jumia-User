@@ -25,26 +25,31 @@ export class SellerdataComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {}
 
   ngOnInit(): void {
-    this.productObservable =
-     this.activateRouteServicse.paramMap.subscribe(
-      (paramMap) => {
-        var m = paramMap.get('id');
+    //  this.activateRouteServicse.paramMap.subscribe(
+    //   (paramMap) => {
+    //     var m = paramMap.get('id');
 
-        this.sellerService.getSellerByID(m!).subscribe((e) => {
+    //     this.sellerService.getSellerByID(m!).subscribe((e) => {
 
+    //       var ids: string[] = [];
 
-          var ids: string[] = [];
+    //       e?.Products?.map((el) => {
+    //         ids.push(el.Product_Id.id);
+    //       });
 
-          e?.Products?.map((el) => {
-            ids.push(el.Product_Id.id);
-          });
+    //       this.productService.getProductbyRef(ids);
+    //       this.productService.products.subscribe((e) => {
+    //         this.products = e;
+    //       });
+    //     });
+    //   }
+    // );
 
-          this.productService.getProductbyRef(ids);
-          this.productService.products.subscribe((e) => {
-            this.products = e;
-          });
-        });
-      }
-    );
+    this.activateRouteServicse.paramMap.subscribe((paramMap) => {
+      var p = paramMap.get('id');
+      this.sellerService.getSellerProducts(p!).subscribe((prds) => {
+        this.products = prds as IProduct[];
+      });
+    });
   }
 }

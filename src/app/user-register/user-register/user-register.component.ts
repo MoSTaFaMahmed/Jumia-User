@@ -12,6 +12,7 @@ import IUser from 'src/app/ViewModels/IUser';
 export class UserRegisterComponent implements OnInit {
   errorMessage: string = '';
   IsLoggedByFacebook: boolean = false;
+  userID:any;
   constructor(
     private AuthService: AuthService,
     private userService: UsersService,
@@ -28,11 +29,14 @@ export class UserRegisterComponent implements OnInit {
     };
     this.AuthService.Signup(form.email, form.password).subscribe(() => {
       //console.log(this.AuthService.userID);})
-      if (this.AuthService.userID) {
+      this.AuthService.user.subscribe(id=>{
+        this.userID=id?.uid;
+      })
+      if (this.userID) {
         this.errorMessage = '';
-        console.log(this.AuthService.userID);
+        console.log(this.userID);
 
-        this.userService.AddUser(this.AuthService.userID, data).then(() => {
+        this.userService.AddUser(this.userID, data).then(() => {
           this.router.navigate(['/Products']);
         });
       } else {
@@ -45,7 +49,7 @@ export class UserRegisterComponent implements OnInit {
   }
   SignupFacebook() {
     this.AuthService.LoginFacebook().subscribe(() => {
-      if (this.AuthService.user) {
+      if (this.userID) {
         this.errorMessage = '';
       } else {
         this.errorMessage = this.AuthService.errorMsg;

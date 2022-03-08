@@ -19,8 +19,10 @@ export class NavbarComponent implements OnInit {
   searchitem: string = '';
   islogged: boolean = false;
   isUser: boolean = false;
+
   private startat = new Subject<string>();
   private startobservable = this.startat.asObservable();
+
   filtteredProducts: IProduct[] = [];
   itemIncart!: number;
   words: ITest = {
@@ -28,7 +30,7 @@ export class NavbarComponent implements OnInit {
   };
   prd!: IProduct;
   flag: string = '';
-
+  id!: any;
   constructor(
     private ProductsService: ProductsService,
     private cartServc: CartServiceService,
@@ -41,11 +43,17 @@ export class NavbarComponent implements OnInit {
     this.ProductsService.hhhh();
     this.ProductsService.products.subscribe((e) => (this.prd = e));
          |||| reference  |||| */
+
+    this.auth.user.subscribe((e) => {
+      if (e?.uid) this.id = e?.uid;
+       
+    });
+
     this.ProductsService.lang.subscribe((e) => {
       this.flag = e;
     });
     this.auth.user.subscribe((user) => {
-      console.log(user);
+      console.log(user?.uid);
 
       user ? (this.isUser = true) : (this.isUser = false);
     });
@@ -62,7 +70,7 @@ export class NavbarComponent implements OnInit {
         this.filtteredProducts = items.map((item) => {
           return item.payload.doc.data();
         });
-        console.log(this.filtteredProducts);
+        // console.log(this.filtteredProducts);
       });
     });
   }
@@ -71,15 +79,13 @@ export class NavbarComponent implements OnInit {
   }
   search() {
     console.log(this.searchitem);
-   
+
     setTimeout(() => {
       this.startat.next(this.searchitem);
-      
     }, 900);
-    
   }
-  searchBtn(){
-    if (this.filtteredProducts.length==0) {
+  searchBtn() {
+    if (this.filtteredProducts.length == 0) {
       this.router.navigate(['/NotFound']);
     }
   }

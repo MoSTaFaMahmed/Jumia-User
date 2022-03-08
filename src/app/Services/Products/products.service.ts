@@ -35,22 +35,14 @@ export class ProductsService {
   getAllData() {
     return this.db
       .collection('Products', (ref) =>
-        ref
-
-          .where('isAccepted', '==', true)
-          .where('Quantity', '>=', 20)
-          .orderBy('Quantity')
+        ref.where('Quantity', '>=', 20).orderBy('Quantity')
       )
       .snapshotChanges();
   }
   getLowQntData() {
     return this.db
       .collection('Products', (ref) =>
-        ref
-          .where('Quantity', '<', 20)
-          .orderBy('Quantity')
-          .where('isAccepted', '==', true)
-          .limit(6)
+        ref.where('Quantity', '<', 20).orderBy('Quantity').limit(6)
       )
       .snapshotChanges();
   }
@@ -67,8 +59,6 @@ export class ProductsService {
           .where('Category', '==', cat)
           .where('Quantity', '>=', 20)
           .orderBy('Quantity')
-          .where('isAccepted', '==', true)
-          .limit(6)
       )
       .snapshotChanges();
   }
@@ -79,8 +69,6 @@ export class ProductsService {
           .where('Category', '==', cat)
           .where('Quantity', '<', 20)
           .orderBy('Quantity')
-          .where('isAccepted', '==', true)
-          .limit(6)
       )
       .snapshotChanges();
   }
@@ -92,26 +80,29 @@ export class ProductsService {
   }
 
   SearchQuery(start: string) {
+    console.log(start);
+
     return this.db
       .collection<IProduct>('Products', (ref) =>
-        ref
-          .where('searchKey', 'array-contains', start)
-
-          .limit(10)
+        ref.where('searchKey', 'array-contains', start)
       )
       .snapshotChanges();
   }
   getProductbyRef(ids: string[]) {
-
-    return this.db.collection<IProduct>('Products',
-    (ref) =>
-      ref.where(
-        fir.default.firestore.FieldPath.documentId(),
-        'in',
-        ids
+    return this.db
+      .collection<IProduct>('Products', (ref) =>
+        ref.where(fir.default.firestore.FieldPath.documentId(), 'in', ids)
       )
-    ).valueChanges().subscribe(e=>{
+      .valueChanges()
+      .subscribe((e) => {
         this.products.next(e);
-    })
+      });
+  }
+  updateRank(id: string) {
+    return this.db
+      .collection<IProduct>('Products')
+      .doc(id)
+      .valueChanges()
+     
   }
 }

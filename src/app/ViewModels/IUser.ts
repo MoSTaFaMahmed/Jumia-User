@@ -5,6 +5,8 @@ export default interface IUser{
     FirstName?:string,
     LastName?:string,
     Phone?:string,
+    Email?:string,
+    Password?:string,
     IsActive?:boolean,
     SellerStatus?:String
     Products?:[{Product_Id:DocumentReference}]

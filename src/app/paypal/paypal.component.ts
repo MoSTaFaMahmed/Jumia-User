@@ -13,30 +13,37 @@ import { AuthService } from '../Services/Authontication/auth.service';
   styleUrls: ['./paypal.component.css'],
 })
 export class PaypalComponent implements OnInit {
-  items: ICart[]=[];
+  items: ICart[] = [];
   total: number = 0;
   order!: IOrder;
+  userID: any;
   //myString:string =this.total.toString();
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private cartservce: CartServiceService,
-    private orderService:OrdersService,
+    private orderService: OrdersService,
     private db: Firestore,
-    private auth: AuthService,) {}
+    private auth: AuthService
+  ) {}
 
   ngOnInit(): void {
+    this.auth.user.subscribe((id) => {
+      this.userID = id?.uid;
+      console.log(this.userID);
+    });
 
-    this.getdata()
+    this.getdata();
     render({
       id: '#payment',
       currency: 'USD',
       onApprove: (details) => {
         console.log(details.status);
-       // alert('thanks for  paying dear '+ details.payer.name.given_name);
+        // alert('thanks for  paying dear '+ details.payer.name.given_name);
         if (details.status == 'COMPLETED') {
-          this.PlaceOrder(this.items)
+          this.PlaceOrder(this.items);
         }
       },
-      value:"5",
+      value: '5',
     });
   }
 
@@ -47,9 +54,7 @@ export class PaypalComponent implements OnInit {
       this.items = data;
 
       if (this.items) this.getTotal(this.items);
-
     });
-
   }
   getTotal(data: any) {
     let subs = 0;
@@ -58,34 +63,38 @@ export class PaypalComponent implements OnInit {
   }
   PlaceOrder(items: ICart[]) {
     console.log(items);
+    this.auth.user.subscribe((id) => {
+      this.userID = id?.uid;
+
       var today = new Date();
-        this.order = {
-          Total: this.total,
-          buyer: doc(this.db, 'users/' + this.auth.userID),
-          Product: items.map((e, index) => ({
-            Product_Id: doc(this.db, 'Products/' + e.id),
-            Total_Price: e.subtotal! * e.Price!,
-            Product_Quntity: e.subtotal,
-            sellerID:e.SellerID
-          })),
-          date:
-            today.getMonth() +
-            1 +
-            '/' +
-            today.getDate() +
-            '/' +
-            today.getFullYear(),
-        };
-    console.log(this.order);
+      this.order = {
+        Total: this.total,
+        buyer: doc(this.db, 'users/' + this.userID),
+        Product: items.map((e) => ({
+          Product_Id: doc(this.db, 'Products/' + e.id),
+          Total_Price: e.subtotal! * e.Price!,
+          Product_Quntity: e.subtotal,
+          sellerID: e.SellerID,
+          delviredstatus: 'pending',
+        })),
+        date:
+          today.getMonth() +
+          1 +
+          '/' +
+          today.getDate() +
+          '/' +
+          today.getFullYear(),
+      };
+      console.log(this.order);
 
-        ////////////navigate to raring ////////////
-          this.orderService.AddOrder(this.order).then(() => {
-            this.orderService.ClearLocalStorage();
-          });
+      ////////////navigate to raring ////////////
+      this.orderService.AddOrder(this.order).then(() => {
+        this.orderService.ClearLocalStorage();
+      });
 
-           items.map(id=>{
-             this.orderService.updatQtn(id.id,id.Quantity!-id.subtotal!)
-           })
-
-      }
+      items.map((id) => {
+        this.orderService.updatQtn(id.id, id.Quantity! - id.subtotal!);
+      });
+    });
+  }
 }
