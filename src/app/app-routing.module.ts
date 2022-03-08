@@ -25,10 +25,14 @@ const routes: Routes = [
   { path: 'search', component: SearchResultComponent },
   { path: 'Register', component: UserRegisterComponent },
   { path: 'login', component: UserLoginComponent },
-  { path: 'Orders/:id', component: UserOrdersComponent,canActivate: [AuthGuardService] },
+  {
+    path: 'Orders/:id',
+    component: UserOrdersComponent,
+    canActivate: [AuthGuardService],
+  },
   { path: 'SellerRegister', component: SellerRegisterComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'OrderDetails/:id', component: OrderDetailsComponent },
+  { path: 'OrdersDetails/:id', component: OrderDetailsComponent },
   {
     path: 'paypal',
     component: PaypalComponent,

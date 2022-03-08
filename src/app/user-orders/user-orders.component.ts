@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../Services/Authontication/auth.service';
 import { OrdersService } from '../Services/Orders/orders.service';
 import { IOrder } from '../ViewModels/iorder';
@@ -19,7 +19,9 @@ export class UserOrdersComponent implements OnInit {
   constructor(
     private orderService: OrdersService,
     private auth: AuthService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private r:Router
+
   ) {}
 
   ngOnInit(): void {
@@ -39,5 +41,8 @@ export class UserOrdersComponent implements OnInit {
         
       });
     });
+  }
+  route(id:string){
+   // this.r.navigate(['OrderDetails/', id]);
   }
 }

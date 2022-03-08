@@ -1,6 +1,6 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { doc,Firestore } from 'firebase/firestore';
+import { doc, Firestore } from '@angular/fire/firestore';
 import { FeedbackService } from '../Services/FeedBack/feedback.service';
 import { OrdersService } from '../Services/Orders/orders.service';
 import { ProductsService } from '../Services/Products/products.service';
@@ -32,7 +32,10 @@ export class OrderDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.paramMap.subscribe((param) => {
+
       this.id = param.get('id');
+      console.log(this.id);
+      
       this.orderService.getOrderDetailsByID(this.id).subscribe((e: any) => {
         this.orderdetails = e as IOrder;
         console.log(this.orderdetails);
