@@ -13,6 +13,6 @@ export class UsersService {
     return this.firestore.doc('users/' + id).set(userdata);
   }
   getUserByID(id: string) {
-    return  this.firestore.collection('users') .doc(id).valueChanges()
+    return  this.firestore.collection<IUser>('users') .doc(id).valueChanges()
     }
 }

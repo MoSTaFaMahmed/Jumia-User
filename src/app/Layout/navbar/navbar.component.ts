@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/Authontication/auth.service';
 import ITest from 'src/app/ViewModels/test';
 import { ICart } from 'src/app/ViewModels/icart';
+import { UsersService } from 'src/app/Services/Users/users.service';
+import IUser from 'src/app/ViewModels/IUser';
 
 @Component({
   selector: 'app-navbar',
@@ -24,24 +26,28 @@ export class NavbarComponent implements OnInit {
   private startobservable = this.startat.asObservable();
 
   filtteredProducts: IProduct[] = [];
-  itemIncart: number=0;
+  itemIncart: number = 0;
   words: ITest = {
     wrods: [],
   };
   prd!: IProduct;
   flag: string = '';
   id!: any;
+  userName: string = '';
   constructor(
     private ProductsService: ProductsService,
     private cartServc: CartServiceService,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private user: UsersService
   ) {}
 
   ngOnInit(): void {
+   
     this.ProductsService.lang.subscribe((e) => {
       this.flag = e;
     });
+    
     this.auth.User?.subscribe((user) => {
       if (user == true) {
         console.log(user);
@@ -56,12 +62,11 @@ export class NavbarComponent implements OnInit {
         this.isUser = false;
         this.cartServc.cartItems.subscribe((el: ICart[]) => {
           console.log(el);
-          
+
           var num = 0;
           el.forEach((e) => (num += e.subtotal!));
           this.itemIncart = el.length;
           console.log(el);
-          
         });
       }
     });
@@ -69,12 +74,17 @@ export class NavbarComponent implements OnInit {
     this.startobservable.subscribe((value) => {
       this.ProductsService.SearchQuery(value).subscribe((items) => {
         this.filtteredProducts = items.map((item) => {
-          return item.payload.doc.data();
+          return {
+            id: item.payload.doc.id,
+            ...item.payload.doc.data(),
+          };
         });
       });
     });
-
-    console.log( this.itemIncart);
+    this.user.getUserByID(localStorage.getItem('uid')!).subscribe((e) => {
+        this.userName = e?.FirstName!;
+      });
+    console.log(this.itemIncart);
   }
   toggleSideBar() {
     this.sideBarOpen = !this.sideBarOpen;
@@ -92,7 +102,7 @@ export class NavbarComponent implements OnInit {
     }
   }
   route(id: string) {
-    console.log(id);
+    console.log(this.filtteredProducts);
 
     this.filtteredProducts = [];
     this.searchitem = '';
@@ -107,12 +117,12 @@ export class NavbarComponent implements OnInit {
 
       localStorage.setItem('cart', JSON.stringify([]));
 
-     // this.cartServc.setCartData([]);
-     // this.cartServc.getCartData();
-     // localStorage.removeItem('uid');
+      // this.cartServc.setCartData([]);
+      // this.cartServc.getCartData();
+      // localStorage.removeItem('uid');
       this.cartServc.cartItems.next([]);
       console.log(this.itemIncart);
-      
+
       this.auth.User.next(false);
     });
   }

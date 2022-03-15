@@ -61,6 +61,17 @@ nav{
 .sell{
   margin-left:100px;
 }
+.cartitem{
+  position: absolute;
+  top: 0px;
+  right: 0;
+  background-color: orange;
+  border-radius: 50%;
+  padding: 0px 5px;
+  color: white;
+  font-size: 0.9rem;
+
+}
 @media only screen and (max-width: 600px){
 	.sell{
     text-align: center;
