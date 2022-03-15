@@ -114,4 +114,19 @@ export class ProductsService {
       ref.where('product_id', '==',doc(this.firs,'Products/'+Prodid))
     ).valueChanges()
   }
+
+///////////////showByCategory//////////
+getDataByCategoryPriceLimit( 
+  cat: string,
+  minPrice:any,
+  manPrice:any
+  ) {
+  return this.db
+    .collection('Products', (ref) => ref
+    .where('Category', '==', cat)
+    .where('Price','>=', minPrice)
+    .where('Price','<=', manPrice)
+    )
+    .snapshotChanges();
+}
 }

@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../Services/Authontication/auth.service';
+import { FavouriteListService } from '../Services/favourite/favourite-list.service';
 import { ProductsService } from '../Services/Products/products.service';
 import { SellerService } from '../Services/Seller/seller.service';
 import { UsersService } from '../Services/Users/users.service';
@@ -19,42 +20,33 @@ export class FavouriteListComponent implements OnInit {
   productObservable?: Subscription;
 
   constructor(
-    private activateRouteServicse: ActivatedRoute,
-    private userService:  UsersService,
-    private productService: ProductsService,
+    private  favouritService:FavouriteListService,
+   
     private auth :AuthService,
-    private fs:AngularFirestore
+    
   ) { }
   ngOnDestroy(): void {
     this.productObservable?.unsubscribe();
   }
 
   ngOnInit(): void {
-    
+    // let userID = this.auth.userID
+    let userID =localStorage.getItem('uid')
+    this.favouritService.getFavouriteItem(userID).subscribe((e:any)=>{
+      this.products= e.map((el:any)=>{
+        return{
+          id : el.payload.doc.id,
+          ...el.payload.doc.data()
+        }
+      })
+    })  
   
-    //  this.activateRouteServicse.paramMap.subscribe(
-    //   (paramMap) => {
-    //     var m = paramMap.get('id');
-    //     console.log(m)
-    const userId=this.auth.userID
-    
-     
-  
-      //   this.userService.getUserByID(this.auth.userID!).subscribe((e:any) => {
-      //        console.log(e.data())
+  }
+  delete(id:any){
+    let userID =localStorage.getItem('uid')
+    console.log( id)
+    this.favouritService.deleteFav(userID,id)
 
-      //     var ids: string[] = [];
-
-      //     e?.Product?.map((el) => {
-      //       ids.push(el.Product_Id.id);
-      //     });
-          
-      //     this.productService.getProductbyRef(ids);
-      //     this.productService.products.subscribe((e) => {
-      //       this.products = e;
-      //     });
-      //   });
-      // }
   }
   
 }

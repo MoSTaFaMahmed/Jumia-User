@@ -1,80 +1,154 @@
+<!-- ================taqwa -->
 <div class="container">
-  <div class="row bg-white mt-5" *ngIf="products.length > 0">
-    <h3 class="row">flash sale</h3>
+  <!-- start title div -->
+  <div class="row p-2 white">
+ 
+  </div>
+  <!-- end title div -->
+  <!-- start header section -->
+  <div class="row mb-2 white">
+    <div class="col-lg-12 rounded white p-3 ">
 
-    <div
-      *ngFor="let item of LowQntproducts"
-      class="card col-lg-2 my-3 col-md-4 me-1 col-sm-6 mx-auto product"
-    >
-      <a
-        [routerLink]="['/Products', item.id]"
-        [queryParams]="{ query: item.Category }"
-        class="text-decoration-none text-dark"
-      >
-        <img
-          class="card-img-top"
-          [src]="item.Image"
-          alt="Card image"
-          style="width: 100%"
-        />
-        <div class="card-body">
-          <!-- <small>{{item.Name}}</small> -->
-          <small *ngIf="flag == 'ltr'">{{ item.Category }}</small>
-          <small *ngIf="flag == 'rtl'">{{ item.CategoryAr }}</small>
-          <h6 class="card-title" style="text-decoration-line: line-through;">EGP {{ item.Price }}</h6>
-          <h6 class="card-title">EGP {{ item.Price!-(item.Price! * 10 /100) }}</h6>
-          <p>
-            <ngb-progressbar *ngIf="item.Quantity! < 19"
-              type="danger"
-              [value]="item.Quantity!"
-              height="5px"
-            ></ngb-progressbar>
+      <img src="https://eg.jumia.is/cms/categories-20/Phones/Banners/1152x252_px_.jpg" alt="header image"
+        class=" rounded-3  header_img">
+
+
+    </div>
+
+  </div>
+  <!-- end header section -->
+  <!-- start smart phone section -->
+  <div class="row">
+    <div class="col-12 smart_title rounded-top">
+      <p class="float-start"><strong>{{categoryName}} </strong> </p>
+
+    </div>
+  </div>
+
+  <div class="row mb-2 white">
+    <!-- aside -->
+    <div class="col-lg-3  ">
+      <!-- //categories -->
+      <ul class="list-group list-group-flush">
+        <!-- start phone&tablets -->
+       
+
+
+        <!-- start price -->
+        <li class="list-group-item">
+          <p><strong>PRICE(EGP)</strong></p>
+          <label for="customRange2" class="form-label">Example range</label>
+
+          <form (ngSubmit)="onSubmit()">
+            <div class="row">
+            <div class="col-lg-6 ">
+            <input name="mim" placeholder="Min Price" [(ngModel)]="min" class="form-control ">
+          </div>
+          <div class="col-lg-6 ">
+            <input name="max" placeholder="Max Price" [(ngModel)]="max" class="form-control ">
+          </div>
+        </div>
+            <button type="button" class="btn btn-warning text-white col-lg-6 mt-3 b" type="submit" >
+              ok
+            </button>
+          </form>
+
+        </li>
+        <!-- end price -->
+
+
+
+
+      </ul>
+
+    </div>
+    <!-- end aside -->
+    <!--start  products -->
+
+
+    <div class="col-lg-8 white">
+      <div class="row" *ngIf="!isFillter">
+
+        <div class="col-lg-3 div_slide pb-4 ml-6 cart" *ngFor="let item of products">
+          <img [src]="item.Image">
+          <div class="h">{{item.Name}}</div>
+          <div>{{item.Price}}</div>
          
-          </p>
-        </div>
-      </a>
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col-lg-12 rounded white p-3 Amzing-Img">
-      <img
-        src="https://eg.jumia.is/cms/categories-20/Phones/Banners/1152x252_px_.jpg"
-        alt="header image"
-        class="rounded-3 header_img"
-      />
-    </div>
-  </div>
-  <div class="empty" *ngIf="products.length < 1">
-    <div class="info">
-      <h4>No Related Products</h4>
-      <a routerLink="" class="btn btn-success">Start Shoping </a>
-    </div>
-  </div>
-  <div class="row bg-white mt-5" *ngIf="products.length > 0">
-    <h3 class="row">{{ categoryName }}</h3>
+          <i class="bi bi-star-filsl"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star"></i>
+          
+          <svg aria-label="Express Shipping" viewBox="0 0 114 12" class="ic xprss" width="94" height="10">
+            <use xlink:href="https://www.jumia.com.eg/assets_he/images/i-shop-jumia.c8de1c55.svg#express">
+            </use>
+          </svg>
+          <button type="button" class="btn btn-warning"><i class="bi bi-cart-check-fill"></i> ADD TO
+            CARD</button>
 
-    <div
-      *ngFor="let item of products"
-      class="card col-lg-2 my-3 col-md-4 me-1 col-sm-6 mx-auto product"
-    >
-      <a
-        [routerLink]="['/Products', item.id]"
-        [queryParams]="{ query: item.Category }"
-        class="text-decoration-none text-dark"
-      >
-        <img
-          class="card-img-top"
-          [src]="item.Image"
-          alt="Card image"
-          style="width: 100%"
-        />
-        <div class="card-body">
-          <!-- <small>{{item.Name}}</small> -->
-          <small *ngIf="flag == 'ltr'">{{ item.Category }}</small>
-          <small *ngIf="flag == 'rtl'">{{ item.CategoryAr }}</small>
-          <h6 class="card-title">EGP {{ item.Price }}</h6>
+
         </div>
-      </a>
+      </div>
+      <div class="row" *ngIf="isFillter">
+
+        <div class="col-lg-3 div_slide pb-4 ml-6 cart" *ngFor="let i of priceComp">
+          <img [src]="i.Image">
+          <div class="h">{{i.Name}}</div>
+          <div>{{i.Price}}</div>
+          
+          <i class="bi bi-star-filsl"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star"></i>
+            (29)
+            <svg aria-label="Express Shipping" viewBox="0 0 114 12" class="ic xprss" width="94" height="10">
+              <use xlink:href="https://www.jumia.com.eg/assets_he/images/i-shop-jumia.c8de1c55.svg#express">
+              </use>
+            </svg>
+          <button type="button" class="btn btn-warning"><i class="bi bi-cart-check-fill"></i> ADD TO
+            CARD</button>
+
+        </div>
+
+      </div>
+
     </div>
+
+
+  
+     
+
+
+<!-- ==================picture============ -->
+<!-- start three pic -->
+<div class="row mb-2  white">
+  <div class="col-lg-4 rounded p-2 ">
+    <img src="https://eg.jumia.is/cms/categories-20/Phones/Banners/new/Floors_378x252_copy_3-3.jpg" alt="header image"
+      class=" rounded-3  header_img">
   </div>
+  <div class="col-lg-4 rounded  p-2 ">
+    <img src="https://eg.jumia.is/cms/categories-20/Phones/Banners/Floors_378x252_copy_3-2.jpg" alt="header image"
+      class=" rounded-3  header_img">
+  </div>
+  <div class="col-lg-4 rounded  p-2 ">
+    <img src="https://eg.jumia.is/cms/categories-20/Phones/Banners/new/Floors_378x252_copy_3.jpg" alt="header image"
+      class=" rounded-3  header_img">
+  </div>
+
+</div>
+
+<!-- end three pic -->
+<!-- start faster driver -->
+
+<div class="row mb-2 white">
+  <div class="col-12 rounded white p-3 ">
+
+    <img src="https://eg.jumia.is/cms/33-20/Phones&Tablets/Banners/Single_floor_1152x252_px_copy.jpg" alt="header image"
+      class=" rounded-3  header_img">
+
+
+  </div>
+
 </div>

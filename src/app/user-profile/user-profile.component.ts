@@ -33,14 +33,14 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.as.user?.subscribe((user) => {
+    this.as.User?.subscribe((user) => {
       // console.log(user);
   
       user ? (this.isUser = true) : (this.isUser = false);
     });
-    this.as.user?.subscribe((param)=>{
+    this.as.User?.subscribe((param)=>{
       
-      this.fs.collection("users").ref.doc(param?.uid).get().then((data)=>{
+      this.fs.collection("users").ref.doc(localStorage.getItem('uid')!).get().then((data)=>{
         console.log(data.data())
         this.datainfo=<IUser>data.data();
         this.dataprofile.email=this.datainfo.email,
@@ -57,14 +57,14 @@ export class UserProfileComponent implements OnInit {
   }
  
   updateUserProfile(){
-    this.as.user?.subscribe((param)=>{
-      this.fs.collection("users").doc(param?.uid).update({
+    this.as.User?.subscribe((param)=>{
+      this.fs.collection("users").doc(localStorage.getItem('uid')!).update({
         phone:this.dataprofile.phone,
         firstname:this.dataprofile.firstname,
         lastname:this.dataprofile.lastname
       }).then(()=>{
         
-        window.location.reload()
+        // window.location.reload()
       }
       )
       .catch(err=>{

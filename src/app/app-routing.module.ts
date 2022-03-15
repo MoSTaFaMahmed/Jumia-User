@@ -56,6 +56,7 @@ const routes: Routes = [
     component: FeedbackComponent,
     canActivate: [AuthGuardService],
   },
+  {path:'saveItem' , component:FavouriteListComponent},
   { path: 'NotFound', component: NotfoundComponent },
   { path: '**', component: ProductDetailsComponent },
 ];

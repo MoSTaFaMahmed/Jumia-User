@@ -14,10 +14,17 @@ export class CateqoryComponent implements OnInit, OnDestroy {
   LowQntproducts: IProduct[] = [];
   productCatObservable?: Subscription;
   categoryName: any;
-  flag:string=''
+  flag:string='';
+  isFillter:boolean=false
+  min?:any
+  max?:any
+  minp?:any
+  maxp?:any
+  userName:any
+  priceComp:IProduct[]=[]
   constructor(
     private prdService: ProductsService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -40,17 +47,42 @@ export class CateqoryComponent implements OnInit, OnDestroy {
           };
         });
 
+        console.log(this.products);
       });
-      this.prdService.getLowQntDataByCategoryName(this.categoryName).subscribe((data)=>{
-        this.LowQntproducts=data.map((element)=>{
-          return{
-            id:element.payload.doc.id,
-            ...(element.payload.doc.data()as IProduct)
-          }
-        })
-      })
+
+     this.isFillter=false
   }
   ngOnDestroy() {
     this.productCatObservable!.unsubscribe();
   }
+  onSubmit() {
+    let min = parseInt(this.min)
+    let max=parseInt(this.max)
+     
+    // let m = this.min
+  //  let  m= data.target.min.value
+    // let min =parseInt(m)
+    // console.log(min,max)
+    this.router.queryParamMap.subscribe((param) => {
+      this.categoryName = param.get('query');
+      console.log(this.categoryName);
+
+
+       this.prdService.getDataByCategoryPriceLimit(this.categoryName,min,max).subscribe(e=>{
+        
+        this.priceComp = e.map((elemnt) => {
+          console.log("hy",elemnt);
+          return {
+            id: elemnt.payload.doc.id,
+            ...(elemnt.payload.doc.data() as IProduct),
+          };
+        });
+        console.log(this.priceComp)
+
+        this.isFillter=true
+      })
+    });
+  
+
+ }
 }

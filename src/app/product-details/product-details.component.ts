@@ -10,6 +10,7 @@ import { AuthService } from '../Services/Authontication/auth.service';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { IFeedBack } from '../ViewModels/ifeed-back';
+import { FavouriteListService } from '../Services/favourite/favourite-list.service';
 
 @Component({
   selector: 'app-product-details',
@@ -42,9 +43,7 @@ export class ProductDetailsComponent implements OnInit {
     private cartServc: CartServiceService,
     private router: Router,
     private sellerServc: SellerService,
-    private auth:AuthService,
-    private db:Firestore,
-    private fs :AngularFirestore,
+   private fc :FavouriteListService
 
 
 
@@ -132,20 +131,13 @@ export class ProductDetailsComponent implements OnInit {
   // }
 
   // ==================addtofavLise"taqwa"========================
-  save(id:string){
-   // let userId=this.auth.userID
-   this.auth.user?.subscribe(id=>{
-     this.uid=id?.uid
-   })
-   console.log(this.uid);
-
-     this.fs.collection('users').doc(this.uid).update({
-              favorite : ([{Product_Id:
-              doc(this.db,"Products/"+id)}])
-     })
-     console.log("updated")
-
-     console.log(this.dataprofile)
+  save(id:any){
+    let userId = localStorage.getItem('uid')
+ 
+  this.fc.addToFavourite(userId,id)
+  
+  console.log("add");
+  
 
 }
 
