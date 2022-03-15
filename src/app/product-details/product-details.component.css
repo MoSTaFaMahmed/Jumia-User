@@ -1,5 +1,10 @@
+div{
+  font-size: 1rem;
+}
 .product:hover{
   transform: scale(1.02,1.05);
+  transition: 0.8s;
+
 }
 .Amzing-Img:hover{
   transform: scale(1.02,1.05);

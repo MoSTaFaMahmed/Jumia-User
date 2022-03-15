@@ -25,26 +25,25 @@ export class UserRegisterComponent implements OnInit {
       firstname: form.firstname,
       lastname: form.lastname,
       Phone: form.phone,
+      email:form.email,
       IsSeller: false,
     };
     this.AuthService.Signup(form.email, form.password).subscribe(() => {
-      //console.log(this.AuthService.userID);})
-      this.AuthService.user?.subscribe(id=>{
-        this.userID=id?.uid;
+      
+      this.AuthService.User?.subscribe(id=>{
+        if (id==true) {
+          this.errorMessage = '';
+          this.userService.AddUser(localStorage.getItem('uid')!, data).then(() => {
+            this.router.navigate(['/Products']);
+          });
+        } else {
+          this.errorMessage = this.AuthService.errorMsg;
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 1500);
+        }
       })
-      if (this.userID) {
-        this.errorMessage = '';
-        console.log(this.userID);
-
-        this.userService.AddUser(this.userID, data).then(() => {
-          this.router.navigate(['/Products']);
-        });
-      } else {
-        this.errorMessage = this.AuthService.errorMsg;
-        setTimeout(() => {
-          this.router.navigate(['/login']);
-        }, 1500);
-      }
+     
     });
   }
   SignupFacebook() {

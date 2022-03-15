@@ -32,7 +32,9 @@ export class AuthService {
         .createUserWithEmailAndPassword(email, password)
         .then((e) => {
           this.user?.subscribe(() => (this.User.next( true)));
-          this.userID = e.user!.uid;
+         // this.userID = e.user!.uid;
+          localStorage.setItem('uid',e.user?.uid!)
+          this.User.next(true);
         })
         .catch(() => {
           this.user?.subscribe(() => (this.User.next( false)));
