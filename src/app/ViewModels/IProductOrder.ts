@@ -6,5 +6,5 @@ export interface IProductOrder {
   Product?: IProduct;
   Product_Quntity?: number;
   Total_Price?: number;
-  delviredstatus?: string;
+  deliveredstatus?: string;
 }

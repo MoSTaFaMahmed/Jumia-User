@@ -1,42 +1,70 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../Services/Authontication/auth.service';
+import { CartServiceService } from '../Services/Cart/cart-service.service';
+import { ICart } from '../ViewModels/icart';
 
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css'],
 })
-export class UserLoginComponent implements OnInit {
+export class UserLoginComponent implements OnInit, OnDestroy {
   errorMes?: string;
   islogin?: boolean;
-
-  constructor(private as: AuthService, private router: Router) {}
+  sub!: Subscription;
+  CardData: ICart[] = [];
+  constructor(
+    private as: AuthService,
+    private router: Router,
+    private CertServc: CartServiceService
+  ) {}
+  ngOnDestroy(): void {}
 
   ngOnInit(): void {}
   login(form: any) {
     let data = form.value;
-
     this.as.login(data.email, data.password).subscribe(() => {
-      if (this.as.userID) {
-        console.log(this.as.userID);
+      if (localStorage.getItem('uid')) {
+        this.sub = this.as
+          .checkISuser(localStorage.getItem('uid')!)
+          .subscribe((el) => {
+            if (el.length <= 0) {
+              localStorage.removeItem('uid');
+              this.as.User.next(false);
+              this.errorMes = 'this Email Not for user';
+              this.sub.unsubscribe();
+            } else if (el.length >= 1) {
+              this.as.User.next(true);
+              this.router.navigate(['/Products']);
+              this.sub.unsubscribe();
+              const ls = this.CertServc.getCartData();
+              ls.map((e: ICart) =>
+                this.CertServc.addToCartFirstor(localStorage.getItem('uid')!, e)
+              );
 
-        this.as.checkuser(this.as.userID).subscribe((e) => {
-          console.log(e);
+              
+              //this.CertServc.cartItems.next([]);
+              // if (typeof ls !== 'undefined' && ls.length === 0) {
+              //   this.CertServc.getCartDtataFireStor(
+              //     localStorage.getItem('uid')
+              //   ).subscribe((e) => {
+              //     this.CardData = e.map((el) => {
+              //       return {
+              //         id: el.payload.doc.id,
+              //         ...(el.payload.doc.data() as ICart),
+              //       };
+              //     });
+              //     console.log(this.CardData);
 
-          if (e.length > 0) {
-            let id = this.as.userID;
-            let email = this.as.userEmail;
-            console.log(this.as.userID);
-
-            localStorage.setItem(JSON.stringify(email), JSON.stringify(id));
-
-            this.router.navigate(['/Products']);
-          }
-        });
+              //     this.CertServc.setCartData(this.CardData);
+              //   });
+              // }
+            }
+          });
       } else {
         this.errorMes = this.as.errorMsg;
-        this.router.navigate(['/login']);
       }
     });
   }

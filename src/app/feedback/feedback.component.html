@@ -1,0 +1,14 @@
+<div *ngIf="flag">
+  <textarea
+    #feedback
+    name=""
+    id=""
+    cols="30"
+    maxlength="30"
+    rows="10"
+  ></textarea>
+  <button  (click)="submitBack(feedback.value)">Give FeedBack</button>
+</div>
+<div *ngIf="!flag">
+<p>you gived feedback </p>
+</div>

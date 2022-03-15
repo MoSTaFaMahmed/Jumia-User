@@ -31,9 +31,10 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FavouriteListComponent } from './favourite-list/favourite-list.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { SellerRegisterComponent } from './seller-register/seller-register.component';
-import { UserRegisterComponent } from './user-register/user-register/user-register.component';
-import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { OrderdetailsComponent } from './orderdetails/orderdetails.component';
+import { UserRegisterComponent } from './user-register/user-register.component';
+import { UserOrdersComponent } from './user-orders/user-orders.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 @NgModule({
   declarations: [
@@ -59,10 +60,10 @@ import { OrderdetailsComponent } from './orderdetails/orderdetails.component';
     UserProfileComponent,
     FavouriteListComponent,
     NotfoundComponent,
-      SellerRegisterComponent,
+      SellerdataComponent,
       UserOrdersComponent,
       OrderdetailsComponent,
-     
+      FeedbackComponent,
    ],
   imports: [
     BrowserModule,

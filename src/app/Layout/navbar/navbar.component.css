@@ -30,16 +30,53 @@ nav{
 {
  background-color: rgb(228, 129, 28);
 }
-.cartitem{
+/* .cartitem{
   position: absolute;
   top:35%;
   color: rgb(228, 129, 28) ;
-}
+} */
 .sellOn{
   color: rgb(246, 139, 30);
   text-decoration: none;
+
 }
 .sellOn:hover{
   color: rgb(228, 129, 28);
+
+}
+.lang:hover{
+  -webkit-text-size-adjust: 100%;
+  font-family: Roboto,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  direction: ltr;
+  color: inherit;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  font-size: .75rem;
+  cursor: pointer;
+  top:-550px
+
+}
+.sell{
+  margin-left:100px;
+}
+@media only screen and (max-width: 600px){
+	.sell{
+    text-align: center;
+  }
+  .lang{
+    -webkit-text-size-adjust: 100%;
+    font-family: Roboto,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    direction: ltr;
+    color: inherit;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    font-size: .75rem;
+    cursor: pointer;
+    top:0px
+  }
   
 }

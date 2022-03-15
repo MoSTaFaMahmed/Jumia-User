@@ -1,20 +1,26 @@
-<nav class="navbar navbar-expand-lg navbar bg-warning">
+<nav class="navbar cc navbar-expand-lg navbar bg-warning row" >
   <img
+  class="col-12"
     src="https://static.jumia.com.eg/cms/Christmas-21/Sticky-Banner/FS/EN.png"
     width="100%"
     alt=""
   />
+
 </nav>
-<li class="nav-item float-start p-2 list-unstyled">
-  <a class="sellOn" [routerLink]="['/SellerRegister']">Sell on Jumia </a>
+<li  class="row  sell  list-unstyled " style="width: 100%; position: relative">
+  <a class=" sellOn col-lg-9 col-md-9  col-sm-12" [routerLink]="['/SellerRegister']">Sell on Jumia </a>
+  <a  class="nav-link text-dark col-lg-1 col-md-1 col-sm-6 lang" (click)="changeDir('ltr')"><img src="https://cdn-icons.flaticon.com/png/512/4049/premium/4049835.png?token=exp=1647123221~hmac=8d05224dd3ab4ea998c68363a7489eec" width="20px"/>English</a>
+  <a class="nav-link text-dark col-lg-1 col-md-1 col-sm-6 lang" (click)="changeDir('rtl')"><img src="https://icons.iconarchive.com/icons/hopstarter/square-flags/16/Egypt-Flag-icon.png"/>عربي</a>
 </li>
-<div class="mt-3 shadow container">
+
+
+<div class="shadow container-fluid">
   <nav
     style="align-items: normal"
     class="navbar navbar-expand-lg bg-white p-0 row"
   >
     <div class="nav-item col-2">
-      <a class="nav-link active" aria-current="page" href="#"
+      <a class="nav-link active" aria-current="page"  routerLink="/Products"
         ><img class="log" src="assets/img/logo.png"
       /></a>
     </div>
@@ -31,7 +37,7 @@
     </button>
     <div class="nav-item col-6 collapse navbar-collapse">
       <ul
-        class="navbar-nav me-auto mb-2 mb-lg-0"
+        class="navbar-nav me-auto mb-2 mb-lg-0 "
         style="width: 100%; justify-content: space-around"
       >
         <li style="width: 100%; position: relative">
@@ -68,47 +74,61 @@
     </div>
     <div class="nav-item col-4">
       <ul class="navbar-nav m-auto mt-3">
-        <li id="navitem1" class="nav-item dropdown">
-          <!--we will change account in "Hi,username"-->
-          <a
+
+          <li id="navitem1" class="nav-item dropdown">
+            <a
             class="nav-link dropdown-toggle text-dark"
             data-bs-toggle="dropdown"
             href="#"
             role="button"
             aria-expanded="false"
+            *ngIf="flag == 'ltr'"
             ><i class="far fa-user"></i
             ><span *ngIf="isUser == true">Account</span>
-            <span *ngIf="isUser == false">Signin</span>
+            <span *ngIf="isUser == false" >Signin</span>
           </a>
+          <a
+          class="nav-link dropdown-toggle text-dark"
+          data-bs-toggle="dropdown"
+          href="#"
+          role="button"
+          aria-expanded="false"
+          *ngIf="flag == 'rtl'"
+          ><i class="far fa-user"></i
+          ><span *ngIf="isUser == true">حساب</span>
+          <span *ngIf="isUser == false" >تسجيل الدخول</span>
+        </a>
 
           <ul class="dropdown-menu">
             <li routerLink="/userProfile">
-              <a class="dropdown-item text-dark"
+              <a class="dropdown-item text-dark" *ngIf="flag == 'ltr'"
                 ><i class="far fa-user"></i> My Account</a
               >
+              <a class="dropdown-item text-dark" *ngIf="flag == 'rtl'"
+              ><i class="far fa-user"></i> حسابي</a
+            >
             </li>
             <li>
-              <a [routerLink]="['/Orders',id]" class="dropdown-item text-dark" href="#"
+              <a *ngIf="flag == 'ltr'" [routerLink]="['/Orders',id]" class="dropdown-item text-dark" href="#"
                 ><i class="far fa-box"></i> Orders</a
               >
-            </li>
-            <li>
-              <a class="dropdown-item text-dark" href="#"
-                ><i class="far fa-envelope"></i> Inbox</a
+
+              <a *ngIf="flag == 'rtl'" [routerLink]="['/Orders',id]" class="dropdown-item text-dark" href="#"
+                ><i class="far fa-box"></i>طلباتي</a
               >
             </li>
+
             <li>
-              <a class="dropdown-item text-dark" href="#"
+              <a *ngIf="flag == 'ltr'" class="dropdown-item text-dark" href="#"
                 ><i class="far fa-heart"></i> Saved Items</a
               >
+              <a *ngIf="flag == 'rtl'" class="dropdown-item text-dark" href="#"
+              ><i class="far fa-heart"></i>العناصر المحفوظة</a
+            >
             </li>
-            <li>
-              <a class="dropdown-item text-dark" href="#"
-                ><i class="far fa-ticket"></i> Jumia Credit</a
-              >
-            </li>
+
             <li><hr class="dropdown-divider" /></li>
-            <li style="text-align: center">
+            <li style="text-align: center" *ngIf="flag == 'ltr'">
               <button
                 *ngIf="isUser"
                 (click)="Logout()"
@@ -124,6 +144,22 @@
                 Login
               </button>
             </li>
+            <li style="text-align: center" *ngIf="flag == 'rtl'">
+              <button
+                *ngIf="isUser"
+                (click)="Logout()"
+                class="btn btn-outline-warning"
+              >
+                تسجيل الخروج
+              </button>
+              <button
+                routerLink="/login"
+                *ngIf="!isUser"
+                class="btn btn-outline-warning"
+              >
+                تسجيل الدخول
+              </button>
+            </li>
           </ul>
         </li>
         <li id="navitem2" class="nav-item dropdown">
@@ -133,8 +169,10 @@
             href="#"
             role="button"
             aria-expanded="false"
-            ><i class="far fa-question-circle"></i> Help</a
+            *ngIf="flag == 'ltr'"
+            ><i class="far fa-question-circle" ></i> Help</a
           >
+
           <ul class="dropdown-menu">
             <li style="text-align: left">
               <a class="dropdown-item text-dark" href="#">Help Center</a>
@@ -178,12 +216,7 @@
           ></a>
         </li>
 
-        <li (click)="changeDir('ltr')" class="nav-item">
-          <a class="nav-link text-dark">EN</a>
-        </li>
-        <li (click)="changeDir('rtl')" class="nav-item">
-          <a class="nav-link text-dark">AR</a>
-        </li>
+
       </ul>
     </div>
   </nav>

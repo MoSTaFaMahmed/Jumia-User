@@ -44,7 +44,9 @@ export class OrdersService {
       .snapshotChanges();
   }
   getOrderDetailsByID(id: string) {
+    
     return this.firestore.collection('Orders').doc(id).valueChanges();
   }
+  
   
 }

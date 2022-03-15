@@ -33,12 +33,12 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.as.user.subscribe((user) => {
+    this.as.user?.subscribe((user) => {
       // console.log(user);
   
       user ? (this.isUser = true) : (this.isUser = false);
     });
-    this.as.user.subscribe((param)=>{
+    this.as.user?.subscribe((param)=>{
       
       this.fs.collection("users").ref.doc(param?.uid).get().then((data)=>{
         console.log(data.data())
@@ -57,7 +57,7 @@ export class UserProfileComponent implements OnInit {
   }
  
   updateUserProfile(){
-    this.as.user.subscribe((param)=>{
+    this.as.user?.subscribe((param)=>{
       this.fs.collection("users").doc(param?.uid).update({
         phone:this.dataprofile.phone,
         firstname:this.dataprofile.firstname,

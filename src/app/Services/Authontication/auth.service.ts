@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { from, Observable } from 'rxjs';
+import { BehaviorSubject, from, Observable, Subject } from 'rxjs';
 import auth2 from 'firebase/compat/app';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import * as fir from 'firebase/compat/app';
+import { textChangeRangeIsUnchanged } from 'typescript';
+import { Firestore, FirestoreError } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +13,17 @@ import * as fir from 'firebase/compat/app';
 export class AuthService {
   userID!: string;
   userEmail!: string | null;
+  
   errorMsg: string = '';
   isUser: boolean = false;
+  
   user!: Observable<firebase.default.User | null>;
+
+  User=new BehaviorSubject <boolean>(false);
+  userId=new BehaviorSubject<string>('');
   constructor(private auth: AngularFireAuth, private db: AngularFirestore) {
-    this.user = auth.user;
+   // this.user = this.auth.user;
+    (localStorage.getItem('uid'))?this.User.next(true):this.User.next(false)
   }
 
   Signup(email: string, password: string) {
@@ -23,11 +31,11 @@ export class AuthService {
       this.auth
         .createUserWithEmailAndPassword(email, password)
         .then((e) => {
-          this.user.subscribe(() => (this.isUser = true));
+          this.user?.subscribe(() => (this.User.next( true)));
           this.userID = e.user!.uid;
         })
         .catch(() => {
-          this.user.subscribe(() => (this.isUser = false));
+          this.user?.subscribe(() => (this.User.next( false)));
           this.errorMsg = 'Email Already Exist';
         })
     );
@@ -38,11 +46,10 @@ export class AuthService {
         .signInWithPopup(new auth2.auth.FacebookAuthProvider())
         .then((e) => {
           console.log(e);
-
-          this.userID = e.user!.uid;
+          
         })
         .catch(() => (this.errorMsg = 'Email Already Exist'))
-    );
+    )
   }
 
   login(email: string, password: string) {
@@ -50,17 +57,18 @@ export class AuthService {
       this.auth
         .signInWithEmailAndPassword(email, password)
         .then((e) => {
-          this.userID = e.user!.uid;
-          this.userEmail = e.user!.email;
+          localStorage.setItem('uid',e.user?.uid!)
+          
+           
         })
-        .catch((error) => (this.errorMsg = error.message))
+        .catch((error:FirestoreError) => (this.errorMsg =error.code))
     );
   }
   async Logout() {
-    await this.auth.signOut();
-    console.log(this.user);
+    return await this.auth.signOut();
+  
   }
-  checkuser(id: string) {
+  checkISuser(id: string) {
     return this.db
       .collection('users', (ref) =>
         ref.where(fir.default.firestore.FieldPath.documentId(), '==', id)

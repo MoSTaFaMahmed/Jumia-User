@@ -12,19 +12,7 @@ import {
   Validators,
   FormArray,
 } from '@angular/forms';
-import {
-  Firestore,
-  addDoc,
-  collection,
-  collectionData,
-  doc,
-  docData,
-  deleteDoc,
-  updateDoc,
-  DocumentReference,
-  where,
-  setDoc,
-} from '@angular/fire/firestore';
+import { Firestore, doc } from '@angular/fire/firestore';
 import IUser from '../ViewModels/IUser';
 @Component({
   selector: 'app-seller-register',

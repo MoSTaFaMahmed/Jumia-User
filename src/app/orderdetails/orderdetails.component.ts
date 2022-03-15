@@ -55,20 +55,5 @@ export class OrderdetailsComponent implements OnInit {
         });
     });
   }
-  submitBack(feedback: string, id: any) {
-    console.log(`${id} + ${feedback}`);
-    var today = new Date();
-    let data: IFeedBack = {
-      date:
-        today.getMonth() +
-        1 +
-        '/' +
-        today.getDate() +
-        '/' +
-        today.getFullYear(),
-      product_id: doc(this.Firs, 'Products/' + id),
-      feedback: feedback,
-    };
-    this.feedBackServc.addfeedback(data);
-  }
+
 }

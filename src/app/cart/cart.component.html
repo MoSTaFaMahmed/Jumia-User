@@ -3,10 +3,10 @@ class="alert text-center  p-1 fs-5 alertApp"
 role="alert">
 <i class="fas fa-check-circle px-3"></i>
  <span *ngIf="alert=='updated'">Product quantity has been updated</span>
- <span *ngIf="alert=='removed'">Product  removed  successfully</span> 
+ <span *ngIf="alert=='removed'">Product  removed  successfully</span>
 </div>
 <div class="container-sm container-md container-lg">
-  
+
   <div class="row">
     <div class="empty" *ngIf="items.length < 1">
       <div class="info">
@@ -57,8 +57,8 @@ role="alert">
           </a>
           <footer style="justify-content: space-between" class="d-flex py-2">
             <button
-              (click)="onDelete(i)"
-              style="color: white; background-color: rgb(246, 139, 30)"
+              (click)="onDelete(i,item?.idd)"
+                style="color: white; background-color: rgb(246, 139, 30)"
               class="btn shadow"
             >
               <i class="fas fa-trash-alt"></i>
@@ -70,8 +70,10 @@ role="alert">
               (click)="suppTotal(item,i)"
                 style="background-color: rgb(246, 139, 30)"
                 class="shadow btn"
+                [disabled]="item.subtotal==1"
               >
                 <i style="color: #fff" class="fas fa-minus"></i>
+
               </button>
               <span style="text-align: center" class="m-3">{{
                 item.subtotal
@@ -80,6 +82,7 @@ role="alert">
               (click)="updateTotal(item)"
                 style="background-color: rgb(246, 139, 30)"
                 class="shadow btn"
+                [disabled]="item.subtotal==item.Quantity"
               >
                 <i style="color: #fff" class="fas fa-plus"></i>
               </button>

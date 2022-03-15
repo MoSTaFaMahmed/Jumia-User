@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
   private startobservable = this.startat.asObservable();
 
   filtteredProducts: IProduct[] = [];
-  itemIncart!: number;
+  itemIncart: number=0;
   words: ITest = {
     wrods: [],
   };
@@ -39,30 +39,31 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /*   |||| reference  ||||  
-    this.ProductsService.hhhh();
-    this.ProductsService.products.subscribe((e) => (this.prd = e));
-         |||| reference  |||| */
-
-    this.auth.user.subscribe((e) => {
-      if (e?.uid) this.id = e?.uid;
-       
-    });
-
     this.ProductsService.lang.subscribe((e) => {
       this.flag = e;
     });
-    this.auth.user.subscribe((user) => {
-      console.log(user?.uid);
-
-      user ? (this.isUser = true) : (this.isUser = false);
-    });
-
-    this.cartServc.cartItems.subscribe((el: ICart[]) => {
-      var num = 0;
-      el.forEach((e) => (num += e.subtotal!));
-
-      this.itemIncart = num;
+    this.auth.User?.subscribe((user) => {
+      if (user == true) {
+        console.log(user);
+        this.isUser = true;
+        this.cartServc
+          .getCartDtataFireStor(localStorage.getItem('uid'))
+          .subscribe((e) => {
+            this.itemIncart = e.length;
+          });
+      } else {
+        console.log(user);
+        this.isUser = false;
+        this.cartServc.cartItems.subscribe((el: ICart[]) => {
+          console.log(el);
+          
+          var num = 0;
+          el.forEach((e) => (num += e.subtotal!));
+          this.itemIncart = el.length;
+          console.log(el);
+          
+        });
+      }
     });
 
     this.startobservable.subscribe((value) => {
@@ -70,9 +71,10 @@ export class NavbarComponent implements OnInit {
         this.filtteredProducts = items.map((item) => {
           return item.payload.doc.data();
         });
-        // console.log(this.filtteredProducts);
       });
     });
+
+    console.log( this.itemIncart);
   }
   toggleSideBar() {
     this.sideBarOpen = !this.sideBarOpen;
@@ -100,6 +102,18 @@ export class NavbarComponent implements OnInit {
     this.ProductsService.setLanguage(dir);
   }
   Logout() {
-    this.auth.Logout();
+    this.auth.Logout().then((ee) => {
+      localStorage.removeItem('uid');
+
+      localStorage.setItem('cart', JSON.stringify([]));
+
+     // this.cartServc.setCartData([]);
+     // this.cartServc.getCartData();
+     // localStorage.removeItem('uid');
+      this.cartServc.cartItems.next([]);
+      console.log(this.itemIncart);
+      
+      this.auth.User.next(false);
+    });
   }
 }

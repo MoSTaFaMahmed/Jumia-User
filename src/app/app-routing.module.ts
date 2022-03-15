@@ -14,9 +14,10 @@ import { AuthGuardService } from './Services/Guards/auth-guard.service';
 import { FavouriteListComponent } from './favourite-list/favourite-list.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { SellerRegisterComponent } from './seller-register/seller-register.component';
-import { UserRegisterComponent } from './user-register/user-register/user-register.component';
+import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { OrderdetailsComponent } from './orderdetails/orderdetails.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/Products', pathMatch: 'full' },
@@ -26,10 +27,14 @@ const routes: Routes = [
   { path: 'search', component: SearchResultComponent },
   { path: 'Register', component: UserRegisterComponent },
   { path: 'login', component: UserLoginComponent },
-  { path: 'Orders/:id', component: UserOrdersComponent,canActivate: [AuthGuardService] },
+  {
+    path: 'Orders/:id',
+    component: UserOrdersComponent,
+    canActivate: [AuthGuardService],
+  },
   { path: 'SellerRegister', component: SellerRegisterComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'OrderDetails/:id', component:OrderdetailsComponent },
+  { path: 'OrderDetails/:id', component: OrderdetailsComponent },
   {
     path: 'paypal',
     component: PaypalComponent,
@@ -44,6 +49,11 @@ const routes: Routes = [
   {
     path: 'favList',
     component: FavouriteListComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'feedback/:id',
+    component: FeedbackComponent,
     canActivate: [AuthGuardService],
   },
   { path: 'NotFound', component: NotfoundComponent },

@@ -2,6 +2,7 @@ import { DocumentReference } from "@angular/fire/compat/firestore";
 
 export interface ICart {
   id?: string;
+  idd?:any;
   Category?: String;
   CategoryAr?: string;
   Description?: string;

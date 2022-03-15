@@ -104,9 +104,9 @@ export class ProductsService {
         this.products.next(e);
       });
   }
-  updateRank(id: string) {
-    return this.db.collection<IProduct>('Products').doc(id).valueChanges();
-  }
+  // updateRank(id: string) {
+  //   return this.db.collection<IProduct>('Products').doc(id).valueChanges();
+  // }
 
   /////////******FEEDBACK*****////////
   getPrroductFeedBack(Prodid:any) {

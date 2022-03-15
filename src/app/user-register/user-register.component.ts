@@ -29,7 +29,7 @@ export class UserRegisterComponent implements OnInit {
     };
     this.AuthService.Signup(form.email, form.password).subscribe(() => {
       //console.log(this.AuthService.userID);})
-      this.AuthService.user.subscribe(id=>{
+      this.AuthService.user?.subscribe(id=>{
         this.userID=id?.uid;
       })
       if (this.userID) {

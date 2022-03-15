@@ -27,7 +27,7 @@ export class PaypalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.auth.user.subscribe((id) => {
+    this.auth.user?.subscribe((id) => {
       this.userID = id?.uid;
       console.log(this.userID);
     });
@@ -63,38 +63,36 @@ export class PaypalComponent implements OnInit {
   }
   PlaceOrder(items: ICart[]) {
     console.log(items);
-    this.auth.user.subscribe((id) => {
-      this.userID = id?.uid;
+    
+    console.log(localStorage.getItem('uid'));
+    var today = new Date();
+    this.order = {
+      Total: this.total,
+      buyer: doc(this.db, 'users/' + localStorage.getItem('uid')),
+      Product: items.map((e) => ({
+        Product_Id: doc(this.db, 'Products/' + e.id),
+        Total_Price: e.subtotal! * e.Price!,
+        Product_Quntity: e.subtotal,
+        Seller_ID: e.SellerID,
+        deliveredstatus: 'pending',
+      })),
+      date:
+        today.getMonth() +
+        1 +
+        '/' +
+        today.getDate() +
+        '/' +
+        today.getFullYear(),
+    };
+    console.log(this.order);
 
-      var today = new Date();
-      this.order = {
-        Total: this.total,
-        buyer: doc(this.db, 'users/' + this.userID),
-        Product: items.map((e) => ({
-          Product_Id: doc(this.db, 'Products/' + e.id),
-          Total_Price: e.subtotal! * e.Price!,
-          Product_Quntity: e.subtotal,
-          sellerID: e.SellerID,
-          delviredstatus: 'pending',
-        })),
-        date:
-          today.getMonth() +
-          1 +
-          '/' +
-          today.getDate() +
-          '/' +
-          today.getFullYear(),
-      };
-      console.log(this.order);
+    ////////////navigate to raring ////////////
+    this.orderService.AddOrder(this.order).then(() => {
+      this.orderService.ClearLocalStorage();
+    });
 
-      ////////////navigate to raring ////////////
-      this.orderService.AddOrder(this.order).then(() => {
-        this.orderService.ClearLocalStorage();
-      });
-
-      items.map((id) => {
-        this.orderService.updatQtn(id.id, id.Quantity! - id.subtotal!);
-      });
+    items.map((id) => {
+      this.orderService.updatQtn(id.id, id.Quantity! - id.subtotal!);
     });
   }
 }

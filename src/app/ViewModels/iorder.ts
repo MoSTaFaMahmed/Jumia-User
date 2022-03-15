@@ -7,8 +7,8 @@ export interface IOrder {
           Product_Id?: any;
           Product_Quntity?: number;
           Total_Price?: number;
-          sellerID?:any,
-          delviredstatus?:string
+          Seller_ID?:any,
+          deliveredstatus?:string
         }
       ]
     | any;

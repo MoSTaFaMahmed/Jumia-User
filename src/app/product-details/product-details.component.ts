@@ -118,7 +118,7 @@ export class ProductDetailsComponent implements OnInit {
 
     console.log(product);
 
-    this.cartServc.addItem(product);
+    this.cartServc.addItem({...product,id:this.productId});
     this.flag = true;
     setTimeout(() => {
       this.flag=false;
@@ -134,7 +134,7 @@ export class ProductDetailsComponent implements OnInit {
   // ==================addtofavLise"taqwa"========================
   save(id:string){
    // let userId=this.auth.userID
-   this.auth.user.subscribe(id=>{
+   this.auth.user?.subscribe(id=>{
      this.uid=id?.uid
    })
    console.log(this.uid);

@@ -21,6 +21,7 @@ export class CartComponent implements OnInit {
   subtotal!: number;
   order!: IOrder;
   ids!: any[];
+  cartFir: ICart[] = [];
   constructor(
     private cartservce: CartServiceService,
     private prdService: ProductsService,
@@ -34,7 +35,29 @@ export class CartComponent implements OnInit {
     this.prdService.lang.subscribe((e) => {
       this.flag = e;
     });
-    this.getdata();
+
+    this.auth.User.subscribe((login) => {
+      if (login == true) {
+        this.cartservce
+          .getCartDtataFireStor(localStorage.getItem('uid'))
+          .subscribe((el) => {
+            this.items = el.map((elemnt: any) => {
+              console.log(elemnt.payload.doc.data());
+              return {
+                idd: elemnt.payload.doc.id,
+                ...(elemnt.payload.doc.data() as ICart),
+              };
+            });
+           console.log(this.items);
+           
+          });
+      }
+      else if(login==false){
+        this.getdata();
+      }
+    });
+
+
   }
   getdata() {
     this.cartservce.cartItems.subscribe((data) => {
@@ -45,14 +68,16 @@ export class CartComponent implements OnInit {
       if (this.items) this.getTotal(this.items);
     });
   }
-  onDelete(index: number) {
-    this.alert='removed';
+  onDelete(index: number,idd:any) {
+    this.alert = 'removed';
     setTimeout(() => {
-      this.alert='';
+      this.alert = '';
     }, 800);
     this.items.splice(index, 1);
     this.cartservce.setCartData(this.items);
     this.getTotal(this.items);
+    console.log(this.items);
+    this.cartservce.removeCartItemFirstore(idd);
   }
   validateInput(event: any, index: number) {
     const Quantity = +event.target.value;
@@ -131,13 +156,14 @@ export class CartComponent implements OnInit {
       this.alert = '';
     }, 800);
     this.cartservce.suppItem(item);
-    if (item.subtotal == 1) {
-      this.onDelete(index);
-      this.alert = 'removed';
+    this.cartservce.removeCartItemFirstore(this.cartFir[index].idd);
+    // if (item.subtotal == 1) {
+    //   this.onDelete(index);
+    //   this.alert = 'removed';
 
-      setTimeout(() => {
-        this.alert = '';
-      }, 800);
-    }
+    //   setTimeout(() => {
+    //     this.alert = '';
+    //   }, 800);
+    // }
   }
 }
