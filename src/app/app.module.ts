@@ -35,14 +35,16 @@ import { OrderdetailsComponent } from './orderdetails/orderdetails.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { Seller_RegisterComponent } from './Seller_Register/Seller_Register.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     HomeComponent,
     UserRegisterComponent,
     NavbarComponent,
     FooterComponent,
+    SellerRegisterComponent,
     ProductDetailsComponent,
     SidebarComponent,
     SliderComponent,
@@ -64,6 +66,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
       UserOrdersComponent,
       OrderdetailsComponent,
       FeedbackComponent,
+      Seller_RegisterComponent
    ],
   imports: [
     BrowserModule,

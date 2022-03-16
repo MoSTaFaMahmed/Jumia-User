@@ -1,3 +1,4 @@
+import { ISeller } from './../../ViewModels/ISeller';
 import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
@@ -47,9 +48,9 @@ export class SellerService {
   getSellerByID(id: string) {
     return this.db.collection<IUser>('Seller').doc(id).valueChanges();
   }
-  registerSeller(id: string, seller: IUser) {
-    console.log('id');
-    console.log(id);
+  registerSeller(id: string, seller:ISeller) {
+    console.log('id')
+    console.log(id)
 
     return this.db.doc('Seller/' + id).set(seller);
   }

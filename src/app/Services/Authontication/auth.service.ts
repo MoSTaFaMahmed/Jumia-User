@@ -25,6 +25,21 @@ export class AuthService {
    // this.user = this.auth.user;
     (localStorage.getItem('uid'))?this.User.next(true):this.User.next(false)
   }
+  SignupSeller(email: string, password: string) {
+    return from(
+      this.auth
+        .createUserWithEmailAndPassword(email, password)
+        .then((e) => {
+          this.user?.subscribe(() => (this.isUser = true));
+          this.userID = e.user!.uid;
+          console.log(this.userID)
+        })
+        .catch(() => {
+          this.user?.subscribe(() => (this.isUser = false));
+          this.errorMsg = 'Email Already Exist';
+        })
+    );
+  }
 
   Signup(email: string, password: string) {
     return from(

@@ -1,15 +1,14 @@
 <div class="container">
   <div class="row regivmail">
     <div class="col-lg-12 col-sm-12 col-md-12">
+     
+     
+
       <h5 class="fw-bold">Create Account to be a Seller</h5>
-      <form
-        class="form needs-validation row g-3"
-        (ngSubmit)="Signup()"
-       
-      >
+      <form class="form needs-validation row g-3" (ngSubmit)="Signup()" [formGroup]="SellerRegisForm" >
         <div class="col-md-12 col-lg-12 col-sm-12">
-          <input
-            formControlName="FirstName"
+          <input 
+          formControlName="FirstName"
             name="FirstName"
             type="text"
             class="form-control border-3"
@@ -17,71 +16,60 @@
             placeholder="Enter Your First Name"
             required
           />
-          <div
-            class="col-md-12 col-lg-12 col-sm-12 alert alert-danger"
-            [hidden]="FirstName?.valid || FirstName?.untouched"
-          >
+          <div class="col-md-12 col-lg-12 col-sm-12 alert alert-danger" [hidden]="FirstName?.valid || FirstName?.untouched">
             <small *ngIf="FirstName?.errors?.['required']">
-              First Name is required
+             First Name is required
             </small>
             <small *ngIf="FirstName?.errors?.['pattern']">
-              First Name must be 3 letters at least,
-              <b>{{FirstName?.errors?.['pattern'].actualValue}}</b> dosn't
-              match.
+              First Name must be 3 letters at least, <b>{{FirstName?.errors?.['pattern'].actualValue}}</b> dosn't match.
             </small>
           </div>
         </div>
         <div class="col-md-12 col-lg-12 col-sm-12">
           <input
-            formControlName="LastName"
+          formControlName="LastName"
             name="LastName"
+          
             type="text"
             class="form-control border-3"
             id="inputLname"
             placeholder="Enter your Last Name"
             required
           />
-          <div
-            class="col-md-12 col-lg-12 col-sm-12 alert alert-danger"
-            [hidden]="LastName?.valid || LastName?.untouched"
-          >
+          <div class="col-md-12 col-lg-12 col-sm-12 alert alert-danger" [hidden]="LastName?.valid || LastName?.untouched">
             <small *ngIf="LastName?.errors?.['required']">
               Last Name is required
             </small>
             <small *ngIf="LastName?.errors?.['pattern']">
-              Last Name must be 3 letters at least,
-              <b>{{LastName?.errors?.['pattern'].actualValue}}</b> dosn't match.
+              Last Name must be 3 letters at least, <b>{{LastName?.errors?.['pattern'].actualValue}}</b> dosn't match.
             </small>
           </div>
         </div>
 
         <div class="col-md-12 col-lg-12 col-sm-12">
           <input
-            formControlName="CompanyName"
+         formControlName="CompanyName"
             name="CompanyName"
+          
             type="text"
             class="form-control border-3"
             id="inputCname"
             placeholder="Enter Company Name"
             required
           />
-          <div
-            class="col-md-12 col-lg-12 col-sm-12 alert alert-danger"
-            [hidden]="CompanyName?.valid || CompanyName?.untouched"
-          >
+          <div class="col-md-12 col-lg-12 col-sm-12 alert alert-danger" [hidden]="CompanyName?.valid || CompanyName?.untouched">
             <small *ngIf="CompanyName?.errors?.['required']">
               Company Name is required , if you work alone , enter your Name.
             </small>
             <small *ngIf="CompanyName?.errors?.['pattern']">
-              Company Name must be 3 letters at least,
-              <b>{{CompanyName?.errors?.['pattern'].actualValue}}</b> dosn't
-              match.
+              Company Name must be 3 letters at least, <b>{{CompanyName?.errors?.['pattern'].actualValue}}</b> dosn't match.
             </small>
           </div>
+          
         </div>
         <div class="col-md-12 col-lg-12 col-sm-12">
           <input
-            formControlName="Email"
+          formControlName="Email"
             name="Email"
             type="email"
             class="form-control border-3"
@@ -90,22 +78,19 @@
             required
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
           />
-          <div
-            class="col-md-12 col-lg-12 col-sm-12 alert alert-danger"
-            [hidden]="Email?.valid || Email?.untouched"
-          >
+          <div class="col-md-12 col-lg-12 col-sm-12 alert alert-danger" [hidden]="Email?.valid || Email?.untouched">
             <small *ngIf="Email?.errors?.['required']">
               Email is required .
             </small>
             <small *ngIf="Email?.errors?.['pattern']">
-              <b>{{Email?.errors?.['pattern'].actualValue}}</b> dosn't match the
-              email pattern.
+               <b>{{Email?.errors?.['pattern'].actualValue}}</b> dosn't match the email pattern.
             </small>
           </div>
         </div>
         <div class="col-md-12 col-lg-12 col-sm-12">
           <input
-            formControlName="Password"
+          formControlName="Password"
+
             name="Password"
             type="Password"
             class="form-control border-3"
@@ -114,23 +99,21 @@
             required
             minlength="8"
           />
-          <div
-            class="col-md-12 col-lg-12 col-sm-12 alert alert-danger"
-            [hidden]="Password?.valid || Password?.untouched"
-          >
+          <div class="col-md-12 col-lg-12 col-sm-12 alert alert-danger" [hidden]="Password?.valid || Password?.untouched ">
             <small *ngIf="Password?.errors?.['required']">
               Password is required
             </small>
-
+            
             <small *ngIf="Password?.errors?.['pattern']">
-              <b>Start your Password with a letter for better security </b>
+               <b>Start your Password with a letter for better security </b> 
             </small>
           </div>
         </div>
         <div class="col-md-12 col-lg-12 col-sm-12 input-group mb-6">
-          <span class="input-group-text" id="basic-addon1">+20</span>
+          <span class="input-group-text " id="basic-addon1">+20</span>
           <input
-            formControlName="Phone"
+          formControlName="Phone"
+
             name="Phone"
             id="phone"
             type="tel"
@@ -138,133 +121,43 @@
             placeholder="Enter your Phone Number"
             required
           />
-          <div
-            class="col-md-12 col-lg-12 col-sm-12 alert alert-danger"
-            [hidden]="Phone?.valid || Phone?.untouched"
-          >
-            <small *ngIf="Phone?.errors?.['required']">
-              Password is required
-            </small>
-            <small *ngIf="Phone?.errors?.['pattern']">
-              Phone Number must be more than 7 Numbers,
-              <b>{{Phone?.errors?.['pattern'].actualValue}}</b> dosn't match.
-            </small>
-          </div>
+       
         </div>
+        
+        <div formGroupName="Address" class="col-md-12 col-lg-12 col-sm-12 input-group mb-6">
 
-        <div
-          formGroupName="Address"
-          class="col-md-12 col-lg-12 col-sm-12 input-group mb-6"
-        >
-          <input
-            formControlName="City"
-            name="City"
-            id="city"
-            type="text"
-            class="form-control border-3"
-            placeholder="City"
-            required
-          />
+             
+          <input    
+              formControlName="City"   
+          name="City" id="city" type="text" class="form-control border-3" placeholder="City" required>
 
-          <input
-            formControlName="Street"
-            name="Street"
-            id="street"
-            type="text"
-            class="form-control border-3"
-            placeholder="Street"
-            required
-          />
+          <input 
+          formControlName="Street" 
+          name="Street" id="street" type="text" class="form-control border-3" placeholder="Street" required>
 
-          <input
-            formControlName="BulNo"
-            name="BulNo"
-            id="Nobulding"
-            type="number"
-            class="form-control border-3"
-            placeholder="bulding number"
-            required
-          />
-          <div
-            class="col-md-12 col-lg-12 col-sm-12 alert alert-danger"
-            [hidden]="
-              City?.valid ||
-              City?.untouched ||
-              BulNo?.valid ||
-              BulNo?.untouched ||
-              Street?.valid ||
-              Street?.untouched
-            "
-          >
-            <small
-              *ngIf="City?.errors?.['required'] || BulNo?.errors?.['required'] || Street?.errors?.['required'] "
-            >
-              Address is required
-            </small>
-            <small
-              *ngIf="City?.errors?.['pattern'] || BulNo?.errors?.['pattern'] || Street?.errors?.['pattern']"
-            >
-              Dosn't match the pattern
-            </small>
-          </div>
-        </div>
+          <input 
+          formControlName="BulNo" 
+          name="BulNo" id="Nobulding" type="number" class="form-control border-3" placeholder="bulding number" required>
+         
+</div>
 
-        <div
-          formGroupName="Payment"
-          class="col-md-12 col-lg-12 col-sm-12 input-group mb-6"
-        >
-          <input
-            formControlName="CreditCard"
-            name="CreditCard"
-            id="CreditCard"
-            type="text"
-            class="form-control border-3"
-            placeholder="Enter your Credit Card"
-            required
-          />
+ 
+        <div formGroupName="Payment" class="col-md-12 col-lg-12 col-sm-12 input-group mb-6">
 
-          <input
-            formControlName="CVV"
-            name="CVV"
-            id="CVV"
-            type="text"
-            class="form-control border-3"
-            placeholder="Enter your CVV"
-            required
-          />
+             
+          <input 
+          formControlName="CreditCard"
+          name="CreditCard" id="CreditCard" type="text" class="form-control border-3" placeholder="Enter your Credit Card" required>
 
-          <input
-            formControlName="CardHolderName"
-            name="CardHolderName"
-            id="CardHolderName"
-            type="text"
-            class="form-control border-3"
-            placeholder="Enter your Card Holder Name"
-            required
-          />
-          <div
-            class="col-md-12 col-lg-12 col-sm-12 alert alert-danger"
-            [hidden]="
-              CreditCard?.valid ||
-              CreditCard?.untouched ||
-              CVV?.valid ||
-              CVV?.untouched ||
-              CardHolderName?.valid ||
-              CardHolderName?.untouched
-            "
-          >
-            <small
-              *ngIf="City?.errors?.['required'] || CVV?.errors?.['required'] || CardHolderName?.errors?.['required'] "
-            >
-              Payment information is required
-            </small>
-            <small
-              *ngIf="City?.errors?.['pattern'] || CVV?.errors?.['pattern'] || CardHolderName?.errors?.['pattern']"
-            >
-              Dosn't match the pattern
-            </small>
-          </div>
-        </div>
+          <input 
+          formControlName="CVV"
+          name="CVV" id="CVV" type="text" class="form-control border-3" placeholder="Enter your CVV" required>
+
+          <input 
+          formControlName="CardHolderName"
+          name="CardHolderName" id="CardHolderName" type="text" class="form-control border-3" placeholder="Enter your Card Holder Name" required>
+         
+</div>
         <div class="col-12">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="gridCheck1" />
@@ -282,13 +175,18 @@
         </div>
 
         <button
-          [disabled]="SellerRegisForm.invalid"
+        [disabled]="SellerRegisForm.invalid"
           class="col-12 btlogin text-white"
           type="submit"
+         
         >
           Create Account
         </button>
+
+        
       </form>
+     
     </div>
   </div>
 </div>
+
